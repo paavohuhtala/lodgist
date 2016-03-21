@@ -1,0 +1,30 @@
+\chapter{Johdanto}
+
+\section{Toiminta ja tavoitteet}
+
+Sovellus on suunnattu mökkien omistajille sekä niiden vuokraamisesta
+kiinnostuneille.
+
+Omistajille sovellus tarjoaa mahdollisuuden asettaa mökkejään julkisesti
+nähtäville ja vuokrattavaksi.
+
+Vuokraajille sovellus tarjoaa mahdollisuuden selata mökkejä, vuokrata
+niitä ja selata varauksiaan.
+
+Sovellus huolehtii myös maksunvälityksestä, joskin tässä projektissa sen
+toteuttaminen ohitetaan.
+
+\section{Toteutus ja ympäristö}\label{toteutus-ja-ympuxe4ristuxf6}
+
+Palvelinpuoli toteutetaan Node.js-alustalla ja
+TypeScript-ohjelmointikielellä. Jos sille ilmenee tarvetta, palvelin
+laitetaan Nginx tai Apache-proxyn taakse, joka cacheaa ja salaa
+liikenteen. Tietokantana käytetään PostgreSQL:ää.
+
+Sovellus suunnitellaan alustariippumattomaksi, mutta lopullinen asennus tehdään Ubuntu Server 14.04:ään. Tällä hetkellä sovellusta hostataan DigitalOceanissa, osoitteessa
+\url{http://lodgist.paavo.me}. 
+
+Palvelimen tavoin käyttöliittymä toteutaan
+TypeScript-ohjelmointikielellä, joka käännetään automaattisesti
+JavaScriptiksi. Alustavasti käyttöliittymän ja MVC-mallin toteutuksssa
+hyödynnetään Angular.js-kirjastoa.
