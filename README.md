@@ -7,5 +7,6 @@ Rest in Finnish, sorry.
 
 * [Sovelluksen testiversio](http://lodgist.paavo.me/)
 * [Dokumentaatio (pdf)](docs/dokumentaatio.pdf)
+* [Viikkonkirjanpito (lisätietoja)](docs/viikkokirjanpito.md)
 
 Aihekuvaus dokumentaatio-pdf:ssä.
