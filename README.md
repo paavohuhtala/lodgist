@@ -7,3 +7,5 @@ Rest in Finnish, sorry.
 
 * [Sovelluksen testiversio](http://lodgist.paavo.me/)
 * [Dokumentaatio (pdf)](docs/dokumentaatio.pdf)
+
+Aihekuvaus dokumentaatio-pdf:ssä.
