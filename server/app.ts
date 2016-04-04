@@ -51,7 +51,7 @@ app.get("/lodgings", (req, res) => {
 });
 
 app.get("/lodging/:id", (req, res) => {
-    let id = parseInt(req.param("id"), 10) - 1;
+    let id = parseInt(req.params.id, 10) - 1;
     res.render("lodging", {lodging: lodgings[id]});
 })
 

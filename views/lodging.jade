@@ -3,6 +3,12 @@ extends layout.jade
 block vars
     - controller = "LodgingController"
 
+mixin stars(n, outOf)
+    - for (var x = 0; x < n; x++)
+        .glyphicon.glyphicon-star
+    - for (var x = 0; x < outOf - n; x++)
+        .glyphicon.glyphicon-star-empty
+
 block content
     .container
         .lodging
@@ -31,3 +37,21 @@ block content
                             p Yhteensä: π €
             .lodging-description.col-md-8
                 p Bacon ipsum dolor amet sirloin pancetta chuck pork loin. Shoulder meatball flank frankfurter. Andouille doner beef shoulder pancetta tongue meatball pork belly ham hock rump meatloaf turducken jowl jerky sausage. Rump filet mignon meatloaf biltong swine. Capicola ball tip turducken beef.
+            .col-md-4
+            .lodging-amenities.col-md-8
+                ul.list-unstyled
+                    li
+                        .glyphicon.glyphicon-console
+                        span Lähellä terminaalia
+                    li
+                        .glyphicon.glyphicon-btc
+                        span Maksettavissa Bitcoinilla
+                    li
+                        span Tiskikone
+            .lodging-reviews.col-md-8
+                h3 Arvostelut
+                .review
+                    .stars
+                        +stars(4, 5)
+                    span.author Tero
+                    p.review-body Ihan kiva.

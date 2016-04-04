@@ -31,7 +31,6 @@
     "gulp-typescript": "^2.12.1",
     "ts-node": "^0.7.1",
     "tsconfig-glob": "^0.4.2",
-    "tsd": "^0.6.5",
     "typescript": "^1.8.9",
     "typings": "^0.7.9"
   },
@@ -41,6 +40,7 @@
     "jade": "^1.11.0",
     "lodash": "^4.6.1",
     "pg": "^4.5.1",
+    "ts-node": "^0.7.1",
     "typescript": "^1.8.9"
   }
 }
