@@ -1,0 +1,42 @@
+
+.lodgings
+    padding-top: 2em
+    & > .lodging
+        margin: 1em
+        height: 12em
+        border: 1px solid darkGray
+        
+        & > *
+            height: 100%
+        
+        & > .lodging-image
+            background-image: url("http://placekitten.com/300/300")
+            background-size: cover
+        
+        & > .lodging-content
+            padding: 1em          
+              
+            & > .lodging-title
+                font-size: 1.5em
+                color: #2c3e50
+            
+        & > .lodging-pricing
+            & > .lodging-price
+                //animation-name: vilkkuu
+                //animation-duration: 1s
+                //animation-iteration-count: infinite
+                font-size: 1.5em
+                margin-top: 2em
+                
+@keyframes vilkkuu
+    0%
+        color: red
+        filter: blur(0px)
+        transform: rotateX(0deg) scaleX(1.0)
+    50%
+        color: black
+        filter: blur(0px)
+        transform: rotateX(70deg) scaleX(2.0)
+    100%
+        color: yellow
+

@@ -1,0 +1,14 @@
+
+#login-panel
+    margin-top: 2em
+    max-width: 800px
+    margin-left: auto
+    margin-right: auto
+    
+    & > div
+        height: 250px
+
+@media (min-width: 750px)
+    .bottom-sm
+        position: absolute
+        bottom: 0px
