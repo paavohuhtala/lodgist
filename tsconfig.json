@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "target": "es6"
+    },
+    "files": [
+        "typings/main.d.ts",
+        "gulpfile.ts"
+    ]
+}
