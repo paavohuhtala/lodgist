@@ -1,4 +1,6 @@
 ﻿
+CREATE EXTENSION btree_gist;
+
 CREATE TYPE user_role AS ENUM (
 	'unverifiedUser',
 	'user',
@@ -23,6 +25,14 @@ CREATE TABLE Users (
 	password VARCHAR(60) NOT NULL, -- We're storing bcrypt hashes, which include the salt
 	phone TEXT NOT NULL,
 	address INTEGER REFERENCES Addresses(id) NOT NULL
+);
+
+CREATE TABLE Sessions (
+	userId INTEGER REFERENCES Users(id) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT(now()::timestamp),
+	validUntil TIMESTAMP NOT NULL DEFAULT(now()::timestamp + interval '14 days'),
+	token CHAR(32) NOT NULL UNIQUE,
+	PRIMARY KEY (userId)
 );
 
 CREATE TABLE Sellers (
@@ -69,9 +79,8 @@ CREATE TABLE Reservations (
 	id SERIAL PRIMARY KEY NOT NULL,
 	lodging INTEGER REFERENCES Lodgings(id) NOT NULL,
 	type reservation_type NOT NULL DEFAULT('user'),
-	begins TIMESTAMP NOT NULL,
-	ends TIMESTAMP NOT NULL,
-	CHECK (ends > begins)
+	during tsrange NOT NULL,
+	EXCLUDE USING gist (lodging WITH =, during WITH &&)
 );
 
 CREATE TABLE ExternalReservations (
@@ -95,3 +104,8 @@ CREATE TABLE Reviews (
 	content TEXT NOT NULL,
 	rating INTEGER CHECK (rating >= 1 AND rating <= 5)
 );
+
+CREATE VIEW Locations AS (SELECT DISTINCT city FROM Addresses);
+
+CREATE INDEX city_index ON Addresses(lower(city));
+CREATE INDEX session_token_index ON Sessions(token);

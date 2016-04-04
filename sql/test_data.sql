@@ -40,9 +40,9 @@ INSERT INTO LodgingAmenities (lodging, amenity) VALUES
 	(1, 6),
 	(1, 1);
 
-INSERT INTO Reservations (lodging, type, begins, ends) VALUES
-	(1, 'external', '2016-01-01', '2016-06-01 06:00:00'),
-	(1, 'user', '2016-06-01 12:00:00', '2016-06-04 11:00:00');
+INSERT INTO Reservations (lodging, type, during) VALUES
+	(1, 'external', '[2016-01-01, 2016-06-01 06:00:00]'),
+	(1, 'user', '[2016-06-01 12:00:00, 2016-06-04 11:00:00]');
 
 INSERT INTO ExternalReservations (reservation, reason) VALUES
 	(1, 'Remontissa.');
