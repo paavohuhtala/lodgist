@@ -1,0 +1,33 @@
+extends layout.jade
+
+block vars
+    - controller = "LodgingController"
+
+block content
+    .container
+        .lodging
+            h2 #{lodging.name}
+            p #{lodging.address.city}
+            .lodging-image.col-md-8
+            .col-md-4
+                .panel.panel-default
+                    .panel-body
+                        .calendar
+                            .calendar-title
+                                a(href="").calendar-button.left.glyphicon.glyphicon-chevron-left                        
+                                span Fiktiokuu 2072
+                                a(href="").calendar-button.right.glyphicon.glyphicon-chevron-right
+                            table
+                                thead
+                                    each day in ["Ma", "Ti", "Ke", "To", "Pe", "La", "Su"]
+                                        td= day
+                                tbody.calendar-cells
+                                    - for (var x = 0; x < 31; x++)
+                                        if ((x % 7) == 0)
+                                            tr
+                                        td= x + 1
+                        div
+                            p Per yö: τ €
+                            p Yhteensä: π €
+            .lodging-description.col-md-8
+                p Bacon ipsum dolor amet sirloin pancetta chuck pork loin. Shoulder meatball flank frankfurter. Andouille doner beef shoulder pancetta tongue meatball pork belly ham hock rump meatloaf turducken jowl jerky sausage. Rump filet mignon meatloaf biltong swine. Capicola ball tip turducken beef.

@@ -1,0 +1,29 @@
+doctype html
+
+mixin nav-item(url, title)
+    li(data-match-route=url): a(href=url)= title
+
+- var controller = ""
+
+block vars
+
+html
+    head
+        title Lodgist
+        link(rel="stylesheet" href="/css/ext.css")
+        link(rel="stylesheet" href="/css/client.css")
+        script(src="/js/ext.js")
+        script(src="/js/client.js")
+    body(ng-app="lodgist" ng-controller=controller)
+        nav.navbar.navbar-default.navbar-static-top(bs-navbar): .container-fluid
+            .navbar-header
+                a.navbar-brand#logo(href="/") Lodgist
+            .collapse.navbar-collapse
+                ul.nav.navbar-nav
+                    +nav-item("/", "Home")
+                    +nav-item("/lodgings", "Lodgings (TEST)")
+                    +nav-item("/lodging/1", "Sample lodging (TEST)")
+                ul.nav.navbar-nav.navbar-right
+                    +nav-item("/login", "Log in")
+        block content
+    

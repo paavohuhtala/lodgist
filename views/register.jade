@@ -1,0 +1,20 @@
+extends layout.jade
+
+block vars
+    - controller = "RegisterController"
+
+block content
+    .container.margin-top-default
+        form
+            .row: .col-sm-offset-2.col-sm-4: .form-group
+                label(for="email") Name
+                input.form-control#name(type="text" required)
+            .row: .col-sm-offset-2.col-sm-4: .form-group
+                label(for="email") Email
+                input.form-control#email(type="email" required)
+            .row: .col-sm-offset-2.col-sm-4: .form-group
+                label(for="password") Password
+                input.form-control#password(type="password" ng-model="password" required)
+            .row: .col-sm-offset-2.col-sm-4: .form-group
+                label(for="password-verify") Password (again)
+                input.form-control#password-verify(type="password" ng-model="passwordVerify" required)

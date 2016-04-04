@@ -1,0 +1,30 @@
+extends layout.jade
+
+block vars
+    - controller = "IndexController"
+
+block content
+    .hero
+        .call-to-action
+            p.slogan Obey. Consume. Travel.
+            .searcher.form-inline
+                .form-group: input.form-control(type="text" placeholder="Where")
+                .form-group: input.form-control(type="text" placeholder="From" ng-model="dateFrom" bs-datepicker)
+                .form-group: input.form-control(type="text" placeholder="To" ng-model="dateTo" bs-datepicker)
+                .form-group: button.btn.btn-success: .glyphicon.glyphicon-search
+    .placeholder-buzzwords: .container
+        .col-md-4.text-center
+            .icon-huge.glyphicon.glyphicon-plane
+            h3 Buzzwords. Redefined.
+            p.text-muted.text-left.
+                Scratch the furniture claws in your leg and eat owner's food and chase the pig around the house, and always hungry. Ears back wide eyed sleep on keyboard, and leave hair everywhere, and refuse to leave cardboard box eat and than sleep on your face.
+        .col-md-4.text-center
+            .icon-huge.glyphicon.glyphicon-piggy-bank
+            h3 Placeholdery. Neat.
+            p.text-muted.text-left.
+                Scratch at the door then walk away spread kitty litter all over house. Pee in the shoe if it fits, i sits kick up litter find something else more interesting.
+        .col-md-4.text-center
+            .icon-huge.glyphicon.glyphicon-sunglasses
+            h3 Trendy. Gimmicky. Cool.
+            p.text-muted.text-left.
+                Chase the pig around the house curl into a furry donut for pee in the shoe yet behind the couch then cats take over the world sleep nap. Hopped up on catnip lick arm hair sit on the laptop so drink water out of the faucet, for eat owner's food. 
