@@ -5,6 +5,9 @@
 \newpage
 \section{Selitteet}
 
+\subsection{Osoite}
+Koostuu kahdesta katuosoiterivistä, paikkakunnasta ja postinumerosta. Sisältää myös kaksimerkkisen maakoodin mahdollista laajennusta varten.
+
 \subsection{Käyttäjä}
 \begin{tabular}{|l|l|l|}
 	\hline
@@ -16,6 +19,9 @@
 	Puhelin & Rajoittamaton määrä tekstiä & \\ \hline
 	Osoiteviite & Validi viite osoitetauluun & Käyttäjän laskutusosoite. \\ \hline
 \end{tabular}
+
+\subsection{Sessio}
+Käyttäjäkohtainen määräaikainen sessio, jota käytetään kirjautumisten tallentamiseen. Sisältää uniikin tunnuksen, voimassaoloajan ja käyttäjätunnuksen.
 
 \subsection{Myyjätiedot}
 Lisätietoa käyttäjään, jos käyttäjä on vahvistettu ja hyväksytty myyjä.
@@ -31,3 +37,6 @@ Lisätietoa varaukseen, jos varaus on tehty järjestelmän sisällä (= sivustol
 
 \subsection{Ulkoisen varauksen tiedot}
 Lisätietoa varaukseen, jos varaus on tehty järjestelmän ulkopuolella mökin omistajan toimesta (esimerkiksi oman varauksen tai remontin takia). Sisältää selitekentän.
+
+\subsection{Arvostelu}
+Arvostelu mökistä. Sisältää arvosanan kokonaislukuna väliltä 1 - 5, mökkitunnuksen, käyttäjätunnuksen ja selitetekstin.
