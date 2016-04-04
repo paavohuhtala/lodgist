@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "classic",
+        "sourceMap": true
+    },
+    "filesGlob": [
+        "../typings/main.d.ts",
+        "database/IQueryParams.ts",
+        "**/*.ts"
+    ],
+    "files": [
+        "../typings/main.d.ts",
+        "database/IQueryParams.ts",
+        "app.ts",
+        "database/IDatabase.ts",
+        "database/IQueryResults.ts",
+        "database/Table.ts"
+    ]
+}
