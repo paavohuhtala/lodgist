@@ -1,11 +1,11 @@
 
-INSERT INTO Addresses (street1, postalCode, city) VALUES
+INSERT INTO Addresses (street1, postal_code, city) VALUES
 	('Demonipolku 6', '00666', 'Kerava'),
 	('Low Earth Orbit', '01337', 'Space'),
 	('Placeholderin Katu N', '0101010', 'Undefinedin kaupunki'),
 	('Placeholderin Katu N + 1', '0101010', 'Undefinedin kaupunki');
 
-INSERT INTO Addresses (street1, street2, postalCode, city) VALUES
+INSERT INTO Addresses (street1, street2, postal_code, city) VALUES
 	('Leppäsuonkatu 11', 'Christina Regina', '00100', 'Helsinki');
 
 INSERT INTO Users (role, name, email, password, phone, address) VALUES
@@ -19,7 +19,7 @@ INSERT INTO Users (role, name, email, password, phone, address) VALUES
 	'$2a$09$AhXEnLew4nIZ6lTu.uSVLOT1MUNH0dDro4KGTu1zt/ntk4RKd.IYK', -- 'bcrypt is a key derivation function'
 	'123456', 3);
 
-INSERT INTO Sellers (userId, companyName, vatId) VALUES
+INSERT INTO Sellers (user_id, company_name, vatId) VALUES
 	(3, 'Rich Cabin''s Cabins for the rich', 'FI12345678');
 
 INSERT INTO Amenities (name) VALUES
@@ -31,7 +31,7 @@ INSERT INTO Amenities (name) VALUES
 	('LCD-televisio'),
 	('Lemmikit sallittuja');
 
-INSERT INTO Lodgings (owner, address, name, description, isPublic, reservationStart, reservationEnd, pricePerNight) VALUES
+INSERT INTO Lodgings (owner, address, name, description, is_public, reservation_start, reservation_end, price_per_night) VALUES
 	(3, 2, 'Kansainvälinen avaruusasema',
 	'1990-luvun lopulla rakennettu ja useaan otteeseen laajennettu jännittävä kohde matallalla maan kiertoradalla!',
 	TRUE, '12:00:00', '10:00:00', 10000);

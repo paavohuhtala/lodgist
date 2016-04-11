@@ -12,7 +12,7 @@ CREATE TABLE Addresses (
 	id SERIAL PRIMARY KEY NOT NULL,
 	street1 TEXT NOT NULL,
 	street2 TEXT,
-	postalCode TEXT NOT NULL,
+	postal_code TEXT NOT NULL,
 	city TEXT NOT NULL,
 	country CHAR(2) NOT NULL DEFAULT('FI')
 );
@@ -28,19 +28,19 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Sessions (
-	userId INTEGER REFERENCES Users(id) NOT NULL,
+	user_id INTEGER REFERENCES Users(id) NOT NULL,
 	created TIMESTAMP NOT NULL DEFAULT(now()::timestamp),
-	validUntil TIMESTAMP NOT NULL DEFAULT(now()::timestamp + interval '14 days'),
+	valid_until TIMESTAMP NOT NULL DEFAULT(now()::timestamp + interval '14 days'),
 	token CHAR(32) NOT NULL UNIQUE,
-	PRIMARY KEY (userId)
+	PRIMARY KEY (user_id)
 );
 
 CREATE TABLE Sellers (
-	userId INTEGER REFERENCES Users(id) NOT NULL,
-	companyName TEXT NOT NULL,
-	billingAddress INTEGER REFERENCES Addresses(id),
+	user_id INTEGER REFERENCES Users(id) NOT NULL,
+	company_name TEXT NOT NULL,
+	billing_address INTEGER REFERENCES Addresses(id),
 	vatId TEXT NOT NULL,
-	PRIMARY KEY (userId)
+	PRIMARY KEY (user_id)
 );
 
 CREATE TABLE Amenities (
@@ -51,20 +51,20 @@ CREATE TABLE Amenities (
 
 CREATE TABLE Lodgings (
 	id SERIAL PRIMARY KEY NOT NULL,
-	owner INTEGER REFERENCES Sellers(userId) NOT NULL,
+	owner INTEGER REFERENCES Sellers(user_id) NOT NULL,
 	address INTEGER REFERENCES Addresses(id) NOT NULL,
 	name TEXT NOT NULL,
 	description TEXT NOT NULL,
-	isPublic BOOLEAN NOT NULL DEFAULT(FALSE),
-	reservationStart TIME NOT NULL,
-	reservationEnd TIME NOT NULL,
-	pricePerNight MONEY CHECK (pricePerNight > 0::money) NOT NULL,
-	CHECK(reservationStart >= reservationEnd),
+	is_public BOOLEAN NOT NULL DEFAULT(FALSE),
+	reservation_start TIME NOT NULL,
+	reservation_end TIME NOT NULL,
+	price_per_night MONEY CHECK (price_per_night > 0::money) NOT NULL,
+	CHECK(reservation_start >= reservation_end),
 	area NUMERIC CHECK (area > 0),
 	floors INTEGER CHECK (floors >= 1),
-	builtYear INTEGER,
-	renovatedYear INTEGER, 
-	CHECK (renovatedYear >= builtYear)
+	built_year INTEGER,
+	renovated_year INTEGER, 
+	CHECK (renovated_year >= built_year)
 );
 
 CREATE TABLE LodgingAmenities (
@@ -98,7 +98,7 @@ CREATE TABLE UserReservations (
 
 CREATE TABLE Reviews (
 	id SERIAL PRIMARY KEY NOT NULL,
-	isPublic BOOLEAN NOT NULL DEFAULT(TRUE),
+	is_public BOOLEAN NOT NULL DEFAULT(TRUE),
 	lodging INTEGER REFERENCES Lodgings(id) NOT NULL,
 	author INTEGER REFERENCES Users(id) NOT NULL,
 	content TEXT NOT NULL,
