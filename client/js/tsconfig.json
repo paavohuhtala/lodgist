@@ -19,13 +19,6 @@
     "files": [
         "typings/browser.d.ts",
         "../../shared/additional_typings/pg-range.d.ts",
-        "../../shared/models/Address.ts",
-        "../../shared/models/Lodging.ts",
-        "../../shared/models/Ref.ts",
-        "../../shared/models/Reservation.ts",
-        "../../shared/models/Role.ts",
-        "../../shared/models/Seller.ts",
-        "../../shared/models/User.ts",
         "../../shared/requests/LoginRequest.ts",
         "../../shared/utils/Functional.ts",
         "controllers/index.ts",

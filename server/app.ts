@@ -1,5 +1,12 @@
 
 import * as express from "express"
+import * as Promise from "bluebird"
+import * as Connection from "./database/Connection"
+import {UserDao} from "./database/daos/UserDao" 
+
+// For testing. will be moved to an env var.
+const cons = "postgres://postgres:postgres@localhost:5432/lodgist";
+Connection.initialize(cons);
 
 let app = express()
 
@@ -46,15 +53,21 @@ let lodgings = [
         }
     }];
 
-app.get("/lodgings", (req, res) => {
-   res.render("lodgings", {lodgings: lodgings});
+import {LodgingDao} from "./database/daos/LodgingDao"
+import {ILodgingRow} from "./models/Lodging"
+
+app.get("/lodgings", (req: express.Request, res: express.Response) => {
+    new LodgingDao().getAll().then(rows => {
+        res.render("lodgings", {lodgings: rows});
+    });
 });
 
 app.get("/lodging/:id", (req, res) => {
     let id = parseInt(req.params.id, 10) - 1;
-    res.render("lodging", {lodging: lodgings[id]});
-})
+    new LodgingDao().getById(id).then(row => {
+        res.render("lodging", {lodging: row});
+    });
+});
 
 app.listen(8080, () => {
-    console.log("hello");
 });

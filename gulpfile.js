@@ -6,6 +6,7 @@ var concat = require("gulp-concat");
 var stylus = require("gulp-stylus");
 var order = require("gulp-order");
 var sourcemaps = require("gulp-sourcemaps");
+var rename = require("gulp-rename");
 
 var serverProject = ts.createProject("./server/tsconfig.json");
 var clientProject = ts.createProject("./client/js/tsconfig.json", {
@@ -71,6 +72,7 @@ gulp.task("fonts", () => {
     gulp.src(fonts)
         .pipe(gulp.dest("./app/static/fonts"));
 });
+
 gulp.task("client", [
     "client.ext.js", "client.js",
     "client.ext.css", "client.css",

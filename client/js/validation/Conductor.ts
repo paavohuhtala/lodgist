@@ -61,7 +61,7 @@ module Conductor {
         }
     }
     
-    type Validator<A, B, TMeta> = (data: A) => Q.IPromise<ValidationResult<B, TMeta>>
+    type Validator<A, B, TMeta> = (data: A) => Promise<ValidationResult<B, TMeta>>
     
     module ValidationResult {
         

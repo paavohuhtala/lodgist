@@ -2,7 +2,7 @@
   "ambientDependencies": {
     "express": "registry:dt/express#4.0.0+20160317120654",
     "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160322035842",
-    "lodash": "registry:dt/lodash#3.10.0+20160330154726",
+    "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "node": "registry:dt/node#4.0.0+20160330064709",
     "pg-promise": "registry:dt/pg-promise#0.0.0+20160316171810",
