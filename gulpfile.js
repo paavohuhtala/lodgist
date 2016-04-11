@@ -5,6 +5,7 @@ var ts = require("gulp-typescript");
 var concat = require("gulp-concat");
 var stylus = require("gulp-stylus");
 var order = require("gulp-order");
+var sourcemaps = require("gulp-sourcemaps");
 
 var serverProject = ts.createProject("./server/tsconfig.json");
 var clientProject = ts.createProject("./client/js/tsconfig.json", {
@@ -32,14 +33,18 @@ var fonts = [
 
 gulp.task("server", () => {
     serverProject.src()
+        .pipe(sourcemaps.init())
         .pipe(ts(serverProject))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest("./app/"));
 });
 
 gulp.task("client.js", () => {
     clientProject.src()
+        .pipe(sourcemaps.init())
         .pipe(ts(clientProject))
         .pipe(concat("client.js"))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest("./app/static/js/"));
 });
 

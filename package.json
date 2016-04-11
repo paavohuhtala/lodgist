@@ -8,8 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "typings": "cd server && typings install && cd ../ && cd client/js && typings install",
     "build": "tsconfig ./server && tsconfig ./client/js && gulp",
-    "start": "node ./app/server/app.js"
+    "start": "node --es_staging --harmony_destructuring ./app/server/app.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-debug": "^2.1.2",
     "gulp-order": "^1.1.1",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.3.1",
     "gulp-typescript": "^2.12.1",
     "ts-node": "^0.7.1",
@@ -40,6 +42,8 @@
     "jade": "^1.11.0",
     "lodash": "^4.6.1",
     "pg": "^4.5.1",
+    "pg-promise": "^3.7.5",
+    "pg-range": "^0.1.2",
     "ts-node": "^0.7.1",
     "typescript": "^1.8.9"
   }
