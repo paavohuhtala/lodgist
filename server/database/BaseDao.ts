@@ -1,7 +1,7 @@
 
 import {getClient} from "./Connection";
 import * as pgp from "pg-promise"
-import {QueryParams, IQueryParams} from "./QueryParams"
+import {QuerySettings, IQuerySettings} from "./QueryParams"
 import * as _ from "lodash"
 
 export abstract class BaseDao<TRow extends {}, TKey> {
@@ -16,34 +16,53 @@ export abstract class BaseDao<TRow extends {}, TKey> {
     public get table() {
         return this._table;
     }
-    
-    private get baseQuery() {
-        return `SELECT * FROM ${this._table}`;
-    }
-    
-    private getLimitOffset(params?: IQueryParams) {
-        params = QueryParams.validate(params);
+
+    private applyQuerySettings(settings: IQuerySettings, params: Object) {
+        settings = QuerySettings.validate(params);
         
-        return `LIMIT ${params.limit} OFFSET ${params.offset}`;
+        _.assign(params, settings)
     }
     
-    public getAllByColumn<TColumn>(column: string, value: TColumn, params?: IQueryParams) {
-        return getClient().query(`${this.baseQuery} WHERE ${column} = $1 ${this.getLimitOffset(params)}`, value)
-               .then(r => <TRow[]> r.rows);
+    private get limitOffset() {
+        return "LIMIT ${limit} OFFSET ${offset}";        
+    }
+    
+    public getAllByColumn<TColumn>(column: string, value: TColumn, settings?: IQuerySettings) {
+        let params = {
+            table: this.table,
+            column: column,
+            value: value
+        }
+
+        this.applyQuerySettings(settings, params);
+
+        let query = "SELECT * FROM ${table~} WHERE ${column~} = $<value> " + this.limitOffset
+
+        return getClient().query(query, params).then(r => <TRow[]> r.rows);
     }
 
     public getOneByColumn<TColumn>(column: string, value: TColumn) {
-        return getClient().oneOrNone(`${this.baseQuery} WHERE ${column} = $1`, value).then(r => <TRow> r)
+        let params = {
+            table: this.table,
+            column: column,
+            value: value,
+        }
+
+        let query = "SELECT * FROM ${table~} WHERE ${column~} = ${value}"
+
+        return getClient().oneOrNone(query, params).then(r => <TRow> r)
     }
     
-    public getAll(params?: IQueryParams) {
-        params = QueryParams.validate(params);
+    public getAll(settings?: IQuerySettings) {
+        let params = {
+            table: this.table
+        }
         
-        let query = `${this.baseQuery} ${this.getLimitOffset(params)}`
+        this.applyQuerySettings(settings, params)
         
-        console.log(query);
+        let query = "SELECT * FROM ${table~} " + this.limitOffset 
         
-        return getClient().manyOrNone(query).then(r => <TRow[]> r);
+        return getClient().manyOrNone(query, params).then(r => <TRow[]> r);
     }
     
     protected abstract getColumns() : string[]
@@ -57,12 +76,19 @@ export abstract class BaseDao<TRow extends {}, TKey> {
     }
     
     public insert(row: TRow) {
-        const pairs = <[string, any][]> _.toPairs(_.pick(row, this.getColumns()));
-        const keys = pairs.map(([l,]) => l).join(", ");
-        const values = pairs.map(([,r]) => r);
-        const valuesTemplate = _.range(1, values.length).map(i => "$" + i).join(", ");
+        const filtered = _.pick<TRow, TRow>(row, this.getColumns())
+        const keys = _.keys(filtered)
+        const keysTemplate = keys.join(", ")
+        const valuesTemplate = keys.map(k => `$<\{${k}\}`).join(", ")
         
-        return getClient().one(`INSERT INTO ${this.table} (${keys}) VALUES (${valuesTemplate}) RETURNING ${this.keyColumn}`, values).then(r => <TKey> r);
+        let params = {
+            table: this.table,
+            keyColumn: this.keyColumn
+        }
+        
+        let query = "INSERT INTO ${table~} " + keysTemplate + " VALUES (" + valuesTemplate + ") RETURNING ${keyColumn~}"
+        
+        return getClient().one(query, filtered).then(r => <TKey> r);
     }
     
     public update(keyValues: Object, filter: Object) {
@@ -71,10 +97,7 @@ export abstract class BaseDao<TRow extends {}, TKey> {
         
         let query = `UPDATE ${this.table} SET ${updateTemplate} WHERE ${filterTemplate}`;
         let params = [].concat(updateValues).concat(filterValues);
-        
-        console.log(query);
-        console.log(JSON.stringify(params));
-        
+    
         return getClient().query(query, params);
     }
     

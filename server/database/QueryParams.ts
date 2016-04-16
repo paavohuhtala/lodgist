@@ -1,24 +1,24 @@
 
 import * as _ from "lodash"
 
-export interface IQueryParams {
+export interface IQuerySettings {
     limit?: number
     offset?: number
 }
 
-export module QueryParams {
-    export function getDefault(): IQueryParams {
+export module QuerySettings {
+    export function getDefault(): IQuerySettings {
         return {
             limit: 30,
             offset: 0
         }
     }
 
-    export function validate(params: IQueryParams) {
+    export function validate(params: IQuerySettings) {
         if (params == null || params == undefined) {
             return getDefault();
         }
         
-        return _.merge(getDefault, params);
+        return _.merge(getDefault(), params);
     }
 }
