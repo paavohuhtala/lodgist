@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "typings": "cd server && typings install && cd ../ && cd client/js && typings install",
-    "build": "tsconfig ./server && tsconfig ./client/js && gulp",
+    "build": "gulp",
     "start": "node --es_staging --harmony_destructuring  --harmony_default_parameters ./app/server/app.js"
   },
   "repository": {
@@ -32,6 +32,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.3.1",
     "gulp-typescript": "^2.12.1",
+    "rimraf": "^2.5.2",
     "ts-node": "^0.7.1",
     "tsconfig-glob": "^0.4.2",
     "typescript": "^1.8.9",

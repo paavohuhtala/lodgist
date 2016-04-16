@@ -7,6 +7,8 @@ var stylus = require("gulp-stylus");
 var order = require("gulp-order");
 var sourcemaps = require("gulp-sourcemaps");
 var rename = require("gulp-rename");
+var tsconfigGlob = require("tsconfig-glob")
+var rimraf = require("rimraf")
 
 var serverProject = ts.createProject("./server/tsconfig.json");
 var clientProject = ts.createProject("./client/js/tsconfig.json", {
@@ -32,7 +34,15 @@ var fonts = [
     "bootswatch-dist/fonts/**.*"
 ].map((x) => "bower_components/" + x);
 
-gulp.task("server", () => {
+gulp.task("ts-globs-client", cb => {
+    tsconfigGlob({configPath: "./client/js"}, err =>  cb(err));
+});
+
+gulp.task("ts-globs-server", cb => {
+    tsconfigGlob({configPath: "./server"}, err => cb(err));
+});
+
+gulp.task("server", ["ts-globs-server"], () => {
     serverProject.src()
         .pipe(sourcemaps.init())
         .pipe(ts(serverProject))
@@ -40,7 +50,8 @@ gulp.task("server", () => {
         .pipe(gulp.dest("./app/"));
 });
 
-gulp.task("client.js", () => {
+
+gulp.task("client.js", ["ts-globs-client"], () => {
     clientProject.src()
         .pipe(sourcemaps.init())
         .pipe(ts(clientProject))
@@ -85,6 +96,10 @@ gulp.task("watch-server", () => {
 gulp.task("watch-client", () => {
     gulp.watch(clientCss, ["client.css"]);
     gulp.watch("./client/js/**/*.ts", ["client.js"]);
+});
+
+gulp.task("clean", cb => {
+    rimraf("./app", cb)
 });
 
 gulp.task("default", ["server", "client"]);
