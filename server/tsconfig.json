@@ -23,6 +23,11 @@
         "authentication/Session.ts",
         "config/Config.ts",
         "config/ConfigLoader.ts",
+        "controllers/Index.ts",
+        "controllers/Lodging.ts",
+        "controllers/Lodgings.ts",
+        "controllers/Login.ts",
+        "controllers/Register.ts",
         "database/BaseDao.ts",
         "database/Connection.ts",
         "database/daos/AddressDao.ts",
@@ -31,12 +36,13 @@
         "database/daos/UserDao.ts",
         "database/QueryParams.ts",
         "database/QueryResults.ts",
+        "IController.ts",
         "models/Address.ts",
         "models/Lodging.ts",
         "models/Reservation.ts",
         "models/Seller.ts",
         "models/Session.ts",
         "models/User.ts",
-        "routes/index.ts"
+        "Routes.ts"
     ]
 }
