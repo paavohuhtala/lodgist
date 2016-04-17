@@ -10,19 +10,25 @@
         "!typings/browser.d.ts",
         "!typings/main/**/*.*",
         "!typings/browser/**/*.*",
+        "../node_modules/pg-monitor/typescript/pg-monitor.ts",
+        "../node_modules/pg-promise/typescript/pg-promise.ts",
         "../shared/**/*.ts",
         "**/*.ts"
     ],
     "files": [
         "typings/main.d.ts",
         "../shared/additional_typings/pg-range.d.ts",
+        "../node_modules/pg-monitor/typescript/pg-monitor.ts",
+        "../node_modules/pg-promise/typescript/pg-promise.ts",
         "../shared/requests/LoginRequest.ts",
         "../shared/utils/Functional.ts",
         "app.ts",
         "authentication/Authentication.ts",
+        "authentication/Middleware.ts",
         "authentication/Session.ts",
         "config/Config.ts",
         "config/ConfigLoader.ts",
+        "controllers/api/Login.ts",
         "controllers/Index.ts",
         "controllers/Lodging.ts",
         "controllers/Lodgings.ts",
@@ -43,6 +49,8 @@
         "models/Seller.ts",
         "models/Session.ts",
         "models/User.ts",
+        "Option.ts",
+        "RequestEx.ts",
         "Routes.ts"
     ]
 }

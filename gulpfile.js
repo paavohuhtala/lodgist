@@ -99,7 +99,11 @@ gulp.task("watch-client", () => {
 });
 
 gulp.task("clean", cb => {
-    rimraf("./app", cb)
+    rimraf("./app", (err) => {
+        rimraf("./client/js/typings/", (err) => {
+            rimraf("./server/typings/", cb);
+        });
+    });
 });
 
 gulp.task("default", ["server", "client"]);

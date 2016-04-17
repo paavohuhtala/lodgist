@@ -2,9 +2,13 @@
 import * as pgp from "pg-promise"
 import * as Promise from "bluebird"
 
-const pg = pgp({promiseLib: Promise});
+const options = {
+    promiseLib: Promise
+};
 
-var client : pgp.PromiseClient = null;
+const pg = pgp();
+
+var client : pgp.IDatabase<any> = null;
 
 export function initialize(connectionString: string) {
     client = pg(connectionString);

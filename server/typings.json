@@ -1,15 +1,15 @@
 {
   "ambientDependencies": {
+    "bcrypt": "registry:dt/bcrypt#0.0.0+20160316155526",
     "express": "registry:dt/express#4.0.0+20160317120654",
     "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160322035842",
     "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "node": "registry:dt/node#4.0.0+20160330064709",
-    "pg-promise": "registry:dt/pg-promise#0.0.0+20160316171810",
     "serve-static": "registry:dt/serve-static#0.0.0+20160317120654"
   },
   "dependencies": {
     "bluebird": "registry:npm/bluebird#3.3.4+20160406213700",
-    "pg": "registry:npm/pg#4.5.1+20160406165510"
+    "moment": "registry:npm/moment#2.10.5+20160211003958"
   }
 }

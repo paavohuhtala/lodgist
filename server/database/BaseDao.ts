@@ -3,6 +3,7 @@ import {getClient} from "./Connection";
 import * as pgp from "pg-promise"
 import {QuerySettings, IQuerySettings} from "./QueryParams"
 import * as _ from "lodash"
+import * as Promise from "bluebird"
 
 export abstract class BaseDao<TRow extends {}, TKey> {
     private _table: string
@@ -50,7 +51,7 @@ export abstract class BaseDao<TRow extends {}, TKey> {
 
         let query = "SELECT * FROM ${table~} WHERE ${column~} = ${value}"
 
-        return getClient().oneOrNone(query, params).then(r => <TRow> r)
+        return getClient().oneOrNone(query, params).then(r => <TRow> r);
     }
     
     public getAll(settings?: IQuerySettings) {
@@ -69,7 +70,7 @@ export abstract class BaseDao<TRow extends {}, TKey> {
     
     private toKeyValuePairs(keyValues: Object, indexOffset = 0) : [string, any[]] {
         const pairs = <[string, any][]> _.toPairs(_.pick(keyValues, this.getColumns()));
-        const template = pairs.map(([l,], i) => `${l}=$${i + 1 + indexOffset}`).join(", ");
+        const template = pairs.map(([l,], i) => `"${l}"=$${i + 1 + indexOffset}`).join(", ");
         const values = pairs.map(([,r]) => r);
         
         return [template, values];
@@ -91,13 +92,43 @@ export abstract class BaseDao<TRow extends {}, TKey> {
         return getClient().one(query, filtered).then(r => <TKey> r);
     }
     
+    // FIXME: update to be like the others
     public update(keyValues: Object, filter: Object) {
         const [updateTemplate, updateValues] = this.toKeyValuePairs(keyValues);
         const [filterTemplate, filterValues] = this.toKeyValuePairs(filter, updateValues.length);
         
-        let query = `UPDATE ${this.table} SET ${updateTemplate} WHERE ${filterTemplate}`;
+        let query = `UPDATE "${this.table}" SET ${updateTemplate} WHERE ${filterTemplate}`;
         let params = [].concat(updateValues).concat(filterValues);
     
+        return getClient().query(query, params);
+    }
+    
+    public exists<TValue>(column: string, value: TValue) {
+        if (this.getColumns().indexOf(column) < 0) {
+            return Promise.reject<boolean>(`Invalid column "${column}"`)
+        }
+        
+        let params = {
+            table: this.table,
+            column: column,
+            value: value
+        }
+        
+        let query = "SELECT EXISTS(SELECT 1 FROM ${table~} WHERE ${column~} = ${value})";
+         
+        // FIXME: dirty cast hack
+        return <Promise<boolean>> <any> getClient().one(query, params);
+    }
+    
+    public delete(id: TKey) {
+        let params = {
+            table: this.table,
+            column: this.keyColumn,
+            value: id
+        }
+        
+        let query = "DELETE FROM ${table~} WHERE ${column~} = ${value}"
+        
         return getClient().query(query, params);
     }
     
