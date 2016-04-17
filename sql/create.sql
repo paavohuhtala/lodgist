@@ -109,3 +109,4 @@ CREATE VIEW "Locations" AS (SELECT DISTINCT city FROM "Addresses");
 
 CREATE INDEX "city_index" ON "Addresses"(lower(city));
 CREATE INDEX "session_token_index" ON "Sessions"(token);
+CREATE INDEX "user_emails" ON "Users"(lower(email));

@@ -2,8 +2,8 @@
 import {IUser} from "./User"
 
 interface IBaseSession {
-    created: Date
-    valid_until: Date
+    created: string
+    valid_until: string
     token: string
 }
 

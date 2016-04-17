@@ -2,7 +2,74 @@
 import {SessionDao} from "../database/daos/SessionDao"
 import {getClient} from "../database/Connection"
 import {ISessionRow} from "../models/Session"
+import {IUserRow} from "../models/User"
+import {some, none} from "../Option"
+import * as Promise from "bluebird"
+import * as crypto from "crypto"
+import * as moment from "moment"
+
+const randomBytes = Promise.promisify(crypto.randomBytes)
+
+const dao = new SessionDao();
+
+async function create(user: IUserRow) {
+    // 16 * 8 = 128 bits of entropy
+    const token = await randomBytes(16); 
+    
+    const session : ISessionRow = {
+        userId: user.id,
+        created: moment().toISOString(),
+        valid_until: moment().add(2, "weeks").toISOString(),
+        // TODO?: Some modified form of base64 would be more efficient 
+        token: token.toString("hex")
+    }
+    
+    await dao.insert(session);
+    
+    return session;
+}
 
 async function refresh(session: ISessionRow) {
-    const dao = new SessionDao();
+    const refreshed = _.clone(session);
+    
+    refreshed.valid_until = moment().add(2, "weeks").toISOString();
+    
+    await dao.update(refreshed, {id: session.userId});
+    
+    return refreshed;
 }
+
+function isValid(session: ISessionRow) {
+    return moment(session.valid_until).isBefore(moment());
+}
+
+export async function getOrCreate(user: IUserRow) {
+    const session = await dao.getById(user.id);
+    
+    if (session == null) {
+        return create(user);
+    }
+    
+    if (isValid(session)) {
+        return refresh(session);
+    }
+    
+    await dao.delete(session.userId);
+
+    return create(user);
+}
+
+export async function tryGet(sessionToken: string) {
+    const session = await dao.getOneByColumn("token", sessionToken);
+    
+    if (session != null) {
+        if (moment(session.valid_until).isBefore(moment())) {
+            return some(await refresh(session));
+        } else {
+            return none<ISessionRow>();
+        }
+    } else {
+        return none<ISessionRow>();
+    }
+}
+

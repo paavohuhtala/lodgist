@@ -13,7 +13,12 @@ const port = 8080
 
 let app = express()
 
-app.use(express.static("app/static/"))
+app.use(express.static("./app/static/"))
+
+import {attachSession, attachUser} from "./authentication/Middleware"
+
+app.use(attachSession);
+app.use(attachUser);
 
 app.set("view engine", "jade");
 
