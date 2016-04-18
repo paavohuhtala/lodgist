@@ -32,7 +32,7 @@ const userDao = new UserDao();
 
 export function attachUser(req: RequestEx, res: Response, next: NextFunction) {
     if (req.session !== null && req.session !== undefined) {
-        userDao.getById(req.session.userId).then(user => {
+        userDao.getById(req.session.user_id).then(user => {
             req.user = user;
             next();
         });

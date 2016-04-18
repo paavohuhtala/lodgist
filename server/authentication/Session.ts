@@ -17,13 +17,13 @@ async function create(user: IUserRow) {
     const token = await randomBytes(16); 
     
     const session : ISessionRow = {
-        userId: user.id,
+        user_id: user.id,
         created: moment().toISOString(),
         valid_until: moment().add(2, "weeks").toISOString(),
         // TODO?: Some modified form of base64 would be more efficient 
         token: token.toString("hex")
     }
-    
+
     await dao.insert(session);
     
     return session;
@@ -34,7 +34,7 @@ async function refresh(session: ISessionRow) {
     
     refreshed.valid_until = moment().add(2, "weeks").toISOString();
     
-    await dao.update(refreshed, {id: session.userId});
+    await dao.update(refreshed, {id: session.user_id});
     
     return refreshed;
 }
@@ -54,7 +54,7 @@ export async function getOrCreate(user: IUserRow) {
         return refresh(session);
     }
     
-    await dao.delete(session.userId);
+    await dao.delete(session.user_id);
 
     return create(user);
 }
@@ -73,3 +73,6 @@ export async function tryGet(sessionToken: string) {
     }
 }
 
+export async function deleteIfExists(userId: number) {
+    return dao.delete(userId);
+}

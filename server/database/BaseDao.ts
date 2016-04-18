@@ -80,16 +80,18 @@ export abstract class BaseDao<TRow extends {}, TKey> {
         const filtered = _.pick<TRow, TRow>(row, this.getColumns())
         const keys = _.keys(filtered)
         const keysTemplate = keys.join(", ")
-        const valuesTemplate = keys.map(k => `$<\{${k}\}`).join(", ")
+        const valuesTemplate = keys.map(k => "${" + k + "}").join(", ")
         
         let params = {
             table: this.table,
             keyColumn: this.keyColumn
         }
         
-        let query = "INSERT INTO ${table~} " + keysTemplate + " VALUES (" + valuesTemplate + ") RETURNING ${keyColumn~}"
+        _.assign(params, filtered);
         
-        return getClient().one(query, filtered).then(r => <TKey> r);
+        let query = "INSERT INTO ${table~} (" + keysTemplate + ") VALUES (" + valuesTemplate + ") RETURNING ${keyColumn~}"
+        
+        return getClient().one(query, params).then(r => <TKey> r);
     }
     
     // FIXME: update to be like the others

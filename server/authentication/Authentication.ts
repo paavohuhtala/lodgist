@@ -5,6 +5,7 @@ import {ISessionRow} from "../models/Session"
 import * as bcrypt from "bcrypt"
 import * as Promise from "bluebird"
 import {getOrCreate} from "./Session"
+import {ILoginRequest} from "../models/requests/LoginRequest"
 
 type AuthenticationStatus = "unknown_user" | "invalid_password" | "valid"
 
@@ -22,7 +23,7 @@ function createResult(status: AuthenticationStatus, session?: ISessionRow) : IAu
 
 const verifyHash = Promise.promisify(bcrypt.compare)
 
-export async function authenticate(request: lodgist.requests.LoginRequest) : Promise<IAuthenticationResult> {
+export async function authenticate(request: ILoginRequest) : Promise<IAuthenticationResult> {
     const userDao = new UserDao();
     const user = await userDao.getOneByColumn<string>("email", request.email);
     
@@ -30,7 +31,7 @@ export async function authenticate(request: lodgist.requests.LoginRequest) : Pro
         return createResult("unknown_user");
     }
     
-    const isValid = await verifyHash(user.password, request.password);
+    const isValid = await verifyHash(request.password, user.password);
     
     if (!isValid) {
         return createResult("invalid_password");

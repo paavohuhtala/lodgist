@@ -20,7 +20,6 @@
         "../shared/additional_typings/pg-range.d.ts",
         "../node_modules/pg-monitor/typescript/pg-monitor.ts",
         "../node_modules/pg-promise/typescript/pg-promise.ts",
-        "../shared/requests/LoginRequest.ts",
         "../shared/utils/Functional.ts",
         "app.ts",
         "authentication/Authentication.ts",
@@ -45,12 +44,14 @@
         "IController.ts",
         "models/Address.ts",
         "models/Lodging.ts",
+        "models/requests/LoginRequest.ts",
         "models/Reservation.ts",
         "models/Seller.ts",
         "models/Session.ts",
         "models/User.ts",
         "Option.ts",
         "RequestEx.ts",
+        "Result.ts",
         "Routes.ts"
     ]
 }

@@ -6,6 +6,8 @@ import {Register} from "./controllers/Register"
 import {Lodging} from "./controllers/Lodging"
 import {Lodgings} from "./controllers/Lodgings"
 
+import {LoginApi, LogoutApi} from "./controllers/api/Login"
+
 export function registerRoutes(app: Express) {
     app.get("/", Index.get);
 
@@ -14,4 +16,7 @@ export function registerRoutes(app: Express) {
     
     app.get("/lodgings", Lodgings.get);
     app.get("/lodgings/:id", Lodging.get);
+    
+    app.post("/api/v1/login", LoginApi.post);
+    app.post("/api/v1/logout", LogoutApi.post);
 }

@@ -10,7 +10,7 @@ interface IBaseSession {
 export const baseSessionMembers = ["created", "valid_until", "token"];
 
 export interface ISessionRow extends IBaseSession {
-    userId: number
+    user_id: number
 }
 
 export const sessionRowMembers = ["user_id"].concat(baseSessionMembers);

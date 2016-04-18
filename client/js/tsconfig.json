@@ -19,7 +19,6 @@
     "files": [
         "typings/browser.d.ts",
         "../../shared/additional_typings/pg-range.d.ts",
-        "../../shared/requests/LoginRequest.ts",
         "../../shared/utils/Functional.ts",
         "controllers/index.ts",
         "controllers/register.ts",
