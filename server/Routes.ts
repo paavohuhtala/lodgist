@@ -1,4 +1,5 @@
-import {Express} from "express"
+import {Express, Response, NextFunction} from "express"
+import {RequestEx} from "./RequestEx"
 
 import {Index} from "./controllers/Index"
 import {Login} from "./controllers/Login"
@@ -9,6 +10,15 @@ import {Lodgings} from "./controllers/Lodgings"
 import {LoginApi, LogoutApi} from "./controllers/api/Login"
 import {NewLodgingApi} from "./controllers/api/NewLodging"
 
+function isLoggedIn(req: RequestEx, res: Response, next: NextFunction) {
+    if (req.user === undefined) {
+        res.sendStatus(401);
+        return;
+    }
+    
+    next();
+}
+
 export function registerRoutes(app: Express) {
     app.get("/", Index.get);
 
@@ -16,11 +26,11 @@ export function registerRoutes(app: Express) {
     app.get("/register", Register.get);
     
     app.get("/lodgings", Lodgings.get);
-    app.get("/lodgings/new", NewLodging.get);
+    app.get("/lodgings/new", isLoggedIn, NewLodging.get);
     app.get("/lodgings/:id", Lodging.get);
     
     app.post("/api/v1/login", LoginApi.post);
-    app.post("/api/v1/logout", LogoutApi.post);
+    app.post("/api/v1/logout", isLoggedIn, LogoutApi.post);
     
-    app.post("/api/v1/lodgings/new", NewLodgingApi.post);
+    app.post("/api/v1/lodgings/new", isLoggedIn, NewLodgingApi.post);
 }
