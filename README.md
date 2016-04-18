@@ -9,6 +9,8 @@ Rest in Finnish, sorry.
     * [Mökkilistaus](http://lodgist.paavo.me:8080/lodgings)
     * [Esimerkkimökki](http://lodgist.paavo.me:8080/lodging/1)
     * [Kirjautumissivu](http://lodgist.paavo.me:8080/login)
+      * Käyttäjätunnus: `that.guy@vault-tec.us`
+      * Salasana: `please stand by`
 * [Dokumentaatio (pdf)](docs/dokumentaatio.pdf)
 * [Viikkonkirjanpito (lisätietoja)](docs/viikkokirjanpito.md)
 
