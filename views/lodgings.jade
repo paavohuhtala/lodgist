@@ -11,7 +11,7 @@ block content
                         a(href="/lodgings/#{lodging.id}").lodging-image.col-md-3                    
                         .lodging-content.col-md-7
                             a(href="/lodgings/#{lodging.id}").lodging-title #{lodging.name}
-                            p.lodging-address #{lodging.city} | #{lodging.owner}
+                            p.lodging-address #{lodging.city} | #{lodging.owner_name}
                             p= lodging.description
                         .lodging-pricing.col-md-2
                             p.lodging-price #{lodging.price_per_night} / yö

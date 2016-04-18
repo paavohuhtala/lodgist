@@ -28,6 +28,7 @@ html(ng-app="lodgist" ng-controller="RootController")
                     if !user
                         +nav-item("/login", "Log in")
                     else
+                        li: a Logged in as #{user.name}
                         li: a(ng-click="global.controls.logout.onClick()") Log out
         block content
     

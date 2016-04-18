@@ -13,7 +13,8 @@ block content
     .container
         .lodging
             h2 #{lodging.name}
-            p #{lodging.address.city}
+            .text-info #{address.city}
+            .text-info Myyjä: #{owner.name}
             .lodging-image.col-md-8
             .col-md-4
                 .panel.panel-default
@@ -33,10 +34,10 @@ block content
                                             tr
                                         td= x + 1
                         div
-                            p Per yö: τ €
+                            p Per yö: #{lodging.price_per_night}
                             p Yhteensä: π €
             .lodging-description.col-md-8
-                p Bacon ipsum dolor amet sirloin pancetta chuck pork loin. Shoulder meatball flank frankfurter. Andouille doner beef shoulder pancetta tongue meatball pork belly ham hock rump meatloaf turducken jowl jerky sausage. Rump filet mignon meatloaf biltong swine. Capicola ball tip turducken beef.
+                p= lodging.description
             .col-md-4
             .lodging-amenities.col-md-8
                 ul.list-unstyled
