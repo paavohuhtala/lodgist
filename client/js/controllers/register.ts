@@ -1,5 +1,5 @@
 
-module lodgist.controllers {
+namespace lodgist.controllers {
     
     interface Control<T> {
         value: T

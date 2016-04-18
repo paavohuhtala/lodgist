@@ -1,14 +1,18 @@
 extends layout.jade
 
+block vars
+    - controller = "LoginController"
+
 block content
     #login-panel
         .col-sm-6
             h3 Already have an account?
             form#login-form
-                .form-group: input.form-control#email(type="email" placeholder="Email" required)
-                .form-group: input.form-control#password(type="password" placeholder="Password" required)
-                button.btn.btn-primary.bottom-sm Login
+                .form-group: input.form-control#email(type="email" placeholder="Email" required ng-model="loginDetails.email")
+                .form-group: input.form-control#password(type="password" placeholder="Password" required ng-model="loginDetails.password")
+                button.btn.btn-primary.bottom-sm(ng-click="controls.loginButton.onClick()") {{controls.loginButton.text}}
+
         .col-sm-6
             h3 Not registered yet?
             p It only takes a minute.
-            a.btn.btn-primary.bottom-sm(href="/register") Register
+            a.btn.btn-primary.bottom-sm(href="/register" ng-text) Register

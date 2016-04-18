@@ -95,13 +95,22 @@ export abstract class BaseDao<TRow extends {}, TKey> {
     }
     
     // FIXME: update to be like the others
-    public update(keyValues: Object, filter: Object) {
-        const [updateTemplate, updateValues] = this.toKeyValuePairs(keyValues);
-        const [filterTemplate, filterValues] = this.toKeyValuePairs(filter, updateValues.length);
+    public update<TFilter>(update: Object, column: string, filterValue: TFilter) {
         
-        let query = `UPDATE "${this.table}" SET ${updateTemplate} WHERE ${filterTemplate}`;
-        let params = [].concat(updateValues).concat(filterValues);
-    
+        const filteredUpdate = _.pick<TRow, TRow>(<TRow> update, this.getColumns());
+        const keys = _.keys(filteredUpdate);
+        const valuesTemplate = keys.map(k => k + " = ${" + k + "}").join(", ");
+        
+        let params = {
+            table: this.table,
+            column: column,
+            filterValue: filterValue
+        }
+
+        _.assign(params, filteredUpdate);
+        
+        let query = "UPDATE ${table~} SET " + valuesTemplate + " WHERE ${column~} = ${filterValue}"
+
         return getClient().query(query, params);
     }
     

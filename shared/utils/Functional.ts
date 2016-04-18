@@ -1,5 +1,5 @@
 
-export module Functional {
+namespace lodgist.functional {
     export function curry2<T, TArgA, TArgB, TRet>(f: (a: TArgA, b: TArgB) => TRet) {
         return (a: TArgA) => (b: TArgB) => f(a, b);
     }

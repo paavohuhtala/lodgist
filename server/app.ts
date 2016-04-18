@@ -1,6 +1,8 @@
 
 import * as express from "express"
 import * as Promise from "bluebird"
+import * as cookieParser from "cookie-parser"
+
 import * as Connection from "./database/Connection"
 
 import {registerRoutes} from "./Routes"
@@ -12,15 +14,14 @@ Connection.initialize(cons);
 const port = 8080
 
 let app = express()
-
+app.set("view engine", "jade");
+app.use(cookieParser());
 app.use(express.static("./app/static/"))
 
 import {attachSession, attachUser} from "./authentication/Middleware"
 
 app.use(attachSession);
 app.use(attachUser);
-
-app.set("view engine", "jade");
 
 registerRoutes(app);
 

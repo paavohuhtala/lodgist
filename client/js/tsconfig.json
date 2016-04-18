@@ -21,8 +21,11 @@
         "../../shared/additional_typings/pg-range.d.ts",
         "../../shared/utils/Functional.ts",
         "controllers/index.ts",
+        "controllers/login.ts",
         "controllers/register.ts",
+        "controllers/root.ts",
         "module.ts",
+        "services/authentication.ts",
         "validation/Conductor.ts"
     ]
 }

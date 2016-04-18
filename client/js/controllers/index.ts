@@ -1,5 +1,5 @@
 
-module lodgist.controllers {
+namespace lodgist.controllers {
     
     export interface IndexScope extends angular.IScope {
         test: string

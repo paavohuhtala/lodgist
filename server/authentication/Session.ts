@@ -4,6 +4,7 @@ import {getClient} from "../database/Connection"
 import {ISessionRow} from "../models/Session"
 import {IUserRow} from "../models/User"
 import {Option, some, none} from "../Option"
+import * as _ from "lodash"
 import * as Promise from "bluebird"
 import * as crypto from "crypto"
 import * as moment from "moment"
@@ -34,13 +35,13 @@ async function refresh(session: ISessionRow) {
     
     refreshed.valid_until = moment().add(2, "weeks").toISOString();
     
-    await dao.update(refreshed, {id: session.user_id});
+    await dao.update(refreshed, "user_id", session.user_id);
     
     return refreshed;
 }
 
 function isValid(session: ISessionRow) {
-    return moment(session.valid_until).isBefore(moment());
+    return moment(session.valid_until).isAfter(moment());
 }
 
 export async function getOrCreate(user: IUserRow) {
@@ -61,9 +62,9 @@ export async function getOrCreate(user: IUserRow) {
 
 export async function tryGet(sessionToken: string) : Promise<Option<ISessionRow>> {
     const session = await dao.getOneByColumn("token", sessionToken);
-    
+
     if (session != null) {
-        if (moment(session.valid_until).isBefore(moment())) {
+        if (moment(session.valid_until).isAfter(moment())) {
             return some(await refresh(session));
         } else {
             return none<ISessionRow>();

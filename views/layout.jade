@@ -7,14 +7,14 @@ mixin nav-item(url, title)
 
 block vars
 
-html
+html(ng-app="lodgist" ng-controller="RootController")
     head
         title Lodgist
         link(rel="stylesheet" href="/css/ext.css")
         link(rel="stylesheet" href="/css/client.css")
         script(src="/js/ext.js")
         script(src="/js/client.js")
-    body(ng-app="lodgist" ng-controller=controller)
+    body(ng-controller=controller)
         nav.navbar.navbar-default.navbar-static-top(bs-navbar): .container-fluid
             .navbar-header
                 a.navbar-brand#logo(href="/") Lodgist
@@ -24,6 +24,9 @@ html
                     +nav-item("/lodgings", "Lodgings (TEST)")
                     +nav-item("/lodgings/1", "Sample lodging (TEST)")
                 ul.nav.navbar-nav.navbar-right
-                    +nav-item("/login", "Log in")
+                    if !user
+                        +nav-item("/login", "Log in")
+                    else
+                        li: a(ng-click="global.controls.logout.onClick()") Log out
         block content
     

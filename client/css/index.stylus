@@ -76,4 +76,6 @@
     & > tr > td
         width: 2.5em
         height: 2em
-        
+
+a[ng-click]
+    cursor: pointer

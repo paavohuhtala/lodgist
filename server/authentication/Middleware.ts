@@ -36,6 +36,7 @@ export function attachUser(req: RequestEx, res: Response, next: NextFunction) {
         userDao.getById(req.session.user_id).then(user => {
             req.user = user;
             res.locals.user = user;
+            
             next();
         });
     } else {
