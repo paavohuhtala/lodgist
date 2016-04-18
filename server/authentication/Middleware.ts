@@ -3,6 +3,7 @@ import {RequestEx} from "../RequestEx"
 import {Response, NextFunction} from "express"
 import {tryGet} from "./Session"
 import {UserDao} from "../database/daos/UserDao"
+import {isSome} from "../Option"
 
 export function attachSession(req: RequestEx, res: Response, next: NextFunction) {
 
@@ -15,7 +16,7 @@ export function attachSession(req: RequestEx, res: Response, next: NextFunction)
     
     if (token !== null && token !== undefined) {
         tryGet(token).then(session => {
-            if (session.isSome) {
+            if (isSome(session)) {
                 req.session = session.value;
             } else {
                 res.clearCookie("session_token");
@@ -34,6 +35,7 @@ export function attachUser(req: RequestEx, res: Response, next: NextFunction) {
     if (req.session !== null && req.session !== undefined) {
         userDao.getById(req.session.user_id).then(user => {
             req.user = user;
+            res.locals.user = user;
             next();
         });
     } else {

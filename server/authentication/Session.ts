@@ -3,7 +3,7 @@ import {SessionDao} from "../database/daos/SessionDao"
 import {getClient} from "../database/Connection"
 import {ISessionRow} from "../models/Session"
 import {IUserRow} from "../models/User"
-import {some, none} from "../Option"
+import {Option, some, none} from "../Option"
 import * as Promise from "bluebird"
 import * as crypto from "crypto"
 import * as moment from "moment"
@@ -59,7 +59,7 @@ export async function getOrCreate(user: IUserRow) {
     return create(user);
 }
 
-export async function tryGet(sessionToken: string) {
+export async function tryGet(sessionToken: string) : Promise<Option<ISessionRow>> {
     const session = await dao.getOneByColumn("token", sessionToken);
     
     if (session != null) {
