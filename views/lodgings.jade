@@ -12,6 +12,6 @@ block content
                         .lodging-content.col-md-7
                             a(href="/lodgings/#{lodging.id}").lodging-title #{lodging.name}
                             p.lodging-address #{lodging.city} | #{lodging.owner}
-                            p Bacon ipsum dolor amet short ribs spare ribs biltong sausage, fatback filet mignon alcatra kevin beef landjaeger. Strip steak pig cupim andouille, tail jerky venison bacon pastrami pork chop corned beef shankle.
+                            p= lodging.description
                         .lodging-pricing.col-md-2
-                            p.lodging-price #{lodging.pricePerNight}€ / yö
+                            p.lodging-price #{lodging.price_per_night} / yö

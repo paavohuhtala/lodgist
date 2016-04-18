@@ -23,6 +23,7 @@ html(ng-app="lodgist" ng-controller="RootController")
                     +nav-item("/", "Home")
                     +nav-item("/lodgings", "Lodgings (TEST)")
                     +nav-item("/lodgings/1", "Sample lodging (TEST)")
+                    +nav-item("/lodgings/new", "Post a new lodging (TEST)")
                 ul.nav.navbar-nav.navbar-right
                     if !user
                         +nav-item("/login", "Log in")

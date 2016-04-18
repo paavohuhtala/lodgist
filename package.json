@@ -41,6 +41,7 @@
   "dependencies": {
     "bcrypt": "^0.8.5",
     "bluebird": "^3.3.4",
+    "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "jade": "^1.11.0",

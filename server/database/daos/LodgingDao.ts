@@ -1,4 +1,5 @@
 
+import * as pgp from "pg-promise"
 import {BaseDao} from "../BaseDao"
 import {ILodgingRow, Lodging} from "../../models/Lodging"
 
@@ -8,7 +9,7 @@ export class LodgingDao extends BaseDao<ILodgingRow, number> {
         return Lodging.lodgingRowMembers;
     }
     
-    constructor() {
-        super("Lodgings", "id");
+    constructor(connection?: pgp.IDatabase<any>) {
+        super("Lodgings", "id", connection);
     }
 }

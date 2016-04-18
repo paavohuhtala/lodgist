@@ -18,3 +18,9 @@ export const Lodging : IController = {
         .then(data => res.render("lodging", data), err => res.send(500, err));             
     }
 }
+
+export const NewLodging : IController = {
+    get: (req: Request, res: Response) => {
+        res.render("new_lodging");
+    }
+}

@@ -28,6 +28,8 @@
         "config/Config.ts",
         "config/ConfigLoader.ts",
         "controllers/api/Login.ts",
+        "controllers/api/Logout.ts",
+        "controllers/api/NewLodging.ts",
         "controllers/Index.ts",
         "controllers/Lodging.ts",
         "controllers/Lodgings.ts",

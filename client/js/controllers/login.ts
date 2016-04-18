@@ -1,5 +1,4 @@
 
-
 namespace lodgist.controllers {
 
     interface LoginScope extends angular.IScope {

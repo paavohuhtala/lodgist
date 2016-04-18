@@ -1,13 +1,13 @@
 
 import {IAddress} from "./Address"
 
-interface IBaseLodging {
+export interface IBaseLodging {
     id: number
     name: string
     description: string
     is_public: boolean
-    reservation_start: Date
-    reservation_end: Date
+    reservation_start: string
+    reservation_end: string
     price_per_night: number
     area: number
     floors: number
