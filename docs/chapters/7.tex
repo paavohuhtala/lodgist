@@ -1,0 +1,31 @@
+\chapter{Asennus}
+
+\section{Ennakkovaatimukset}
+
+Sovellus vaatii modernit versiot Node.js:stä (5.9.0) [ja NPM:stä] sekä PostgreSQL:stä (9.3.11). Ohjelma toimii ainakin Ubuntu Linux- ja Windows-ympäristöissä. \\
+
+Sovelluksen riippuvuuksien asentaminen sekä kääntäminen vaatii myös NPM-paketit \texttt{gulp}, \texttt{typings} ja \texttt{bower} globaalisti asennettuna.
+
+\section{Lataaminen}
+
+Sovelluksen lähdekoodi ladataan Gitin kautta. Siirry haluamaaasi hakemistoon (esim. \texttt{/var/node/lodgist}) ja kloonaa repositorio: \\ \\
+\texttt{git clone https://github.com/paavohuhtala/lodgist.git .}
+
+\section{Tietokannan valmistelu}
+
+Kansiosta \texttt{/sql} löytyvät tietokantaskriptit. Sovellus olettaa, että käytössä on tietokanta nimeltään \texttt{lodgist}, ja että se on saatavilla portissa 5432 nykyisellä koneella. Luo oikean niminen tietokanta, ja suorita  skriptit \texttt{create.sql} ja \texttt{test\_data.sql} käyttäen \texttt{psql}-komentiriviohjelmaa tai PgAdmin 3- työpöytäohjelmaa.\\
+
+Tietokannan yhdistämistietoja (connection string) voi toistaiseksi muuttaa ainoastaan muokkaamalla tiedostoa \texttt{/server/app.ts}.
+
+\section{Riippuvuudet}
+
+\begin{itemize}
+	\item Asenna NPM -paketit: \\ \texttt{npm install}
+	\item Asenna Bower -paketit: \\ \texttt{bower install}
+	\item Asenna TypeScript -tyyppimäärittelyt: \\ \texttt{npm run typings}
+\end{itemize}
+
+\section{Kääntäminen}
+
+Sovellus käännettään komennolla \texttt{gulp}. Jos kääntäminen onnistuu, tiedostot ilmestyvät kansioon \texttt{/app}.
+
