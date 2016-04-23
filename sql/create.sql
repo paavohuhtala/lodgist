@@ -58,7 +58,7 @@ CREATE TABLE "Lodgings" (
 	is_public BOOLEAN NOT NULL DEFAULT(FALSE),
 	reservation_start TIME NOT NULL,
 	reservation_end TIME NOT NULL,
-	price_per_night MONEY CHECK (price_per_night > 0::money) NOT NULL,
+	price_per_night NUMERIC(12, 2) CHECK (price_per_night > 0) NOT NULL,
 	CHECK(reservation_start >= reservation_end),
 	area NUMERIC CHECK (area > 0),
 	floors INTEGER CHECK (floors >= 1),
@@ -92,7 +92,7 @@ CREATE TABLE "ExternalReservations" (
 CREATE TABLE "UserReservations" (
 	reservation INTEGER REFERENCES "Reservations"(id) NOT NULL,
 	customer INTEGER REFERENCES "Users"(id) NOT NULL,
-	price MONEY NOT NULL,
+	price NUMERIC(12, 2) NOT NULL,
 	is_paid BOOLEAN NOT NULL DEFAULT(FALSE),
 	PRIMARY KEY (customer, reservation)
 );

@@ -18,8 +18,6 @@ import {ReservationDao} from "../../database/daos/ReservationDao"
 import {UserReservationDao} from "../../database/daos/UserReservationDao"
 import {ExternalReservationDao} from "../../database/daos/ExternalReservationDao"
 
-import * as _ from "lodash"
-
 // CONSIDER moving these request interfacs somewhere else
 interface INewReservationRequest {
     during: PgRange.Range<Date>
@@ -66,7 +64,7 @@ async function createUserReservation(request: INewUserReservationRequest, custom
             customer: customer.id,
             price: totalPrice,
             reservation: reservationId,
-            paid: false
+            is_paid: false
         }
 
         return new UserReservationDao(t).insert(userReservation);
