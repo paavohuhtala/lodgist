@@ -14,6 +14,7 @@
         "!typings/main/**/*.*",
         "!typings/browser/**/*.*",
         "../../shared/**/*.ts",
+        "!../../shared/additional_typings/pg-range-module.d.ts",
         "**/*.ts"
     ],
     "files": [

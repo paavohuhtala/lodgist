@@ -20,10 +20,3 @@ declare namespace PgRange {
     }
 }
 
-/*declare module "pg-range" {
-    
-    import * as pg from "pg"
-    
-    export function install(pg: pg.Client): void;
-    export const Range: PgRange.RangeConstructor;
-}*/
