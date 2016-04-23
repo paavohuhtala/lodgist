@@ -13,7 +13,7 @@ import {NewLodgingApi} from "./controllers/api/NewLodging"
 
 import {MyReservations} from "./controllers/MyReservations"
 import {LodgingReservations} from "./controllers/LodgingReservations"
-import {NewReservation} from "./controllers/NewReservation"
+import {NewExternalReservation, NewUserReservation} from "./controllers/NewReservation"
 
 function isLoggedIn(req: RequestEx, res: Response, next: NextFunction) {
     if (req.user === undefined) {
@@ -32,14 +32,19 @@ export function registerRoutes(app: Express) {
     
     app.get("/lodgings", Lodgings.get);
     app.get("/lodgings/new", isLoggedIn, NewLodging.get);
-    app.get("/lodgings/:id/reservations/new", isLoggedIn, NewReservation.get);
+    app.get("/lodgings/:id/reservations/user/new", isLoggedIn, NewUserReservation.get);
+    app.get("/lodgings/:id/reservations/external/new", isLoggedIn, NewExternalReservation.get);
     app.get("/lodgings/:id/reservations", isLoggedIn, LodgingReservations.get);
     app.get("/lodgings/:id", Lodging.get);    
     
     app.get("/reservations", isLoggedIn, MyReservations.get);
     
+    app.get("/mock/payment_provider/:reservation_id");
+    
     app.post("/api/v1/login", LoginApi.post);
     app.post("/api/v1/logout", isLoggedIn, LogoutApi.post);
     
     app.post("/api/v1/lodgings/new", isLoggedIn, NewLodgingApi.post);
+    app.post("/api/v1/reservations/user/new", isLoggedIn);
+    app.post("/api/v1/reservations/external/new", isLoggedIn);
 }

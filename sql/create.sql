@@ -93,6 +93,7 @@ CREATE TABLE "UserReservations" (
 	reservation INTEGER REFERENCES "Reservations"(id) NOT NULL,
 	customer INTEGER REFERENCES "Users"(id) NOT NULL,
 	price MONEY NOT NULL,
+	paid BOOLEAN NOT NULL DEFAULT(FALSE),
 	PRIMARY KEY (customer, reservation)
 );
 

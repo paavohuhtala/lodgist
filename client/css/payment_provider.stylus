@@ -1,0 +1,12 @@
+
+#horrendous-logo
+
+    font-family: "Comic Sans MS", Brush Script MT, serif
+    
+    & > span:nth-child(1)
+        color: red
+    & > span:nth-child(2)
+        color: green
+    & > span:nth-child(3)
+        color: blue
+    

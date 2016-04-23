@@ -19,7 +19,8 @@ var clientJsDeps = [
     "angular/angular.js",
     "angular-i18n/angular-locale_fi-fi.js",
     "angular-strap/dist/angular-strap.js",
-    "angular-strap/dist/angular-strap.tpl.js"
+    "angular-strap/dist/angular-strap.tpl.js",
+    "moment/moment.js"
 ].map((x) => "bower_components/" + x);
 
 var clientCssDeps = [

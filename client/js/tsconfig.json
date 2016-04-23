@@ -10,6 +10,7 @@
     },
     "filesGlob": [
         "typings/browser.d.ts",
+        "../../bower_components/moment/moment.d.ts",
         "!typings/main.d.ts",
         "!typings/main/**/*.*",
         "!typings/browser/**/*.*",
@@ -19,6 +20,7 @@
     ],
     "files": [
         "typings/browser.d.ts",
+        "../../bower_components/moment/moment.d.ts",
         "../../shared/additional_typings/pg-range.d.ts",
         "../../shared/utils/Functional.ts",
         "controllers/amenities.ts",

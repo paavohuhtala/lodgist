@@ -2,6 +2,7 @@
 import * as express from "express"
 import * as Promise from "bluebird"
 import * as cookieParser from "cookie-parser"
+import * as compression from "compression"
 const bodyParser = require("body-parser");
 
 import * as Connection from "./database/Connection"
@@ -15,6 +16,7 @@ Connection.initialize(cons);
 const port = 8080
 
 let app = express()
+app.use(compression());
 app.set("view engine", "jade");
 app.use(cookieParser());
 app.use(bodyParser.json());
