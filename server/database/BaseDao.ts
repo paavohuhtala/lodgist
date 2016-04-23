@@ -81,8 +81,27 @@ export abstract class BaseDao<TRow extends {}, TKey> {
     }
     
     protected abstract getColumns() : string[]
+    
+    protected onValidate(row: TRow) {
+        return true;
+    }
+    
+    /*public validateRow(row: TRow) {
+        const hasAllColumns = this.getColumns().map(r => r in row).reduce((l, r) => l && r, true);
+        
+        if (hasAllColumns) {
+            return this.onValidate(row);
+        } else {
+            return false;
+        }
+    }*/
         
     public insert(row: TRow) {
+        
+        if (!this.onValidate(row)) {
+            return null;
+        }
+        
         const filtered = _.pick<TRow, TRow>(row, this.getColumns())
         const keys = _.keys(filtered)
         const keysTemplate = keys.join(", ")
@@ -97,10 +116,9 @@ export abstract class BaseDao<TRow extends {}, TKey> {
         
         let query = "INSERT INTO ${table~} (" + keysTemplate + ") VALUES (" + valuesTemplate + ") RETURNING ${keyColumn~}"
         
-        return this.getClient().one(query, params).then(r => <TKey> r);
+        return this.getClient().one(query, params).then(r => <TKey> r[this.keyColumn]);
     }
     
-    // FIXME: update to be like the others
     public update<TFilter>(update: Object, column: string, filterValue: TFilter) {
         
         const filteredUpdate = _.pick<TRow, TRow>(<TRow> update, this.getColumns());
