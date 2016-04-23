@@ -47,7 +47,7 @@ INSERT INTO "Reservations" (lodging, type, during, ) VALUES
 INSERT INTO "ExternalReservations" (reservation, reason) VALUES
 	(1, 'Remontissa.');
 
-INSERT INTO "UserReservations" (reservation, customer, price, paid) VALUES
+INSERT INTO "UserReservations" (reservation, customer, price, is_paid) VALUES
 	(2, 1, 440, TRUE);
 
 INSERT INTO "Reviews" (lodging, author, content, rating) VALUES

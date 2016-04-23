@@ -32,7 +32,7 @@ export interface IExternalReservation extends IBaseExternalReservation {
 export interface IBaseUserReservation {
     customer: number
     price: number
-    paid: boolean
+    is_paid: boolean
 }
 
 export interface IUserReservationRow extends IBaseUserReservation {
