@@ -6,7 +6,7 @@ import {ILodgingRow, Lodging} from "../../models/Lodging"
 export class LodgingDao extends BaseDao<ILodgingRow, number> {
 
     protected getColumns() {
-        return Lodging.lodgingRowMembers;
+        return Lodging.rowMembers;
     }
     
     constructor(connection?: pgp.IDatabase<any>) {

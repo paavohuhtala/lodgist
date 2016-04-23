@@ -16,3 +16,19 @@ export interface IReservationRow {
 export interface IReservation {
     lodging: ILodging
 }
+
+export interface IExternalReservationRow {
+    reservation: number
+    reason: string
+}
+
+export interface IUserReserationRow {
+    reservation: number
+    customer: number
+    price: number
+}
+
+export module Reservation {
+    export const baseMembers = ["id", "type", "during"];
+    export const rowMembers = ["lodging"].concat(baseMembers);
+}

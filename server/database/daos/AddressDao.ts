@@ -5,7 +5,7 @@ import {IAddress, Address} from "../../models/Address"
 
 export class AddressDao extends BaseDao<IAddress, number> {
     protected getColumns() {
-        return Address.addressMembers;
+        return Address.members;
     }
     
     constructor(connection?: pgp.IDatabase<any>) {

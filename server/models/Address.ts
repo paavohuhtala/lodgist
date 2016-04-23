@@ -9,5 +9,5 @@ export interface IAddress {
 }
 
 export module Address {
-    export const addressMembers = ["id", "street1", "street2", "postal_code", "city", "country"]
+    export const members = ["id", "street1", "street2", "postal_code", "city", "country"]
 }

@@ -5,7 +5,7 @@ import {User, IUserRow} from "../../models/User"
 
 export class UserDao extends BaseDao<IUserRow, number> {
     protected getColumns() {
-        return User.userRowMembers;
+        return User.rowMembers;
     }
     
     constructor(connection?: pgp.IDatabase<any>) {

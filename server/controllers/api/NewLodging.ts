@@ -24,7 +24,7 @@ async function createLodging(lodging: ILodging, owner: IUserRow) : Promise<numbe
             return Promise.reject("Invalid address.");
         }
         
-        let modifiedLodging = <ILodgingRow> _.pick(lodging, Lodging.baseLodgingMembers)
+        let modifiedLodging = <ILodgingRow> _.pick(lodging, Lodging.baseMembers)
         modifiedLodging.address = addressId;
         modifiedLodging.owner = owner.id;
         

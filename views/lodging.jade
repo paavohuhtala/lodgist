@@ -19,23 +19,10 @@ block content
             .col-md-4
                 .panel.panel-default
                     .panel-body
-                        .calendar
-                            .calendar-title
-                                a(href="").calendar-button.left.glyphicon.glyphicon-chevron-left                        
-                                span Fiktiokuu 2072
-                                a(href="").calendar-button.right.glyphicon.glyphicon-chevron-right
-                            table
-                                thead
-                                    each day in ["Ma", "Ti", "Ke", "To", "Pe", "La", "Su"]
-                                        td= day
-                                tbody.calendar-cells
-                                    - for (var x = 0; x < 31; x++)
-                                        if ((x % 7) == 0)
-                                            tr
-                                        td= x + 1
                         div
-                            p Per yö: #{lodging.price_per_night}
-                            p Yhteensä: π €
+                            a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/new") Siirry varaamaan
+                        b #{lodging.price_per_night} / yö
+                        p.text-muted sis. alv n + 1 %
             .lodging-description.col-md-8
                 p= lodging.description
             .col-md-4

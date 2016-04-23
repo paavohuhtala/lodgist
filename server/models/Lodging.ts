@@ -25,7 +25,10 @@ export interface ILodging extends IBaseLodging {
 }
 
 export module Lodging {
-    export const baseLodgingMembers = ["id", "name", "description", "is_public", "reservation_start", "reservation_end", "price_per_night", "price_per_night", "area", "floors", "built_year", "renovated_year"];
-    
-    export const lodgingRowMembers = ["owner", "address"].concat(baseLodgingMembers);
+    export const baseMembers = [
+        "id", "name", "description", "is_public",
+        "reservation_start", "reservation_end", "price_per_night",
+        "price_per_night", "area", "floors", "built_year", "renovated_year"];
+
+    export const rowMembers = ["owner", "address"].concat(baseMembers);
 }

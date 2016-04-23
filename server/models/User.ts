@@ -21,7 +21,7 @@ export interface IUser extends IBaseUser {
 }
 
 export module User {
-    export const baseUserMembers = ["id", "role", "name", "email", "phone"];
-    export const userRowMembers : string[] = ["password", "address"].concat(baseUserMembers);
-    export const userMembers : string[] = ["address"].concat(baseUserMembers);
+    export const baseMembers = ["id", "role", "name", "email", "phone"];
+    export const rowMembers : string[] = ["password", "address"].concat(baseMembers);
+    export const members : string[] = ["address"].concat(baseMembers);
 }
