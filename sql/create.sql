@@ -80,6 +80,7 @@ CREATE TABLE "Reservations" (
 	lodging INTEGER REFERENCES "Lodgings"(id) NOT NULL,
 	type reservation_type NOT NULL DEFAULT('user'),
 	during tsrange NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT(now()::timestamp),
 	EXCLUDE USING gist (lodging WITH =, during WITH &&)
 );
 
@@ -94,6 +95,7 @@ CREATE TABLE "UserReservations" (
 	customer INTEGER REFERENCES "Users"(id) NOT NULL,
 	price NUMERIC(12, 2) NOT NULL,
 	is_paid BOOLEAN NOT NULL DEFAULT(FALSE),
+	paid TIMESTAMP,
 	PRIMARY KEY (customer, reservation)
 );
 

@@ -14,7 +14,7 @@ import {IUserReservationRow, IExternalReservationRow,IReservationRow, Reservatio
 import {IUserRow} from "../../models/User"
 import {ILodgingRow} from "../../models/Lodging"
 
-import {deUtcify} from "../../DateUtils"
+import {deTimezonify} from "../../DateUtils"
 import {getClient} from "../../database/Connection"
 
 import {LodgingDao} from "../../database/daos/LodgingDao"
@@ -62,8 +62,8 @@ async function createReservation(t: pgp.IDatabase<any>, request: INewReservation
     const starts = moment.utc(lodging.reservation_start, "HH:mm:ss");
     const ends = moment.utc(lodging.reservation_end, "HH:mm:ss");
     
-    during.lower = deUtcify(moment(during.lower).hour(starts.hour()).minute(starts.minute())).toDate();
-    during.upper = deUtcify(moment(during.upper).hour(ends.hour()).minute(ends.minute())).toDate();
+    during.lower = deTimezonify(moment(during.lower).hour(starts.hour()).minute(starts.minute())).toDate();
+    during.upper = deTimezonify(moment(during.upper).hour(ends.hour()).minute(ends.minute())).toDate();
 
     const reservation : IReservationRow = {
         lodging: request.lodging,
