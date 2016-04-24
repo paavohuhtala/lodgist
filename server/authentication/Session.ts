@@ -37,14 +37,14 @@ async function refresh(session: ISessionRow) {
     
     await dao.update(update, "user_id", session.user_id);
     
-    return _.assign(_.clone(session), update);
+    return <ISessionRow> _.assign(_.clone(session), update);
 }
 
 function isValid(session: ISessionRow) {
     return moment(session.valid_until).isAfter(moment());
 }
 
-export async function getOrCreate(user: IUserRow) {
+export async function getOrCreate(user: IUserRow) : Promise<ISessionRow> {
     const session = await dao.getById(user.id);
     
     if (session == null) {

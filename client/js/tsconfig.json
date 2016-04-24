@@ -30,6 +30,7 @@
         "controllers/login.ts",
         "controllers/new_lodging.ts",
         "controllers/new_user_reservation.ts",
+        "controllers/payment_provider.ts",
         "controllers/register.ts",
         "controllers/root.ts",
         "module.ts",

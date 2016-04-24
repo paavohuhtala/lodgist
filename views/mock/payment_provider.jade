@@ -1,6 +1,6 @@
 doctype html
 
-html
+html(ng-app="lodgist" ng-controller="PaymentProviderController" ng-init="reservation = #{reservation.id}")
     head
         title MAKSUM VÄLITÄJÄ
         link(rel="stylesheet" href="/css/ext.css")
@@ -17,4 +17,4 @@ html
                 .panel.panel-default
                     .panel-body
                         p Yhteensä: #{userReservation.price} €
-                        button.btn.btn-primary.btn-success Maksa internetrahalla
+                        button.btn.btn-primary.btn-success(ng-click="onClickPay()") Maksa internetrahalla

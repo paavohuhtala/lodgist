@@ -86,16 +86,6 @@ export abstract class BaseDao<TRow extends {}, TKey> {
         return true;
     }
     
-    /*public validateRow(row: TRow) {
-        const hasAllColumns = this.getColumns().map(r => r in row).reduce((l, r) => l && r, true);
-        
-        if (hasAllColumns) {
-            return this.onValidate(row);
-        } else {
-            return false;
-        }
-    }*/
-        
     public insert(row: TRow) {
         
         if (!this.onValidate(row)) {
@@ -119,7 +109,10 @@ export abstract class BaseDao<TRow extends {}, TKey> {
         return this.getClient().one(query, params).then(r => <TKey> r[this.keyColumn]);
     }
     
-    public update<TFilter>(update: Object, column: string, filterValue: TFilter) {
+    public update<TFilter>(update: Object, column: "_primary" | string, filterValue: TFilter) {
+        if (column === "_primary") {
+            column = this.keyColumn;
+        }
         
         const filteredUpdate = _.pick<TRow, TRow>(<TRow> update, this.getColumns());
         const keys = _.keys(filteredUpdate);
