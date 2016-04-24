@@ -7,7 +7,7 @@ block vars
     - controller = "NewUserReservationController"
 
 block content
-    div(ng-init="setLodgdingId(#{lodging.id})")
+    div(ng-init="setLodgingId(#{lodging.id})")
     div(ng-init="lodging.price_per_night = #{lodging.price_per_night}")
     .container.margin-top-default
         form
@@ -19,7 +19,7 @@ block content
                     input.form-control(type="text" ng-model="reservation.during.lower" ng-disabled="controls.datePickers.areDisabled" bs-datepicker data-min-date="today" data-max-date="reservation.during.upper" data-disabled-dates="bounds.starts")
                 .col-sm-3: .form-group
                     label Päättyy
-                    input.form-control(type="text" ng-model="reservation.during.upper" bs-datepicker data-min-date="{{reservation.during.lower}}" data-disabled-dates="bounds.ends")
+                    input.form-control(type="text" ng-model="reservation.during.upper" ng-disabled="controls.datePickers.areDisabled" bs-datepicker data-min-date="{{reservation.during.lower}}" data-disabled-dates="bounds.ends")
             .row
                 .col-sm-8: p Varaus alkaa klo #{lodging.reservation_start} ja päättyy klo #{lodging.reservation_end}.
             .row

@@ -34,10 +34,12 @@ namespace lodgist.controllers {
             ends: DateRange[]
         }
         controls: {
-            
+            datePickers: {
+                areDisabled: boolean
+            }
         }
         getBounds(): void
-        setLodgdingId(id: number): void
+        setLodgingId(id: number): void
         getPrice(): number
         getNights(): number
         onSend(): void
@@ -54,6 +56,7 @@ namespace lodgist.controllers {
                 during: {}
             }
             
+            // CONSIDER sharing this with the server codebase, by implementing as an API
             $scope.getNights = () => {
                 if ($scope.reservation.during.upper == null || $scope.reservation.during.lower == null) {
                     return null;
@@ -65,13 +68,12 @@ namespace lodgist.controllers {
                 return nights;
             }
             
-            $scope.setLodgdingId = (id) => {
+            $scope.setLodgingId = (id) => {
                 $scope.reservation.lodging = id;
                 $scope.getBounds();
             }
             
-            $scope.getPrice = () => {   
-                
+            $scope.getPrice = () => {
                 const nights = $scope.getNights();
                 
                 if (nights == null) {
@@ -86,13 +88,7 @@ namespace lodgist.controllers {
                     location.pathname = `/mock/payment_provider/${res.data}`;
                 });
             };
-            
-            // Disable selection until fetched
-            $scope.bounds = {
-                starts: [{start: new Date("1970-01-01"), end: new Date("2038-01-01")}],
-                ends: [{start: new Date("1970-01-01"), end: new Date("2038-01-01")}]
-            }
-            
+
             $scope.getBounds = () => {
                 $http.get(`/api/v1/lodgings/${$scope.reservation.lodging}/reservations/bounds`).then(res => {
                     const bounds : {starts: SerializedDateRange[], ends: SerializedDateRange[]} = <any> res.data
@@ -103,7 +99,15 @@ namespace lodgist.controllers {
                     }
                     
                     $scope.bounds = dateBounds
+                    $scope.controls.datePickers.areDisabled = false
                 })
+            }
+            
+            $scope.controls = {
+                // Date pickers are disabled until we've fetched the reserved dates
+                datePickers: {
+                    areDisabled: true
+                }
             }
         }
     }

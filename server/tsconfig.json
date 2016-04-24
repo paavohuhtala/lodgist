@@ -57,6 +57,7 @@
         "database/daos/UserReservationDao.ts",
         "database/QueryParams.ts",
         "database/QueryResults.ts",
+        "DateUtils.ts",
         "IController.ts",
         "models/Address.ts",
         "models/Lodging.ts",

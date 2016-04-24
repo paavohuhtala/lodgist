@@ -14,13 +14,13 @@ import {IUserReservationRow, IExternalReservationRow,IReservationRow, Reservatio
 import {IUserRow} from "../../models/User"
 import {ILodgingRow} from "../../models/Lodging"
 
+import {deUtcify} from "../../DateUtils"
 import {getClient} from "../../database/Connection"
 
 import {LodgingDao} from "../../database/daos/LodgingDao"
 import {ReservationDao} from "../../database/daos/ReservationDao"
 import {UserReservationDao} from "../../database/daos/UserReservationDao"
 import {ExternalReservationDao} from "../../database/daos/ExternalReservationDao"
-
 
 interface IRequestRange {
     lower: Date
@@ -35,7 +35,6 @@ function toPgRange(range: IRequestRange) {
     // HACK HACK HACK ish
     const dbRange = <IDBRange<Date>> <any> Range(range.lower, range.upper, "[)");
 
-    // More HACK HACK HACK
     dbRange.formatDBType = function() {
         const thisr = <PgRange.Range<Date>> this;
         return `${thisr.bounds[0]}${thisr.lower.toISOString()},${thisr.upper.toISOString()}${thisr.bounds[1]}`;
@@ -44,7 +43,7 @@ function toPgRange(range: IRequestRange) {
     return dbRange;
 }
 
-// CONSIDER moving these request interfacs somewhere else
+// CONSIDER moving these request interfaces somewhere else
 
 interface INewReservationRequest {
     during: IRequestRange
@@ -58,15 +57,14 @@ interface INewExternalReservationRequest extends INewReservationRequest {
 }
 
 async function createReservation(t: pgp.IDatabase<any>, request: INewReservationRequest, lodging: ILodgingRow, type: ReservationType) : Promise<number> {
-    
     const during = toPgRange(request.during);
     
-    const starts = moment(lodging.reservation_start, "HH:mm:ss");
-    const ends = moment(lodging.reservation_end, "HH:mm:ss");
+    const starts = moment.utc(lodging.reservation_start, "HH:mm:ss");
+    const ends = moment.utc(lodging.reservation_end, "HH:mm:ss");
     
-    during.lower = moment(during.lower).hour(starts.hour()).minute(starts.minute()).toDate();
-    during.upper = moment(during.upper).hour(ends.hour()).minute(ends.minute()).toDate();
-    
+    during.lower = deUtcify(moment(during.lower).hour(starts.hour()).minute(starts.minute())).toDate();
+    during.upper = deUtcify(moment(during.upper).hour(ends.hour()).minute(ends.minute())).toDate();
+
     const reservation : IReservationRow = {
         lodging: request.lodging,
         during: during,
