@@ -31,13 +31,13 @@ async function create(user: IUserRow) {
 }
 
 async function refresh(session: ISessionRow) {
-    const refreshed = _.clone(session);
+    const update = {
+        valid_until: moment().add(2, "weeks").toISOString()
+    }
     
-    refreshed.valid_until = moment().add(2, "weeks").toISOString();
+    await dao.update(update, "user_id", session.user_id);
     
-    await dao.update(refreshed, "user_id", session.user_id);
-    
-    return refreshed;
+    return _.assign(_.clone(session), update);
 }
 
 function isValid(session: ISessionRow) {
