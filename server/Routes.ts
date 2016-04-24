@@ -17,9 +17,11 @@ import {LodgingReservations} from "./controllers/LodgingReservations"
 import {NewExternalReservation, NewUserReservation} from "./controllers/NewReservation"
 import {NewExternalReservationApi, NewUserReservationApi} from "./controllers/api/NewReservation"
 import {ReservationBoundsApi} from "./controllers/api/ReservationBounds"
+import {AmenitiesApi} from "./controllers/api/Amenities"
 
 import {PaymentProvider} from "./controllers/mock/PaymentProvider"
 import {PaymentCallbackApi} from "./controllers/mock/api/Payment"
+
 
 function isLoggedIn(req: RequestEx, res: Response, next: NextFunction) {
     if (req.user === undefined) {
@@ -56,4 +58,6 @@ export function registerRoutes(app: Express) {
     app.post("/api/v1/reservations/user/new", isLoggedIn, NewUserReservationApi.post);
     app.post("/api/v1/reservations/external/new", isLoggedIn, NewExternalReservationApi.post);
     app.get("/api/v1/lodgings/:id/reservations/bounds", isLoggedIn, ReservationBoundsApi.get);
+    
+    app.get("/api/v1/amenities", AmenitiesApi.get);
 }
