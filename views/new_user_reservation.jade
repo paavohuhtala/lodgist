@@ -7,7 +7,7 @@ block vars
     - controller = "NewUserReservationController"
 
 block content
-    div(ng-init="reservation.lodging = #{lodging.id}")
+    div(ng-init="setLodgdingId(#{lodging.id})")
     div(ng-init="lodging.price_per_night = #{lodging.price_per_night}")
     .container.margin-top-default
         form
@@ -16,10 +16,10 @@ block content
             .row
                 .col-sm-3: .form-group
                     label Alkaen
-                    input.form-control(type="text" ng-model="reservation.during.lower" bs-datepicker data-min-date="today" data-max-date="reservation.during.upper")
+                    input.form-control(type="text" ng-model="reservation.during.lower" ng-disabled="controls.datePickers.areDisabled" bs-datepicker data-min-date="today" data-max-date="reservation.during.upper" data-disabled-dates="bounds.starts")
                 .col-sm-3: .form-group
                     label Päättyy
-                    input.form-control(type="text" ng-model="reservation.during.upper" bs-datepicker data-min-date="{{reservation.during.lower}}")
+                    input.form-control(type="text" ng-model="reservation.during.upper" bs-datepicker data-min-date="{{reservation.during.lower}}" data-disabled-dates="bounds.ends")
             .row
                 .col-sm-8: p Varaus alkaa klo #{lodging.reservation_start} ja päättyy klo #{lodging.reservation_end}.
             .row
@@ -30,7 +30,3 @@ block content
                         b {{getPrice() | currency}}
             .row: .col-sm-5
                 button.btn.btn-primary(ng-click="onSend()") Varaa ja maksa
-
-
-        h3 Debugging
-        textarea.form-control {{reservation}}

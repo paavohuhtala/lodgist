@@ -33,12 +33,11 @@ interface IDBRange<T extends PgRange.RangeType> extends PgRange.Range<T> {
 
 function toPgRange(range: IRequestRange) {
     // HACK HACK HACK ish
-    const dbRange = <IDBRange<Date>> <any> Range(range.lower, range.upper, "[]");
+    const dbRange = <IDBRange<Date>> <any> Range(range.lower, range.upper, "[)");
 
     // More HACK HACK HACK
     dbRange.formatDBType = function() {
         const thisr = <PgRange.Range<Date>> this;
-        //return (<PgRange.Range<Date>> this).toPostgres(x => x);
         return `${thisr.bounds[0]}${thisr.lower.toISOString()},${thisr.upper.toISOString()}${thisr.bounds[1]}`;
     };
     

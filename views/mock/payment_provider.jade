@@ -1,12 +1,20 @@
+doctype html
 
-.container
-    h1#horrendous-logo
-        span MAKSUM
-        span _
-        span VÄLITTÄJÄ
-    .panel.panel-default
-        .panel-heading
-            span Maksutavat
-        .panel-body
-            p Yhteensä: #{userReservation.price} €$
-            button.btn.btn-primary.btn-success Maksa internetrahalla
+html
+    head
+        title MAKSUM VÄLITÄJÄ
+        link(rel="stylesheet" href="/css/ext.css")
+        link(rel="stylesheet" href="/css/client.css")
+        script(src="/js/ext.js")
+        script(src="/js/client.js")
+    body
+        .container
+            .col-md-5
+                h1#horrendous-logo
+                    span MAKSUM
+                    span _
+                    span VÄLITTÄJÄ
+                .panel.panel-default
+                    .panel-body
+                        p Yhteensä: #{userReservation.price} €
+                        button.btn.btn-primary.btn-success Maksa internetrahalla
