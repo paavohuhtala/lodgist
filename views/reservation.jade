@@ -1,2 +1,14 @@
+extends layout.jade
 
-h1 Todo
+block vars
+    - controller = "ReservationController"
+
+block content
+    .container.margin-top-default
+        if alert == "successful_payment"
+            .alert.alert-success(role="alert")
+                .glyphicon.glyphicon-ok
+                strong Maksu suoritettiin onnistuneesti.
+        h1 Varaus
+        h4 ##{reservation.id}
+       
