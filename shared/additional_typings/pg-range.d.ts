@@ -11,7 +11,7 @@ declare namespace PgRange {
     
     export interface Range<T extends RangeType> extends JsonRange<T> {
         toJson(): JsonRange<T>
-        toPostgres(): string
+        toPostgres(prepare: (x: any) => any): string
     }
     
     export interface RangeConstructor {

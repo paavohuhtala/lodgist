@@ -14,6 +14,7 @@ import {NewLodgingApi} from "./controllers/api/NewLodging"
 import {MyReservations} from "./controllers/MyReservations"
 import {LodgingReservations} from "./controllers/LodgingReservations"
 import {NewExternalReservation, NewUserReservation} from "./controllers/NewReservation"
+import {NewExternalReservationApi, NewUserReservationApi} from "./controllers/api/NewReservation"
 
 function isLoggedIn(req: RequestEx, res: Response, next: NextFunction) {
     if (req.user === undefined) {
@@ -45,6 +46,6 @@ export function registerRoutes(app: Express) {
     app.post("/api/v1/logout", isLoggedIn, LogoutApi.post);
     
     app.post("/api/v1/lodgings/new", isLoggedIn, NewLodgingApi.post);
-    app.post("/api/v1/reservations/user/new", isLoggedIn);
-    app.post("/api/v1/reservations/external/new", isLoggedIn);
+    app.post("/api/v1/reservations/user/new", isLoggedIn, NewUserReservationApi.post);
+    app.post("/api/v1/reservations/external/new", isLoggedIn, NewExternalReservationApi.post);
 }

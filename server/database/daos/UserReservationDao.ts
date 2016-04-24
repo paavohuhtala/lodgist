@@ -11,6 +11,6 @@ export class UserReservationDao extends BaseDao<IUserReservationRow, number> {
     }
     
     constructor(connection?: pgp.IDatabase<any>) {
-        super("UserReservations", "id", connection);
+        super("UserReservations", "reservation", connection);
     }
 }

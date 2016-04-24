@@ -1,0 +1,18 @@
+
+mixin month-calendar(beginning)
+    - const mb = moment(beginning)
+    - const daysInMonth = mb.daysInMonth();
+    - const days = _.range(1, daysInMonth + 1);
+
+    .calendar
+        .calendar-title
+            span #{mb.format("MMMM YYYY")}
+        table
+            thead
+                each day in ["Ma", "Ti", "Ke", "To", "Pe", "La", "Su"]
+                    td= day
+            tbody.calendar-cells
+                - for (var x = 0; x < daysInMonth; x++)
+                    if ((x % 7) == 0)
+                        tr
+                    td= x + 1
