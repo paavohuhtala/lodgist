@@ -30,8 +30,12 @@ block content
                     input.form-control(type="number" ng-model="lodging.price_per_night")
             .row
                 p.text-muted Lodgistin osuus: {{lodging.price_per_night * 0.1 | currency}}
+
             h3 Varusteet
-            p.text-muted TODO
+            .row
+                .col-sm-5
+                    button.form-control(ng-model="lodging.amenities" placeholder="Valitse varusteet" max-length="4" max-length-html="valittu" bs-select data-multiple="1" bs-options="amenity.id as amenity.name for amenity in amenities")
+
             h3 Lisätiedot
             p.text-muted TODO
             

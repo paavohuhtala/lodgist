@@ -27,15 +27,19 @@ block content
                 p= lodging.description
             .col-md-4
             .lodging-amenities.col-md-8
-                ul.list-unstyled
-                    li
-                        .glyphicon.glyphicon-console
-                        span Lähellä terminaalia
-                    li
-                        .glyphicon.glyphicon-btc
-                        span Maksettavissa Bitcoinilla
-                    li
-                        span Tiskikone
+                h3 Varustelu
+                if !amenities || amenities.length == 0
+                    .text-muted Ei ilmoitettu
+                else
+                    ul.list-unstyled
+                        for amenity in amenities
+                            li
+                                if amenity.icon
+                                    .glyphicon(class=amenity.icon)
+                                else
+                                    .glyphicon.glyphicon-ok
+                                span= amenity.name
+                                
             .lodging-reviews.col-md-8
                 h3 Arvostelut
                 .review

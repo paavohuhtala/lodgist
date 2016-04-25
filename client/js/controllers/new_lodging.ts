@@ -15,18 +15,19 @@ namespace lodgist.controllers {
             is_public?: boolean,
             reservation_start: string,
             reservation_end: string,
-            price_per_night: number
+            price_per_night: number,
+            amenities: any[]
         },
         controls: {
             sendButton: {
                 onClick: () => void
             }
-        }
+        },
+        amenities?: number[]
     }
     
    
     export class NewLodging {
-        
         private $scope: NewLodgingScope
         
         private onSend($http: angular.IHttpService) {
@@ -50,12 +51,17 @@ namespace lodgist.controllers {
                 reservation_start: "12:30",
                 reservation_end: "11:00",
                 description: "Esimerkkikuvaus",
-                price_per_night: 45
+                price_per_night: 45,
+                amenities: []
             }
             
             $scope.controls = {
                 sendButton: { onClick: this.onSend($http) }
             }
+            
+            $http.get("/api/v1/amenities").then(res => {
+               $scope.amenities = <any[]> res.data; 
+            });
         }
     }
 }

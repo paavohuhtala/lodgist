@@ -8,10 +8,9 @@ import {LodgingDao} from "../database/daos/LodgingDao"
 
 export const Reservation : IController = {
     get: async (req: Request, res: Response) => {
-        const client = getClient()
-        const reservation = await new ReservationDao(client).getById(parseInt(req.params.id));
-        const userReservation = await new UserReservationDao(client).getById(reservation.id);
-        const lodging = await new LodgingDao(client).getById(reservation.lodging);
+        const reservation = await new ReservationDao().getById(parseInt(req.params.id));
+        const userReservation = await new UserReservationDao().getById(reservation.id);
+        const lodging = await new LodgingDao().getById(reservation.lodging);
         
         const viewData = {
             reservation,

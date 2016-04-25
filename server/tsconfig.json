@@ -52,6 +52,7 @@
         "database/daos/AddressDao.ts",
         "database/daos/AmenityDao.ts",
         "database/daos/ExternalReservationDao.ts",
+        "database/daos/LodgingAmenityDao.ts",
         "database/daos/LodgingDao.ts",
         "database/daos/ReservationDao.ts",
         "database/daos/SessionDao.ts",
