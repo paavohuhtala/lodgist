@@ -13,6 +13,7 @@ namespace lodgist {
     .controller("ReservationController", lodgist.controllers.Reservation)
     .controller("NewLodgingController", lodgist.controllers.NewLodging)
     .controller("NewUserReservationController", lodgist.controllers.NewUserReservation)
+    .controller("NewExternalReservationController", lodgist.controllers.NewExternalReservation)
     .controller("PaymentProviderController", lodgist.controllers.PaymentProvider)
     .config(($datepickerProvider: mgcrea.ngStrap.datepicker.IDatepickerProvider) => {
         angular.extend($datepickerProvider.defaults, {monthTitleFormat: "LLLL yyyy"});

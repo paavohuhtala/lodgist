@@ -90,7 +90,7 @@ async function createExternalReservation(request: INewExternalReservationRequest
     return getClient().tx(async (t: pgp.IDatabase<any>) => {
         const lodging = await new LodgingDao(t).getById(request.lodging);
         
-        const reservationId = await createReservation(t, request, lodging, "user");
+        const reservationId = await createReservation(t, request, lodging, "external");
 
         // CONSIDER somehow sharing this check with the method above 
         if (reservationId == null) {

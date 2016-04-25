@@ -16,10 +16,13 @@ block content
                 dl
                     dt Tila
                     dd
-                        if userReservation.is_paid
-                            strong.text-success Maksettu (#{moment(userReservation.paid).format("DD.MM.YYYY HH:mm")})
+                        if userReservation
+                            if userReservation.is_paid
+                                strong.text-success Maksettu (#{moment(userReservation.paid).format("DD.MM.YYYY HH:mm")})
+                            else
+                                strong.text-warning Ei maksettu
                         else
-                            strong.text-warning Ei maksettu
+                            strong.text-info Omistajan varaus
                     dt Tunnus
                     dd #{reservation.id}
                     dt Kohde
@@ -28,5 +31,9 @@ block content
                     dd #{moment(reservation.created).format("DD.MM.YYYY HH:mm")}
                     dt Varattu välille
                     dd #{moment(reservation.during.lower).format("DD.MM.YYYY HH:mm")} - #{moment(reservation.during.upper).format("DD.MM.YYYY HH:mm")}
-                    dt Hinta
-                    dd #{parseFloat(userReservation.price)} €
+                    if userReservation
+                        dt Hinta
+                        dd #{parseFloat(userReservation.price)} €
+                    if externalReservation
+                        dt Selite
+                        dd #{externalReservation.reason}

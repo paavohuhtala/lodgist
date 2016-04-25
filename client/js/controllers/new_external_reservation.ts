@@ -1,4 +1,6 @@
 
+// TOOD: this file is 99% similar to new_user_reservation
+
 /// <reference path="../../../bower_components/moment/moment.d.ts" />
 
 namespace lodgist.controllers {
@@ -20,16 +22,14 @@ namespace lodgist.controllers {
         }
     }
     
-    interface NewUserReservationScope extends angular.IScope {
-        lodging: {
-            price_per_night: number
-        },
+    interface NewExternalReservationScope extends angular.IScope {
         reservation: {
             lodging?: number
             during: {
                 lower?: Date
                 upper?: Date
-            }
+            },
+            reason?: string
         },
         bounds?: {
             starts: DateRange[],
@@ -42,52 +42,28 @@ namespace lodgist.controllers {
         }
         getBounds(): void
         setLodgingId(id: number): void
-        getPrice(): number
-        getNights(): number
         onSend(): void
     }
    
-    export class NewUserReservation {
+    export class NewExternalReservation {
         
-        private $scope: NewUserReservationScope
+        private $scope: NewExternalReservationScope
 
-        constructor($scope: NewUserReservationScope, $http: angular.IHttpService) {
+        constructor($scope: NewExternalReservationScope, $http: angular.IHttpService) {
             this.$scope = $scope
             
             $scope.reservation = {
                 during: {}
             }
             
-            // CONSIDER sharing this with the server codebase, by implementing as an API
-            $scope.getNights = () => {
-                if ($scope.reservation.during.upper == null || $scope.reservation.during.lower == null) {
-                    return null;
-                }
-                
-                const nights = moment($scope.reservation.during.upper).startOf("day").diff(
-                               moment($scope.reservation.during.lower).startOf("day"), "days");
-                
-                return nights;
-            }
-            
             $scope.setLodgingId = (id) => {
                 $scope.reservation.lodging = id;
                 $scope.getBounds();
             }
-            
-            $scope.getPrice = () => {
-                const nights = $scope.getNights();
-                
-                if (nights == null) {
-                    return null;
-                }
-                
-                return nights * $scope.lodging.price_per_night;
-            };
-            
+
             $scope.onSend = () => {
-                $http.post("/api/v1/reservations/user/new", $scope.reservation).then(res => {
-                    location.pathname = `/mock/payment_provider/${res.data}`;
+                $http.post("/api/v1/reservations/external/new", $scope.reservation).then(res => {
+                    location.pathname = `/reservations/${res.data}`;
                 });
             };
 

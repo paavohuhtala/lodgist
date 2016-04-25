@@ -6,6 +6,10 @@ import {IController} from "../../IController"
 
 import {getClient} from "../../database/Connection"
 
+// CONSIDER moving these somewhere else
+// It should be noted that these queries are rather specific and are not
+// expected to be used anywhere else.
+
 const startsQuery = `
     SELECT date(lower(during) - interval '1 day') as "start", date(upper(during) - interval '1 day')  as "end" FROM "Reservations"
     JOIN "Lodgings" ON "Lodgings".id = $<lodging>

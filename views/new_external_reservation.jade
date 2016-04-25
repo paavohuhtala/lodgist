@@ -1,11 +1,20 @@
 
 extends layout.jade
 
+include mixins/reservation_selector
+
 block vars
     - controller = "NewExternalReservationController"
 
 block content
+    div(ng-init="setLodgingId(#{lodging.id})")
     .container.margin-top-default
         form
-            +month-calendar(#{moment()})
-            
+            h2 Uusi varausilmoitus
+            p #{lodging.name}
+            +reservation-selector()
+            .row: .col-sm-6: .form-group
+                label Selite
+                input.form-control(type="text" required ng-model="reservation.reason")
+            .row: .col-sm-5
+                button.btn.btn-primary(ng-click="onSend()") Varaa

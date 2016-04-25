@@ -28,6 +28,7 @@
         "controllers/lodging.ts",
         "controllers/lodgings.ts",
         "controllers/login.ts",
+        "controllers/new_external_reservation.ts",
         "controllers/new_lodging.ts",
         "controllers/new_user_reservation.ts",
         "controllers/payment_provider.ts",
