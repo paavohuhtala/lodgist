@@ -19,10 +19,10 @@ block content
             .col-md-4
                 .panel.panel-default
                     .panel-body
+                        h4 #{parseFloat(lodging.price_per_night)} € / yö
+                        p.text-muted sis. alv n + 1 %
                         div
                             a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/user/new") Siirry varaamaan
-                        b #{lodging.price_per_night} / yö
-                        p.text-muted sis. alv n + 1 %
             .lodging-description.col-md-8
                 p= lodging.description
             .col-md-4

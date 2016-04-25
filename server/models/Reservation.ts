@@ -54,6 +54,6 @@ export module ExternalReservation {
 }
 
 export module UserReservation {
-    export const baseMembers = ["customer", "price", "is_paid"];
+    export const baseMembers = ["customer", "price", "is_paid", "paid"];
     export const columns = ["reservation"].concat(baseMembers);
 }
