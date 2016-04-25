@@ -7,7 +7,7 @@ block content
     #login-panel
         .col-sm-6
             h3 Already have an account?
-            form#login-form
+            form(novalidate)#login-form
                 .form-group: input.form-control#email(type="email" placeholder="Email" required ng-model="loginDetails.email")
                 .form-group: input.form-control#password(type="password" placeholder="Password" required ng-model="loginDetails.password")
                 button.btn.btn-primary.bottom-sm(ng-click="controls.loginButton.onClick()") {{controls.loginButton.text}}
