@@ -10,14 +10,14 @@ INSERT INTO "Addresses" (street1, street2, postal_code, city) VALUES
 
 INSERT INTO "Users" (role, name, email, password, phone, address) VALUES
 	('user', 'Asiakas', 'asiakas@example.com',
-	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq ', -- 'salasana'
-	'123-456', 5),
+	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq', -- 'salasana'
+	'123-456', 4),
 	('seller', 'Myyjä', 'myyjä@example.com',
-	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq', -- 'salasana',
-	'123-457', 5),
+	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq', -- 'salasana'
+	'123-457', 4),
 	('seller', 'Järjestelmänvalvoja', 'admin@example.com',
-	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq.IYK', -- 'salasana'
-	'123-458', 5);
+	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq', -- 'salasana'
+	'123-458', 4);
 
 INSERT INTO "Sellers" (user_id, company_name, vatId) VALUES
 	(2, 'Myyjän myymälä', 'FI12345678');
@@ -32,7 +32,7 @@ INSERT INTO "Amenities" (name) VALUES
 	('Lemmikit sallittuja');
 
 INSERT INTO "Lodgings" (owner, address, name, description, is_public, reservation_start, reservation_end, price_per_night) VALUES
-	(3, 2, 'Kansainvälinen avaruusasema',
+	(2, 2, 'Kansainvälinen avaruusasema',
 	'1990-luvun lopulla rakennettu ja useaan otteeseen laajennettu jännittävä kohde matallalla maan kiertoradalla!',
 	TRUE, '12:00:00', '10:00:00', 10000);
 

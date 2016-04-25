@@ -8,8 +8,13 @@ Sovellukseen pääsee selaimessa navigoimalla osoitteeseen \href{http://localhos
 
 \section{Käyttäjätunnukset}
 
-Testiversio ei tue vielä uusien käyttäjien rekisteröintiä, mutta testikäyttäjillä on käytettävissään useita testitunnuksia, jotka löytyvät tiedostosta \texttt{sql/test\_data.sql}. Järjestelmä käyttää käyttäjänimien sijaan sähköpostiosoitteita.\\
-\\
+Voit luoda uuden käyttäjän käyttämällä rekisteröintisivua, mutta uudet käyttäjät eivät voi rekisteröidä mökkejä. Testaamisen helpottamiseksi järjstelmään on luotu testitunnuksia, yksi joka roolille. Järjestelmä käyttää kirjautumiseen sähköpostiosoitteita.\\
+
 \noindent
-Sähköpostiosoite: \texttt{that.guy@vault-tec.com} \\
-Salasana: \texttt{please stand by}
+Kaikkien esiluotujen käyttäjien salasana on \texttt{salasana}.\\
+
+\begin{description}
+	\item[Asiakas] asiakas@example.com
+	\item[Myyjä] myyjä@example.com
+	\item[Järjestelmänvalvoja] admin@example.com
+\end{description}
