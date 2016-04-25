@@ -19,6 +19,6 @@ Aihekuvaus dokumentaatio-pdf:ssä.
 * Kaikkien käyttäjien salasana on luonnollisesti `salasana`
 
 * Asiakas: asiakas@example.com
-* Myyjä: myyjä@example.com
+* Myyjä: myyja@example.com
 * Järjestelmänvalvoja: admin@example.com
 
