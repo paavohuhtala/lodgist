@@ -9,18 +9,18 @@ INSERT INTO "Addresses" (street1, street2, postal_code, city) VALUES
 	('Leppäsuonkatu 11', 'Christina Regina', '00100', 'Helsinki');
 
 INSERT INTO "Users" (role, name, email, password, phone, address) VALUES
-	('user', 'Urho Karhu', 'urho.karhu@domus-gaudium.fi',
-	'$2a$10$JGbFjNhhRteZjXy0KF9EE.VODp.NGNuJeFcLMvYNUxTzTcClpRTjS', -- 'safedefaults'
-	'0700-BMUR-KLUSTERPONG', 5),
-	('admin', 'The Overseer', 'that.guy@vault-tec.us',
-	'$2a$09$K/wkfFVfrUKv36HszesO1e6P/VKPmq/7qQaYABWOlWz1btASFm1Re', -- 'please stand by',
-	'1-776-LIBERTY', 2),
-	('seller', 'Rich Cabin', 'rich.cabin@cabinsfortherich.com',
-	'$2a$09$AhXEnLew4nIZ6lTu.uSVLOT1MUNH0dDro4KGTu1zt/ntk4RKd.IYK', -- 'bcrypt is a key derivation function'
-	'123456', 3);
+	('user', 'Asiakas', 'asiakas@example.com',
+	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq ', -- 'salasana'
+	'123-456', 5),
+	('seller', 'Myyjä', 'myyjä@example.com',
+	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq', -- 'salasana',
+	'123-457', 5),
+	('seller', 'Järjestelmänvalvoja', 'admin@example.com',
+	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq.IYK', -- 'salasana'
+	'123-458', 5);
 
 INSERT INTO "Sellers" (user_id, company_name, vatId) VALUES
-	(3, 'Rich Cabin''s Cabins for the rich', 'FI12345678');
+	(2, 'Myyjän myymälä', 'FI12345678');
 
 INSERT INTO "Amenities" (name) VALUES
 	('Sauna'),

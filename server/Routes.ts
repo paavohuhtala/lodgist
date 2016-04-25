@@ -19,7 +19,7 @@ import {NewExternalReservationApi, NewUserReservationApi} from "./controllers/ap
 import {ReservationBoundsApi} from "./controllers/api/ReservationBounds"
 import {AmenitiesApi} from "./controllers/api/Amenities"
 
-import {EmailAvailableApi} from "./controllers/api/NewUser"
+import {NewUserApi, EmailAvailableApi} from "./controllers/api/NewUser"
 
 import {PaymentProvider} from "./controllers/mock/PaymentProvider"
 import {PaymentCallbackApi} from "./controllers/mock/api/Payment"
@@ -65,4 +65,5 @@ export function registerRoutes(app: Express) {
     app.get("/api/v1/amenities", AmenitiesApi.get);
     
     app.get("/api/v1/users/:email/available", EmailAvailableApi.get);
+    app.post("/api/v1/users", NewUserApi.post);
 }

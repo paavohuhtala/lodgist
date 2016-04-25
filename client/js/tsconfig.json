@@ -36,6 +36,7 @@
         "controllers/reservation.ts",
         "controllers/root.ts",
         "directives/email_availability.ts",
+        "directives/inputs_match.ts",
         "module.ts",
         "services/authentication.ts",
         "validation/Conductor.ts"

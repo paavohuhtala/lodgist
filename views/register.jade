@@ -3,23 +3,35 @@ extends layout.jade
 block vars
     - controller = "RegisterController"
 
+include mixins/address_input
+
 block content
     .container.margin-top-default
         form(novalidate name="registerForm")
-            .row: .col-sm-offset-2.col-sm-4: .form-group
+            .row
+                h2 Perustiedot
+            .row: .col-sm-4: .form-group
                 label.control-label(for="email") Nimi
-                input.form-control#name(type="text" required)
-            .row: .col-sm-offset-2.col-sm-4: .form-group(ng-class="{'has-error has-feedback': registerForm.email.$invalid && registerForm.email.$dirty, 'has-success has-feedback': registerForm.email.$valid && registerForm.email.$dirty}")
+                input.form-control(type="text" required ng-model="user.name")
+            .row: .col-sm-4: .form-group(ng-class="{'has-error has-feedback': registerForm.email.$invalid && registerForm.email.$dirty, 'has-success has-feedback': registerForm.email.$valid && registerForm.email.$dirty}")
                 label.control-label(for="email") Sähköposti
-                input.form-control#email(type="email" name="email" required email-availability-validator ng-model="user.email" ng-model-options="{debounce: 250}")
+                input.form-control(type="email" name="email" required email-availability-validator ng-model="user.email" ng-model-options="{debounce: 250}")
                 span.glyphicon.glyphicon-ok.form-control-feedback(ng-if="registerForm.email.$valid && registerForm.email.$dirty")
                 p(ng-show="registerForm.email.$error.emailAvailability") Sähköposti on jo käytössä.
                 p(ng-show="registerForm.email.$error.email") Sähköposti on väärää muotoa.
-            .row: .col-sm-offset-2.col-sm-4: .form-group
+            .row: .col-sm-4: .form-group
+                label.control-label(for="phone") Puhelin
+                input.form-control(type="text" name="phone" required ng-model="user.phone")
+            .row: .col-sm-4: .form-group
                 label.control-label(for="password") Salasana
-                input.form-control#password(type="password" ng-model="password" required)
-            .row: .col-sm-offset-2.col-sm-4: .form-group
-                label.control-label(for="password-verify") Salasana uudestaan
-                input.form-control#password-verify(type="password" ng-model="passwordVerify" required)
+                input.form-control(type="password" ng-model="user.password" required)
+            .row: .col-sm-4: .form-group
+                label.control-label(for="password-confirm") Salasana uudestaan
+                //input.form-control(name="password-confirm" type="password" ng-model="passwordConfirm" required inputs-match="user.password")
+                input.form-control(name="password-confirm" type="password" ng-model="passwordConfirm" required)
             .row
-                span {{user.email}}
+                h2 Osoite
+            +address-input("user.address")
+            
+            .row: .col-sm-4
+                button.btn.btn-primary(ng-click="onSend()") Rekisteröidy
