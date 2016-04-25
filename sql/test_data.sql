@@ -12,7 +12,7 @@ INSERT INTO "Users" (role, name, email, password, phone, address) VALUES
 	('user', 'Asiakas', 'asiakas@example.com',
 	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq', -- 'salasana'
 	'123-456', 4),
-	('seller', 'Myyjä', 'myyjä@example.com',
+	('seller', 'Myyjä', 'myyja@example.com',
 	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq', -- 'salasana'
 	'123-457', 4),
 	('seller', 'Järjestelmänvalvoja', 'admin@example.com',
