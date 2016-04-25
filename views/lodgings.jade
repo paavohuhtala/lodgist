@@ -14,4 +14,4 @@ block content
                             p.lodging-address #{lodging.city} | #{lodging.owner_name}
                             p= lodging.description
                         .lodging-pricing.col-md-2
-                            p.lodging-price #{lodging.price_per_night} / yö
+                            p.lodging-price #{parseFloat(lodging.price_per_night)} € / yö

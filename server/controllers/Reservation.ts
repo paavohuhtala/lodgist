@@ -6,11 +6,11 @@ import {ReservationDao} from "../database/daos/ReservationDao"
 import {UserReservationDao} from "../database/daos/UserReservationDao"
 import {LodgingDao} from "../database/daos/LodgingDao"
 
-export const Reservation : IController = {
-    get: async (req: Request, res: Response) => {
-        const reservation = await new ReservationDao().getById(parseInt(req.params.id));
-        const userReservation = await new UserReservationDao().getById(reservation.id);
-        const lodging = await new LodgingDao().getById(reservation.lodging);
+async function getViewData(reservationId: number) {
+    return getClient().task(async (t) => {
+        const reservation = await new ReservationDao(t).getById(reservationId);
+        const userReservation = await new UserReservationDao(t).getById(reservation.id);
+        const lodging = await new LodgingDao(t).getById(reservation.lodging);
         
         const viewData = {
             reservation,
@@ -18,6 +18,14 @@ export const Reservation : IController = {
             lodging,
             alert: <string> null
         }
+        
+        return viewData;
+    });
+}
+
+export const Reservation : IController = {
+    get: async (req: Request, res: Response) => {
+        const viewData = await getViewData(parseInt(req.params.id));
         
         if (req.query.successful_payment !== undefined) {
             viewData.alert = "successful_payment"

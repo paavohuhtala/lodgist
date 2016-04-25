@@ -14,7 +14,9 @@ import {IUserReservationRow, IExternalReservationRow,IReservationRow, Reservatio
 import {IUserRow} from "../../models/User"
 import {ILodgingRow} from "../../models/Lodging"
 
-import {deTimezonify} from "../../DateUtils"
+import {deTimezonify, nightsBetween, parseDateRange} from "../../DateUtils"
+import {toPgRange, IMinimalRange} from "../../RangeUtils"
+
 import {getClient} from "../../database/Connection"
 
 import {LodgingDao} from "../../database/daos/LodgingDao"
@@ -22,31 +24,11 @@ import {ReservationDao} from "../../database/daos/ReservationDao"
 import {UserReservationDao} from "../../database/daos/UserReservationDao"
 import {ExternalReservationDao} from "../../database/daos/ExternalReservationDao"
 
-interface IRequestRange {
-    lower: Date
-    upper: Date
-}
-
-interface IDBRange<T extends PgRange.RangeType> extends PgRange.Range<T> {
-    formatDBType(): string
-}
-
-function toPgRange(range: IRequestRange) {
-    // HACK HACK HACK ish
-    const dbRange = <IDBRange<Date>> <any> Range(range.lower, range.upper, "[)");
-
-    dbRange.formatDBType = function() {
-        const thisr = <PgRange.Range<Date>> this;
-        return `${thisr.bounds[0]}${thisr.lower.toISOString()},${thisr.upper.toISOString()}${thisr.bounds[1]}`;
-    };
-    
-    return dbRange;
-}
 
 // CONSIDER moving these request interfaces somewhere else
 
 interface INewReservationRequest {
-    during: IRequestRange
+    during: IMinimalRange<string>
     lodging?: number
 }
 
@@ -57,7 +39,7 @@ interface INewExternalReservationRequest extends INewReservationRequest {
 }
 
 async function createReservation(t: pgp.IDatabase<any>, request: INewReservationRequest, lodging: ILodgingRow, type: ReservationType) : Promise<number> {
-    const during = toPgRange(request.during);
+    const during = toPgRange(parseDateRange(request.during));
     
     const starts = moment.utc(lodging.reservation_start, "HH:mm:ss");
     const ends = moment.utc(lodging.reservation_end, "HH:mm:ss");
@@ -89,8 +71,7 @@ async function createUserReservation(request: INewUserReservationRequest, custom
         }
 
         // CONSIDER moving business logic somewhere else?
-        const nights = moment(request.during.upper).startOf("day").diff(
-                       moment(request.during.lower).startOf("day"), "days");
+        const nights = nightsBetween(parseDateRange(request.during));
         
         const totalPrice = nights * lodging.price_per_night;     
                 
@@ -140,7 +121,7 @@ export const NewUserReservationApi : IController = {
             return;
         }
         
-        res.status(200).send(newReservationId.toString());
+        res.send(newReservationId.toString());
     }
 }
 
@@ -160,6 +141,6 @@ export const NewExternalReservationApi : IController = {
             return;
         }
         
-        res.status(200).send(newReservationId.toString());
+        res.send(newReservationId.toString());
     }
 }

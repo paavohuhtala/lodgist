@@ -7,18 +7,15 @@ import {AddressDao} from "../database/daos/AddressDao"
 import {UserDao} from "../database/daos/UserDao"
 import {LodgingAmenityDao} from "../database/daos/LodgingAmenityDao"
 
-const amenityQuery = `
-    SELECT id, name, icon FROM "LodgingAmenities"
-    JOIN "Amenities" ON amenity = id
-    WHERE lodging = $1`
-
 async function getViewData(id: number) {
-    const lodging = await new LodgingDao().getById(id);
-    const address = await new AddressDao().getById(lodging.address);
-    const owner = await new UserDao().getById(lodging.owner);
-    const amenities = await getClient().manyOrNone(amenityQuery, lodging.id);
+    return getClient().task(async (t) => {
+        const lodging = await new LodgingDao(t).getById(id);
+        const address = await new AddressDao(t).getById(lodging.address);
+        const owner = await new UserDao(t).getById(lodging.owner);
+        const amenities = await new LodgingAmenityDao(t).getByLodging(lodging.id);
     
-    return {lodging: lodging, address: address, owner: owner, amenities: amenities}
+        return {lodging: lodging, address: address, owner: owner, amenities: amenities}
+    });
 }
 
 export const Lodging : IController = {

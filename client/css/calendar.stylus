@@ -1,0 +1,31 @@
+.calendar-title
+    & > span
+        display: inline
+        font-weight: bold
+    
+    text-align: center
+    width: 100%    
+    margin-bottom: 1em
+
+.calendar-button
+    display: inline
+    
+    &.left
+        float: left
+    
+    &.right
+        float: right
+
+.calendar
+    display: block
+    margin-left: auto
+    margin-right: auto
+    padding: 0.5em
+    width: 18em
+    & > table > thead
+        font-weight: bold
+
+.calendar-cells
+    & > tr > td
+        width: 2.5em
+        height: 2em

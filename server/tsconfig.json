@@ -71,6 +71,7 @@
         "models/Session.ts",
         "models/User.ts",
         "Option.ts",
+        "RangeUtils.ts",
         "RequestEx.ts",
         "Result.ts",
         "Routes.ts"

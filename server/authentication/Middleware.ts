@@ -3,6 +3,7 @@ import {RequestEx} from "../RequestEx"
 import {Response, NextFunction} from "express"
 import {tryGet} from "./Session"
 import {UserDao} from "../database/daos/UserDao"
+import {ISessionRow} from "../models/Session"
 import {isSome} from "../Option"
 
 export function attachSession(req: RequestEx, res: Response, next: NextFunction) {
@@ -16,7 +17,7 @@ export function attachSession(req: RequestEx, res: Response, next: NextFunction)
     
     if (token !== null && token !== undefined) {
         tryGet(token).then(session => {
-            if (isSome(session)) {
+            if (isSome<ISessionRow>(session)) {
                 req.session = session.value;
             } else {
                 res.clearCookie("session_token");

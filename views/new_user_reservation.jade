@@ -1,7 +1,7 @@
 
 extends layout.jade
 
-include mixins/large_calendar
+include mixins/reservation_selector
 
 block vars
     - controller = "NewUserReservationController"
@@ -13,15 +13,7 @@ block content
         form
             h2 Uusi varaus
             p #{lodging.name}
-            .row
-                .col-sm-3: .form-group
-                    label Alkaen
-                    input.form-control(type="text" ng-model="reservation.during.lower" ng-disabled="controls.datePickers.areDisabled" bs-datepicker data-min-date="today" data-max-date="reservation.during.upper" data-disabled-dates="bounds.starts")
-                .col-sm-3: .form-group
-                    label Päättyy
-                    input.form-control(type="text" ng-model="reservation.during.upper" ng-disabled="controls.datePickers.areDisabled" bs-datepicker data-min-date="{{reservation.during.lower}}" data-disabled-dates="bounds.ends")
-            .row
-                .col-sm-8: p Varaus alkaa klo #{lodging.reservation_start} ja päättyy klo #{lodging.reservation_end}.
+            +reservation-selector()
             .row
                 .col-sm-5
                     div(ng-show="getPrice()")

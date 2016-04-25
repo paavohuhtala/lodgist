@@ -25,7 +25,7 @@ export const PaymentCallbackApi : IController = {
             }
             const reservation = await new UserReservationDao().update(update, "_primary", confirmation.reservation);
 
-            res.status(200).send(`/reservations/${confirmation.reservation}?successful_payment`);
+            res.send(`/reservations/${confirmation.reservation}?successful_payment`);
         } else {
             res.sendStatus(500);
         }

@@ -22,7 +22,7 @@ import {AmenitiesApi} from "./controllers/api/Amenities"
 import {PaymentProvider} from "./controllers/mock/PaymentProvider"
 import {PaymentCallbackApi} from "./controllers/mock/api/Payment"
 
-
+// TODO: move to authentication/authorization
 function isLoggedIn(req: RequestEx, res: Response, next: NextFunction) {
     if (req.user === undefined) {
         res.sendStatus(401);

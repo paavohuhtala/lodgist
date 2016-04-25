@@ -24,6 +24,6 @@ export const ReservationBoundsApi : IController = {
         const starts = await client.manyOrNone(startsQuery, {lodging: lodgingId});
         const ends = await client.manyOrNone(endsQuery, {lodging: lodgingId});
         
-        res.status(200).send({starts: starts, ends: ends});
+        res.send({starts: starts, ends: ends});
     }
 }
