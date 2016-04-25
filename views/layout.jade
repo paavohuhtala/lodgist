@@ -15,10 +15,12 @@ html(ng-app="lodgist" ng-controller="RootController")
         script(src="/js/ext.js")
         script(src="/js/client.js")
     body(ng-controller=controller)
-        nav.navbar.navbar-default.navbar-static-top(bs-navbar): .container-fluid
+        nav.navbar.navbar-default.navbar-static-top(bs-navbar bs-collapse): .container-fluid
             .navbar-header
+                button.navbar-toggle.collapsed(type="button" data-toggle="collapse" bs-collapse-toggle)
+                    span.glyphicon.glyphicon-menu-hamburger
                 a.navbar-brand#logo(href="/") Lodgist
-            .collapse.navbar-collapse
+            .collapse.navbar-collapse(bs-collapse-target)
                 ul.nav.navbar-nav
                     +nav-item("/", "Home")
                     +nav-item("/lodgings", "Lodgings (TEST)")

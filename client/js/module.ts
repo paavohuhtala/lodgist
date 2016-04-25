@@ -10,6 +10,7 @@ namespace lodgist {
     .controller("RegisterController", lodgist.controllers.Register)
     .controller("LodgingsController", lodgist.controllers.Lodgings)
     .controller("LodgingController", lodgist.controllers.Lodging)
+    .controller("ReservationController", lodgist.controllers.Reservation)
     .controller("NewLodgingController", lodgist.controllers.NewLodging)
     .controller("NewUserReservationController", lodgist.controllers.NewUserReservation)
     .controller("PaymentProviderController", lodgist.controllers.PaymentProvider)
