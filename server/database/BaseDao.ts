@@ -145,7 +145,7 @@ export abstract class BaseDao<TRow extends {}, TKey> {
         let query = "SELECT EXISTS(SELECT 1 FROM ${table~} WHERE ${column~} = ${value})";
          
         // FIXME: dirty cast hack
-        return <Promise<boolean>> <any> this.getClient().one(query, params);
+        return <Promise<boolean>> <any> this.getClient().one(query, params).then(v => v.exists);
     }
     
     public delete(id: TKey) {

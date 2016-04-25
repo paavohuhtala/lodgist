@@ -1,27 +1,19 @@
 
 namespace lodgist.controllers {
     
-    interface Control<T> {
-        value: T
-        state: "pristine" | "valid" | "invalid"
-    }
-    
     export interface RegisterScope extends angular.IScope {
-        name: string
-        email: string
-        password: string
-        passwordVerify: string
-        
-        isValid: () => boolean
+        user: {
+            name?: string
+            email?: string
+            password?: string
+            passwordVerify?: string
+        }
     }
     
     export class Register {        
-        
-        private isValid() {
-            
-        }
-        
+
         constructor($scope: RegisterScope) {
+            $scope.user = {}
         }
     }
 }

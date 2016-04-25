@@ -47,8 +47,8 @@ INSERT INTO "Reservations" (lodging, type, during) VALUES
 INSERT INTO "ExternalReservations" (reservation, reason) VALUES
 	(1, 'Remontissa.');
 
-INSERT INTO "UserReservations" (reservation, customer, price, is_paid) VALUES
-	(2, 1, 440, TRUE);
+INSERT INTO "UserReservations" (reservation, customer, price, is_paid, paid) VALUES
+	(2, 1, 440, TRUE, now()::timestamp - interval '2 hours');
 
 INSERT INTO "Reviews" (lodging, author, content, rating) VALUES
 	(1, 3, '5/5 proper great', 5);

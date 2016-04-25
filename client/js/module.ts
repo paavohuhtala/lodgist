@@ -4,6 +4,7 @@
 namespace lodgist {
     angular
     .module("lodgist", ["mgcrea.ngStrap"])
+    .directive("emailAvailabilityValidator", lodgist.directives.EmailAvailabilityValidator.getInstance())
     .controller("RootController", lodgist.controllers.Root)
     .controller("IndexController", lodgist.controllers.Index)
     .controller("LoginController", lodgist.controllers.Login)

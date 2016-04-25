@@ -19,6 +19,8 @@ import {NewExternalReservationApi, NewUserReservationApi} from "./controllers/ap
 import {ReservationBoundsApi} from "./controllers/api/ReservationBounds"
 import {AmenitiesApi} from "./controllers/api/Amenities"
 
+import {EmailAvailableApi} from "./controllers/api/NewUser"
+
 import {PaymentProvider} from "./controllers/mock/PaymentProvider"
 import {PaymentCallbackApi} from "./controllers/mock/api/Payment"
 
@@ -32,6 +34,7 @@ function isLoggedIn(req: RequestEx, res: Response, next: NextFunction) {
     next();
 }
 
+// TODO: group & label these better
 export function registerRoutes(app: Express) {
     app.get("/", Index.get);
 
@@ -60,4 +63,6 @@ export function registerRoutes(app: Express) {
     app.get("/api/v1/lodgings/:id/reservations/bounds", isLoggedIn, ReservationBoundsApi.get);
     
     app.get("/api/v1/amenities", AmenitiesApi.get);
+    
+    app.get("/api/v1/users/:email/available", EmailAvailableApi.get);
 }

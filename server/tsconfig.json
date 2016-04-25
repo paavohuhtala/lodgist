@@ -35,6 +35,7 @@
         "controllers/api/NewLodging.ts",
         "controllers/api/NewReservation.ts",
         "controllers/api/NewReview.ts",
+        "controllers/api/NewUser.ts",
         "controllers/api/ReservationBounds.ts",
         "controllers/Index.ts",
         "controllers/Lodging.ts",

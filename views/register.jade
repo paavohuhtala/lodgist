@@ -5,16 +5,21 @@ block vars
 
 block content
     .container.margin-top-default
-        form
+        form(novalidate name="registerForm")
             .row: .col-sm-offset-2.col-sm-4: .form-group
-                label(for="email") Name
+                label.control-label(for="email") Nimi
                 input.form-control#name(type="text" required)
+            .row: .col-sm-offset-2.col-sm-4: .form-group(ng-class="{'has-error has-feedback': registerForm.email.$invalid && registerForm.email.$dirty, 'has-success has-feedback': registerForm.email.$valid && registerForm.email.$dirty}")
+                label.control-label(for="email") Sähköposti
+                input.form-control#email(type="email" name="email" required email-availability-validator ng-model="user.email" ng-model-options="{debounce: 250}")
+                span.glyphicon.glyphicon-ok.form-control-feedback(ng-if="registerForm.email.$valid && registerForm.email.$dirty")
+                p(ng-show="registerForm.email.$error.emailAvailability") Sähköposti on jo käytössä.
+                p(ng-show="registerForm.email.$error.email") Sähköposti on väärää muotoa.
             .row: .col-sm-offset-2.col-sm-4: .form-group
-                label(for="email") Email
-                input.form-control#email(type="email" required)
-            .row: .col-sm-offset-2.col-sm-4: .form-group
-                label(for="password") Password
+                label.control-label(for="password") Salasana
                 input.form-control#password(type="password" ng-model="password" required)
             .row: .col-sm-offset-2.col-sm-4: .form-group
-                label(for="password-verify") Password (again)
+                label.control-label(for="password-verify") Salasana uudestaan
                 input.form-control#password-verify(type="password" ng-model="passwordVerify" required)
+            .row
+                span {{user.email}}
