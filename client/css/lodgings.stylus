@@ -10,7 +10,7 @@
             height: 100%
         
         & > .lodging-image
-            background-image: url("http://placekitten.com/300/300")
+            background-image: url("https://placekitten.com/300/300")
             background-size: cover
         
         & > .lodging-content

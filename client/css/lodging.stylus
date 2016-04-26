@@ -1,7 +1,7 @@
 .lodging
     & > .lodging-image
         height: 450px
-        background-image: url("http://placekitten.com/700/500")
+        background-image: url("https://placekitten.com/700/500")
         background-size: cover
     
     & > .lodging-description
