@@ -10,7 +10,7 @@ Käyttäjille näkyvät sivut koostuvat neljästä komponentista:
 \begin{itemize}
 	\item[Malli] Mallit haetaan tietokannasta ja/tai luodaan kyselyn perusteella. Suurimmalle osalle tietokantatauluista on tyyppikuvaukset, jotka sijaitsevat kansiossa \texttt{server/models/}.
 	\item[Näkymä] Näkymät on kirjoitettu Jade-templatekielellä. Staattinen osa näkymän sisällöstä täytetään palvelimella, ja dynaaminen sisältö täytetään Angular.js:n avulla. Templatet löytyvät kansiosta \texttt{views/}.
-	\item[Palvelinkontrolleri] Palvelinkontrollerit luovat kyselyyn perustuvat mallit, hakevat tietokannasta tietuita, yhdistävät ne näkymiin ja lähettävät tuloksen käyttäjälle. Myös REST-rajapinnoille on palvelinkontrollerit, vaikka muut komponentit puuttuvat niistä. Ne löytyvät kansiosta \texttt{server/controllers/}
+	\item[Palvelinkontrolleri] Palvelinkontrollerit luovat kyselyyn perustuvat mallit, hakevat tietokannasta tietueita, yhdistävät ne näkymiin ja lähettävät tuloksen käyttäjälle. Myös REST-rajapinnoille on palvelinkontrollerit, vaikka muut komponentit puuttuvat niistä. Ne löytyvät kansiosta \texttt{server/controllers/}
 	\item[Käyttöliittymäkontrolleri] Angular.js:llä toteutettuja käyttöliittymäkontrollereita ajetaan käyttäjän selaimella. Ne huolehtivat dynaamisesta sisällöstä, lomakkeiden vahvistamisesta sekä rajapintakyselyistä. Ne löytyvät kansiosta \texttt{client/js/controllers/}.
 \end{itemize}
 
