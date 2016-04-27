@@ -1,0 +1,2 @@
+mixin amenity-selector(amenities, target, max)
+    button.form-control.amenity-selector(ng-model=target placeholder="Valitse varusteet" max-length=max max-length-html="valittu" bs-select data-multiple="1" bs-options="amenity.id as amenity.name for amenity in #{amenities}")

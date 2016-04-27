@@ -110,6 +110,15 @@ CREATE TABLE "Reviews" (
 
 CREATE VIEW "Locations" AS (SELECT DISTINCT city FROM "Addresses");
 
+CREATE VIEW "LodgingAmenityArrays" AS (
+	WITH all_amenities AS (SELECT lodging, array_agg(amenity) AS amenities FROM "LodgingAmenities" GROUP BY lodging)
+
+	SELECT
+		l.id as lodging, COALESCE(all_amenities.amenities, '{}'::integer[]) as amenities
+	FROM "Lodgings" l
+	LEFT JOIN all_amenities ON all_Amenities.lodging = l.id
+	GROUP BY l.id, all_amenities.amenities);
+
 CREATE INDEX "city_index" ON "Addresses"(lower(city));
 CREATE INDEX "session_token_index" ON "Sessions"(token);
 CREATE INDEX "user_emails" ON "Users"(lower(email));

@@ -9,6 +9,7 @@ import {Register} from "./controllers/Register"
 
 import {Lodging, NewLodging} from "./controllers/Lodging"
 import {Lodgings} from "./controllers/Lodgings"
+import {LodgingSearchApi} from "./controllers/api/LodgingSearch"
 import {NewLodgingApi} from "./controllers/api/NewLodging"
 
 import {MyReservations} from "./controllers/MyReservations"
@@ -48,7 +49,7 @@ export function registerRoutes(app: Express) {
     app.get("/lodgings/:id/reservations", isLoggedIn, LodgingReservations.get);
     app.get("/lodgings/:id", Lodging.get);    
     
-    app.get("/reservations", isLoggedIn, MyReservations.get);
+    app.get("/my_reservations", isLoggedIn, MyReservations.get);
     app.get("/reservations/:id", isLoggedIn, Reservation.get);
     
     app.get("/mock/payment_provider/:reservation_id", isLoggedIn, PaymentProvider.get);
@@ -57,6 +58,7 @@ export function registerRoutes(app: Express) {
     app.post("/api/v1/login", LoginApi.post);
     app.post("/api/v1/logout", isLoggedIn, LogoutApi.post);
     
+    app.get("/api/v1/lodgings", LodgingSearchApi.get);
     app.post("/api/v1/lodgings/new", isLoggedIn, NewLodgingApi.post);
     app.post("/api/v1/reservations/user/new", isLoggedIn, NewUserReservationApi.post);
     app.post("/api/v1/reservations/external/new", isLoggedIn, NewExternalReservationApi.post);

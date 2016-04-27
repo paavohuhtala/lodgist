@@ -1,0 +1,13 @@
+
+extends layout.jade
+
+include mixins/lodging
+
+block vars
+    - controller = "MyLodgingsController"
+
+block content
+    .container
+        .lodgings#static-lodgings
+                each lodging in lodgings
+                    +lodging(lodging)

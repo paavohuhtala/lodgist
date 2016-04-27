@@ -14,8 +14,6 @@ namespace lodgist.directives {
         constructor() {
             this.link = (scope: IInputsMatchScope, element: ng.IAugmentedJQuery, attrs: ng.IAttributes, ngModel: ng.INgModelController) => {
                 ngModel.$validators["inputsMatch"] = (value, _) => {
-                    console.log(value);
-                    console.log(scope);
                     return value == scope.other};
             }
         }
