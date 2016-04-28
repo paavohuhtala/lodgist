@@ -25,7 +25,9 @@ export const LoginApi : IController = {
         
         authenticate(loginRequest).then(result => {
             if (result.status === "valid") {
-                res.cookie("session_token", result.session.token, {expires: moment(result.session.valid_until).toDate()}).sendStatus(200)
+                res.cookie("session_token", result.session.token, {
+                    expires: moment(result.session.valid_until).toDate()
+                }).sendStatus(200)
             } else {
                 res.status(403).send(result.status);
             }

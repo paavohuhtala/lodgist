@@ -13,16 +13,16 @@ block content
     .container
         .lodging
             h2 #{lodging.name}
-            .text-info #{address.city}
-            .text-info Myyjä: #{owner.name}
+            .text-info #{lodging.address.city}
+            .text-info Myyjä: #{lodging.seller.company_name}
             .lodging-image.col-md-8
             .col-md-4
                 .panel.panel-default
                     .panel-body
-                        h4 #{parseFloat(lodging.price_per_night)} € / yö
+                        h4 #{lodging.price_per_night} € / yö
                         p.text-muted sis. alv n + 1 %
                         div
-                            unless isOwner
+                            unless user.id == lodging.seller.user_id
                                 a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/user/new") Siirry varaamaan
                             else
                                 a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/external/new") Ilmoita varaus
@@ -31,11 +31,11 @@ block content
             .col-md-4
             .lodging-amenities.col-md-8
                 h3 Varustelu
-                if !amenities || amenities.length == 0
+                if !lodging.amenities || lodging.amenities.length == 0
                     .text-muted Ei ilmoitettu
                 else
                     ul.list-unstyled
-                        for amenity in amenities
+                        for amenity in lodging.amenities
                             li
                                 if amenity.icon
                                     .glyphicon(class=amenity.icon)
