@@ -14,7 +14,7 @@ const query = new pgp.QueryFile("./sql/queries/lodging.sql", {debug: true});
 export const Lodging : IController = {
     get: async (req: RequestEx, res: Response) => {
         let id = parseInt(req.params.id, 10);
-        let viewData = await getClient().one(query, {lodging: id}););
+        let viewData = await getClient().one(query, {lodging: id});
         res.render("lodging", viewData);
     }
 }
