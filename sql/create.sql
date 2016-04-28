@@ -110,11 +110,13 @@ CREATE TABLE "Reviews" (
 
 CREATE VIEW "Locations" AS (SELECT DISTINCT city FROM "Addresses");
 
+-- Results in a table with the schema [lodging: number; amenities: integer[]]
 CREATE VIEW "LodgingAmenityArrays" AS (
 	WITH all_amenities AS (SELECT lodging, array_agg(amenity) AS amenities FROM "LodgingAmenities" GROUP BY lodging)
 
 	SELECT
-		l.id as lodging, COALESCE(all_amenities.amenities, '{}'::integer[]) as amenities
+		l.id as lodging,
+		COALESCE(all_amenities.amenities, '{}'::integer[]) as amenities
 	FROM "Lodgings" l
 	LEFT JOIN all_amenities ON all_Amenities.lodging = l.id
 	GROUP BY l.id, all_amenities.amenities);
