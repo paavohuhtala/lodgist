@@ -1,0 +1,49 @@
+
+// Derived from https://github.com/mgcrea/bootstrap-additions/blob/master/src/datepicker/datepicker.less
+
+.datepicker.dropdown-menu
+    min-width: 250px
+    min-height: 270px
+    padding: 1em
+    
+    & tbody
+        min-height: 180px
+        
+        & > button
+            padding: 0.5em
+    
+    & button
+        outline: none
+        border: none
+        color: black
+        padding: 0.25em
+        
+        &:hover
+            color: #999
+        
+        &[disabled]
+            background-color: #EEE
+            border-radius: 0px
+
+            &:hover
+                color: black
+                
+            &.btn-today
+                color: #FF4F09
+        
+    & .btn-default
+        background-color: transparent
+    
+    & .btn-today
+        background-color: #18bc9c
+        color: white
+    
+    & .btn-primary
+        background-color: #25C1D7
+        
+    &.datepicker-mode-1, &.datepicker-mode-2
+        min-width: 400px
+        & tbody button
+            height: 65px
+            width: 80px
+            text-align: left
