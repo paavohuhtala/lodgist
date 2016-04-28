@@ -1,17 +1,27 @@
+
 .lodging
     & > .lodging-image
         height: 450px
         background-image: url("https://placekitten.com/700/500")
         background-size: cover
-    
+        margin-bottom: 2em
+
     & > .lodging-description
         padding-top: 2em
         
     & > .lodging-amenities
         & > ul
             & .glyphicon
-                font-size: 1.5em
+                font-size: 1.5em    
                 margin-right: 1em
             & > li > span
                 position: absolute
                 left: 4em
+    & .lodging-price
+        text-align: center
+        font-size: 2em
+    
+    & .button-container
+        text-align: center
+        padding-top: 1em
+        padding-bottom: 1em

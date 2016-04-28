@@ -8,6 +8,7 @@ SELECT to_json(r) AS lodging FROM (
    SELECT
      l.id,
      l.name,
+     l.description,
      l.price_per_night,
      to_json(s) AS seller,
      to_json(a) AS address,

@@ -19,13 +19,20 @@ block content
             .col-md-4
                 .panel.panel-default
                     .panel-body
-                        h4 #{lodging.price_per_night} € / yö
-                        p.text-muted sis. alv n + 1 %
+                        p.lodging-price {{#{lodging.price_per_night} | currency}} / yö
                         div
-                            unless user.id == lodging.seller.user_id
-                                a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/user/new") Siirry varaamaan
+                            if !user
+                                .button-container
+                                    button.btn.btn-primary.btn-lg.reserve-button(disabled href="#") Siirry varaamaan
+                                p
+                                    a.text-info(href="/login") Kirjaudu 
+                                    | tai 
+                                    a.text-info(href="/register") rekisteröidy 
+                                    | varataksesi kohteita.
+                            else if user.id == lodging.seller.user_id
+                                .button-container: a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/external/new") Ilmoita varaus
                             else
-                                a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/external/new") Ilmoita varaus
+                                .button-container: a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/user/new") Siirry varaamaan
             .lodging-description.col-md-8
                 p= lodging.description
             .col-md-4

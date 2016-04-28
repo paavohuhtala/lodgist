@@ -1,12 +1,11 @@
 
 .lodgings
     
-    & > .lodging
+    & > .lodging-item
         margin: 1em
         border: 1px solid darkGray
         
         & > *
-            height: 100%
             height: 12em
         
         & > .lodging-image
