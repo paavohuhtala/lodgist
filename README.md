@@ -5,10 +5,10 @@ Rest in Finnish, sorry.
 
 ## Linkkejä
 
-* [Sovelluksen testiversio](http://lodgist.paavo.me:8080/)
-    * [Mökkilistaus](http://lodgist.paavo.me:8080/lodgings)
-    * [Esimerkkimökki](http://lodgist.paavo.me:8080/lodging/1)
-    * [Kirjautumissivu](http://lodgist.paavo.me:8080/login)
+* [Sovelluksen testiversio](https://lodgist.paavo.me)
+    * [Mökkilistaus](https://lodgist.paavo.me/lodgings)
+    * [Esimerkkimökki](https://lodgist.paavo.me/lodging/1)
+    * [Kirjautumissivu](https://lodgist.paavo.me/login)
 * [Dokumentaatio (pdf)](docs/dokumentaatio.pdf)
 * [Viikkonkirjanpito (lisätietoja)](docs/viikkokirjanpito.md)
 
