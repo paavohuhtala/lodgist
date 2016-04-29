@@ -33,7 +33,7 @@ block content
                     dd #{moment(reservation.during.lower).format("DD.MM.YYYY HH:mm")} - #{moment(reservation.during.upper).format("DD.MM.YYYY HH:mm")}
                     if reservation.user_reservation
                         dt Hinta
-                        dd #{parseFloat(reservation.user_reservation.price)} €
+                        dd {{::#{parseFloat(reservation.user_reservation.price)} | currency}}
                     if reservation.external_reservation
                         dt Selite
                         dd #{reservation.external_reservation.reason}
