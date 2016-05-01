@@ -6,15 +6,13 @@ import {LodgingDao} from "../database/daos/LodgingDao"
 import {ReservationDao} from "../database/daos/ReservationDao"
 import {getClient} from "../database/Connection"
 import * as pgp from "pg-promise"
+import * as _ from "lodash"
 
-const query = `
-    SELECT * FROM "Reservations" r
-    INNER JOIN "UserReservations" u ON u.reservation = r.id
-    WHERE u.customer = $<userId>`;
+const query = new pgp.QueryFile("./sql/queries/my_reservations.sql", {debug: true}); 
 
 export const MyReservations : IController = {
     get: async (req: RequestEx, res: Response) => {
-        const reservations = await getClient().manyOrNone(query, {userId: req.user.id});
-        res.render("my_reservations", reservations);
+        const results = await getClient().oneOrNone(query, {customer: req.user.id});
+        res.render("my_reservations", {reservations: _.groupBy(results.reservations, (s: any) => s.status)});
     }
 }

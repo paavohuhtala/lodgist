@@ -1,0 +1,8 @@
+mixin reservation-state(reservation)
+    if reservation.user_reservation
+        if reservation.user_reservation.is_paid
+            strong.text-success Maksettu (#{moment(reservation.user_reservation.paid).format("DD.MM.YYYY HH:mm")})
+        else
+            strong.text-warning Ei maksettu
+    else
+        strong.text-info Omistajan varaus

@@ -16,5 +16,5 @@ html(ng-app="lodgist" ng-controller="PaymentProviderController" ng-init="reserva
                     span VÄLITTÄJÄ
                 .panel.panel-default
                     .panel-body
-                        p Yhteensä: {{::#{userReservation.price}}}
+                        p Yhteensä: {{::#{userReservation.price} | currency}}
                         button.btn.btn-primary.btn-success(ng-click="onClickPay()") Maksa internetrahalla

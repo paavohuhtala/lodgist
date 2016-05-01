@@ -1,10 +1,6 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "removeComments": false,
-        "noImplicitAny": false,
         "moduleResolution": "node",
         "sourceMap": true
     },
@@ -28,6 +24,7 @@
         "controllers/lodging.ts",
         "controllers/lodgings.ts",
         "controllers/login.ts",
+        "controllers/my_reservations.ts",
         "controllers/new_external_reservation.ts",
         "controllers/new_lodging.ts",
         "controllers/new_user_reservation.ts",

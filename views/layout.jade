@@ -22,12 +22,12 @@ html(ng-app="lodgist" ng-controller="RootController")
                 a.navbar-brand#logo(href="/") Lodgist
             .collapse.navbar-collapse(bs-collapse-target)
                 ul.nav.navbar-nav
-                    +nav-item("/", "Home")
-                    +nav-item("/lodgings", "Lodgings (TEST)")
-                    +nav-item("/lodgings/1", "Sample lodging (TEST)")
-                    +nav-item("/lodgings/new", "Post a new lodging (TEST)")
+                    +nav-item("/", "Etusivu")
+                    +nav-item("/lodgings", "Kohteet")
                     +nav-item("/my_reservations", "Varaukseni")
-                    +nav-item("/my_lodgings", "Kohteeni")
+                    if user && user.role == "seller"
+                        +nav-item("/my_lodgings", "Kohteeni")
+                        +nav-item("/lodgings/new", "Uusi kohde")                        
                 ul.nav.navbar-nav.navbar-right
                     if !user
                         +nav-item("/login", "Log in")

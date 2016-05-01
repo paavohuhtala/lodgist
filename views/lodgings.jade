@@ -17,11 +17,4 @@ block content
         .col-md-12.lodgings(ng-if="!dynamicLodgings")
             .progress: .progress-bar.progress-bar-striped.active(style="width: 100%")
         .col-md-12.lodgings(ng-if="dynamicLodgings")
-            .lodging-item.row(ng-repeat="lodging in dynamicLodgings track by lodging.id")
-                a.lodging-image.col-md-3(ng-href="/lodgings/{{lodging.id}}")             
-                .lodging-content.col-md-7
-                    a(ng-href="/lodgings/{{lodging.id}}").lodging-title {{lodging.name}}
-                    p.lodging-address {{lodging.city}} | {{lodging.company_name}}
-                    p {{lodging.description}}
-                .lodging-pricing.col-md-2
-                    p.lodging-price {{lodging.price_per_night | currency}} / yö
+            +lodging("dynamicLodgings")

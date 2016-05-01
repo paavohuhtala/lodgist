@@ -52,3 +52,9 @@ a[ng-click]
 
 .alert > .glyphicon
     margin-right: 1em
+
+.reservations
+
+    & > h2
+        margin-top: 1em
+        margin-bottom: 1em

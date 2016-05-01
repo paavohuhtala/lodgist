@@ -1,9 +1,9 @@
-mixin lodging(lodging)
-    .lodging.row
-        a.lodging-image.col-md-3(href="/lodgings/#{lodging.id}")             
+mixin lodging(lodgingsArray)
+    .lodging-item.row(ng-repeat="lodging in #{lodgingsArray} track by lodging.id")
+        a.lodging-image.col-md-3(ng-href="/lodgings/{{lodging.id}}")             
         .lodging-content.col-md-7
-            a(href="/lodgings/#{lodging.id}").lodging-title #{lodging.name}
-            p.lodging-address #{lodging.city} | #{lodging.owner_name}
-            p= lodging.description
+            a(ng-href="/lodgings/{{lodging.id}}").lodging-title {{lodging.name}}
+            p.lodging-address {{lodging.city}} | {{lodging.company_name}}
+            p {{lodging.description}}
         .lodging-pricing.col-md-2
-            p.lodging-price #{parseFloat(lodging.price_per_night)} € / yö
+            p.lodging-price {{lodging.price_per_night | currency}} / yö

@@ -11,6 +11,7 @@ mixin stars(n, outOf)
 
 block content
     .container
+        - var isOwner = user.id === lodging.seller.user_id    
         .lodging
             h2 #{lodging.name}
             .text-info #{lodging.address.city}
@@ -29,7 +30,7 @@ block content
                                     | tai 
                                     a.text-info(href="/register") rekisteröidy 
                                     | varataksesi kohteita.
-                            else if user.id == lodging.seller.user_id
+                            else if isOwner
                                 .button-container: a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/external/new") Ilmoita varaus
                             else
                                 .button-container: a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/user/new") Siirry varaamaan

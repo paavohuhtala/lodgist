@@ -1,5 +1,7 @@
 extends layout.jade
 
+include mixins/reservation_state
+
 block vars
     - controller = "ReservationController"
 
@@ -15,14 +17,7 @@ block content
             .col-md-6: .well
                 dl
                     dt Tila
-                    dd
-                        if reservation.user_reservation
-                            if reservation.user_reservation.is_paid
-                                strong.text-success Maksettu (#{moment(reservation.user_reservation.paid).format("DD.MM.YYYY HH:mm")})
-                            else
-                                strong.text-warning Ei maksettu
-                        else
-                            strong.text-info Omistajan varaus
+                    dd: +reservation-state(reservation)
                     dt Tunnus
                     dd #{reservation.id}
                     dt Kohde
