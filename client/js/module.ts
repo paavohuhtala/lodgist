@@ -3,7 +3,7 @@
 
 namespace lodgist {
     angular
-    .module("lodgist", ["mgcrea.ngStrap"])
+    .module("lodgist", ["mgcrea.ngStrap", "angularInlineEdit"])
     .directive("emailAvailabilityValidator", lodgist.directives.EmailAvailabilityValidator.getInstance())
     .directive("inputsMatch", lodgist.directives.InputsMatchValidator.getInstance())
     .controller("RootController", lodgist.controllers.Root)
@@ -17,6 +17,7 @@ namespace lodgist {
     .controller("NewUserReservationController", lodgist.controllers.NewUserReservation)
     .controller("NewExternalReservationController", lodgist.controllers.NewExternalReservation)
     .controller("MyReservationsController", lodgist.controllers.MyReservations)
+    .controller("AmenitiesController", lodgist.controllers.Amenities)
     .controller("PaymentProviderController", lodgist.controllers.PaymentProvider)
     .config(($datepickerProvider: mgcrea.ngStrap.datepicker.IDatepickerProvider) => {
         angular.extend($datepickerProvider.defaults, {

@@ -20,6 +20,7 @@ var clientJsDeps = [
     "angular-i18n/angular-locale_fi-fi.js",
     "angular-strap/dist/angular-strap.js",
     "angular-strap/dist/angular-strap.tpl.js",
+    "ng-inline-edit/dist/ng-inline-edit.js",
     "moment/moment.js"
 ].map((x) => "bower_components/" + x);
 

@@ -4,4 +4,26 @@ block vars
     - controller = "AmenitiesController"
 
 block content
-    h2 TODO
+    .container.margin-top-default
+        h1 Varusteet
+        .row
+            .col-md-6: .list-group.amenities
+                .progress(ng-if="!amenities"): .progress-bar.progress-bar-striped.active(style="width: 100%")
+                .list-group-item.clearfix.amenity(ng-repeat="amenity in amenities track by amenity.id")
+                    span {{::amenity.name}}
+                        .pull-right
+                            span.text-muted(ng-if="amenity.used") Ei käytössä
+                            a.glyphicon.glyphicon-remove.remove-amenity(ng-class="{'active': !amenity.used}" ng-click="deleteAmenity(amenity.id)")
+            .col-md-offset-2.col-md-4: form.form(name="newAmenityForm" novalidate)
+                .panel.panel-default
+                    .panel-heading Lisää uusi varuste
+                    .panel-body
+                        .form-group
+                            label Nimi
+                            input.form-control(type="text" ng-model="newAmenity.name" required)
+                        .form-group
+                            label Glyphicon-kuvakkeen CSS-luokka
+                            input.form-control(type="text" ng-model="newAmenity.icon" placeholder="Vapaaehtoinen")
+                        .form-group: button.btn.btn-default.btn-primary(ng-click="createAmenity()" ng-disabled="!newAmenityForm.$valid") Lisää
+        p.text-muted Varusteita, joita on merkitty aktiivisiin mökkeihin ei voi poistaa.
+        

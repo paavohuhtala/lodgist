@@ -18,6 +18,7 @@ import {LodgingReservations} from "./controllers/LodgingReservations"
 import {NewExternalReservation, NewUserReservation} from "./controllers/NewReservation"
 import {NewExternalReservationApi, NewUserReservationApi} from "./controllers/api/NewReservation"
 import {ReservationBoundsApi} from "./controllers/api/ReservationBounds"
+import {Amenities} from "./controllers/Amenities"
 import {AmenitiesApi} from "./controllers/api/Amenities"
 
 import {NewUserApi, EmailAvailableApi} from "./controllers/api/NewUser"
@@ -52,6 +53,8 @@ export function registerRoutes(app: Express) {
     app.get("/my_reservations", isLoggedIn, MyReservations.get);
     app.get("/reservations/:id", isLoggedIn, Reservation.get);
     
+    app.get("/amenities", isLoggedIn, Amenities.get);
+    
     app.get("/mock/payment_provider/:reservation_id", isLoggedIn, PaymentProvider.get);
     app.post("/api/v1/mock/payment_callback", isLoggedIn, PaymentCallbackApi.post);
     
@@ -65,6 +68,8 @@ export function registerRoutes(app: Express) {
     app.get("/api/v1/lodgings/:id/reservations/bounds", isLoggedIn, ReservationBoundsApi.get);
     
     app.get("/api/v1/amenities", AmenitiesApi.get);
+    app.post("/api/v1/amenities", AmenitiesApi.post);
+    app.delete("/api/v1/amenities/:id", AmenitiesApi.delete);
     
     app.get("/api/v1/users/:email/available", EmailAvailableApi.get);
     app.post("/api/v1/users", NewUserApi.post);

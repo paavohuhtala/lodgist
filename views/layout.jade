@@ -27,12 +27,13 @@ html(ng-app="lodgist" ng-controller="RootController")
                     +nav-item("/my_reservations", "Varaukseni")
                     if user && user.role == "seller"
                         +nav-item("/my_lodgings", "Kohteeni")
-                        +nav-item("/lodgings/new", "Uusi kohde")                        
+                        +nav-item("/lodgings/new", "Uusi kohde")
+                    +nav-item("/amenities", "Varusteet")
                 ul.nav.navbar-nav.navbar-right
                     if !user
                         +nav-item("/login", "Log in")
                     else
-                        li: a Logged in as #{user.name}
-                        li: a(ng-click="global.controls.logout.onClick()") Log out
+                        li: a #{user.name} (#{user.email})
+                        li: a(ng-click="global.controls.logout.onClick()") Kirjaudu ulos
         block content
     

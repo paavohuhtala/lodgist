@@ -1,0 +1,13 @@
+
+.amenities
+    & > .amenity
+        & .remove-amenity
+            margin-left: 8px
+            cursor: not-allowed
+        
+            &:hover
+                text-decoration: none
+            
+            &.active
+                cursor: pointer
+                color: red
