@@ -20,6 +20,7 @@
         "../../shared/additional_typings/pg-range.d.ts",
         "../../shared/utils/Functional.ts",
         "controllers/amenities.ts",
+        "controllers/edit_lodging.ts",
         "controllers/index.ts",
         "controllers/lodging_reservations.ts",
         "controllers/lodging.ts",
