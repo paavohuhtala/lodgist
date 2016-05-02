@@ -13,10 +13,12 @@ namespace lodgist {
     .controller("LodgingsController", lodgist.controllers.Lodgings)
     .controller("LodgingController", lodgist.controllers.Lodging)
     .controller("ReservationController", lodgist.controllers.Reservation)
+    .controller("LodgingReservationsController", lodgist.controllers.LodgingReservations)
     .controller("NewLodgingController", lodgist.controllers.NewLodging)
     .controller("NewUserReservationController", lodgist.controllers.NewUserReservation)
     .controller("NewExternalReservationController", lodgist.controllers.NewExternalReservation)
     .controller("MyReservationsController", lodgist.controllers.MyReservations)
+    .controller("MyLodgingsController", lodgist.controllers.MyLodgings)
     .controller("AmenitiesController", lodgist.controllers.Amenities)
     .controller("PaymentProviderController", lodgist.controllers.PaymentProvider)
     .config(($datepickerProvider: mgcrea.ngStrap.datepicker.IDatepickerProvider) => {

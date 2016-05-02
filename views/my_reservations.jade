@@ -1,6 +1,6 @@
 extends layout.jade
 
-include mixins/reservation_state
+include mixins/reservation_listing
 
 block vars
     - controller = "MyReservationsController"
@@ -16,30 +16,4 @@ mixin reservation-item(reservation)
 
 block content
     .container.margin-top-default.reservations
-        h1 Varaukseni
-        h2 Nykyiset varaukset
-        if reservations.current
-            .row: .col-md-6
-                .list-group
-                    each reservation in reservations.current
-                        +reservation-item(reservation)
-        else
-            p.text-muted Ei nykyisiä varauksia
-
-        h2 Tulevat varaukset
-        if reservations.upcoming
-            .row: .col-md-6
-                .list-group
-                    each reservation in reservations.upcoming
-                        +reservation-item(reservation)
-        else
-            p.text-muted Ei tulevia varauksia
-
-        h2 Entiset varaukset
-        if reservations.past
-            .row: .col-md-6
-                .list-group
-                    each reservation in reservations.past
-                        +reservation-item(reservation)
-        else
-            p.text-muted Ei entisiä varauksia
+        +reservation-listing(reservations)

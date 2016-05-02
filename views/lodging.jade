@@ -34,6 +34,12 @@ block content
                                 .button-container: a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/external/new") Ilmoita varaus
                             else
                                 .button-container: a.btn.btn-primary.btn-lg(href="/lodgings/#{lodging.id}/reservations/user/new") Siirry varaamaan
+                if isOwner
+                    .panel.panel-default
+                        .panel-heading Hallitse
+                        .panel-body: .row
+                            .col-md-12
+                                a.btn.btn-default(href="/lodgings/#{lodging.id}/reservations") Selaa varauksia
             .lodging-description.col-md-8
                 p= lodging.description
             .col-md-4

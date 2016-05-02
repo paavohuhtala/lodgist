@@ -1,13 +1,16 @@
 
 extends layout.jade
 
-include mixins/lodging
+include mixins/lodging_listing
 
 block vars
     - controller = "MyLodgingsController"
 
 block content
-    .container
-        .lodgings#static-lodgings
-                each lodging in lodgings
-                    +lodging(lodging)
+    .container.lodgings-wrapper.margin-top-default
+        .col-md-12
+            h1 Kohteeni
+        .col-md-12.lodgings(ng-if="!dynamicLodgings")
+            .progress: .progress-bar.progress-bar-striped.active(style="width: 100%")
+        .col-md-12.lodgings(ng-if="dynamicLodgings")
+            +lodging-listing("dynamicLodgings")

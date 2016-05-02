@@ -14,6 +14,8 @@ import {Lodging, NewLodging} from "./controllers/Lodging"
 import {Lodgings} from "./controllers/Lodgings"
 import {LodgingSearchApi} from "./controllers/api/LodgingSearch"
 import {NewLodgingApi} from "./controllers/api/NewLodging"
+import {MyLodgings} from "./controllers/MyLodgings"
+import {MyLodgingsApi} from "./controllers/api/MyLodgings"
 
 import {MyReservations} from "./controllers/MyReservations"
 import {Reservation} from "./controllers/Reservation"
@@ -74,6 +76,8 @@ export function registerRoutes(app: Express) {
     app.get("/lodgings/:id/reservations", isOwnerOf, LodgingReservations.get);
     app.get("/lodgings/:id", Lodging.get);    
     
+    app.get("/my_lodgings", canPostLodgings, MyLodgings.get);
+    
     app.get("/my_reservations", isLoggedIn, MyReservations.get);
     app.get("/reservations/:id", canAccessReservation, Reservation.get);    
     app.get("/mock/payment_provider/:id", canAccessReservation, PaymentProvider.get);
@@ -85,7 +89,8 @@ export function registerRoutes(app: Express) {
     
     app.post("/api/v1/login", LoginApi.post);
     app.post("/api/v1/logout", isLoggedIn, LogoutApi.post);
-
+    
+    app.get("/api/v1/my_lodgings", canPostLodgings, MyLodgingsApi.get);
     app.get("/api/v1/lodgings", LodgingSearchApi.get);
     app.post("/api/v1/lodgings/new", canPostLodgings, NewLodgingApi.post);
     

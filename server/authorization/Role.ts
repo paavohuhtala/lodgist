@@ -28,8 +28,6 @@ export function isSeller(allowUnverified: boolean = true) {
             return false;
         }
         
-        console.log(user.role);
-        
         return (allowUnverified && user.role == "unverifiedSeller") || user.role == "seller";
     }
 }

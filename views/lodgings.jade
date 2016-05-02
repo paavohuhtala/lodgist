@@ -1,6 +1,6 @@
 extends layout.jade
 
-include mixins/lodging
+include mixins/lodging_listing
 include mixins/amenity_selector
 
 block vars
@@ -17,4 +17,4 @@ block content
         .col-md-12.lodgings(ng-if="!dynamicLodgings")
             .progress: .progress-bar.progress-bar-striped.active(style="width: 100%")
         .col-md-12.lodgings(ng-if="dynamicLodgings")
-            +lodging("dynamicLodgings")
+            +lodging-listing("dynamicLodgings")

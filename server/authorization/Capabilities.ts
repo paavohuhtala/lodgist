@@ -19,9 +19,7 @@ export type AsyncPredicate = (req: RequestEx) => Promise<boolean>
 export module Lodging {
     
     export async function isOwnerOf(lodgingId: number, user: IUserRow) {
-        console.log("oh shieeet")
         const lodging = await new LodgingDao().getById(lodgingId);
-        console.log("dat boiii")
         
         if (lodging.owner === user.id) {
             return true;

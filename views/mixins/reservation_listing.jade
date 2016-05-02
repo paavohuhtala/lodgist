@@ -1,0 +1,42 @@
+
+include reservation_state
+
+mixin reservation-item(reservation)
+    a.list-group-item(href="/reservations/#{reservation.id}")
+        if reservation.lodging
+            h4.list-group-item-heading #{reservation.lodging.name}
+        else if reservation.user_reservation && reservation.user_reservation.customer != user.id
+            h4.list-group-item-heading #{reservation.customer_name}
+        p.list-group-item-text
+            span #{moment(reservation.during.lower).format("DD.MM.YYYY HH:mm")} - #{moment(reservation.during.upper).format("DD.MM.YYYY HH:mm")}
+            if reservation.user_reservation
+                p {{::#{reservation.user_reservation.price} | currency}}
+            p: +reservation-state(reservation)
+
+mixin reservation-listing(reservations)
+    h2 Nykyiset varaukset
+    if reservations.current
+        .row: .col-md-6
+            .list-group
+                each reservation in reservations.current
+                    +reservation-item(reservation)
+    else
+        p.text-muted Ei nykyisiä varauksia
+
+    h2 Tulevat varaukset
+    if reservations.upcoming
+        .row: .col-md-6
+            .list-group
+                each reservation in reservations.upcoming
+                    +reservation-item(reservation)
+    else
+        p.text-muted Ei tulevia varauksia
+
+    h2 Entiset varaukset
+    if reservations.past
+        .row: .col-md-6
+            .list-group
+                each reservation in reservations.past
+                    +reservation-item(reservation)
+    else
+        p.text-muted Ei entisiä varauksia

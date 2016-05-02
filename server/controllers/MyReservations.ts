@@ -2,8 +2,6 @@
 import {Response} from "express"
 import {RequestEx} from "../RequestEx"
 import {IController} from "../IController"
-import {LodgingDao} from "../database/daos/LodgingDao"
-import {ReservationDao} from "../database/daos/ReservationDao"
 import {getClient} from "../database/Connection"
 import * as pgp from "pg-promise"
 import * as _ from "lodash"

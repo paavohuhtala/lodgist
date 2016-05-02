@@ -1,4 +1,14 @@
 extends layout.jade
 
+include mixins/reservation_listing
+
 block vars
     - controller = "LodgingReservationsController"
+
+block content
+    .container.margin-top-default.reservations
+        .col-md-12
+            h1 Kohteen #{lodging.id} varaukset
+            a(href="/lodgings/#{lodging.id}"): h2 #{lodging.name}
+        .col-md-12
+            +reservation-listing(reservations)

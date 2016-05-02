@@ -1,6 +1,5 @@
 
 .lodgings
-    
     & > .lodging-item
         margin: 1em
         border: 1px solid darkGray

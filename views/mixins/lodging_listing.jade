@@ -1,9 +1,14 @@
-mixin lodging(lodgingsArray)
+mixin lodging-listing(lodgingsArray)
     .lodging-item.row(ng-repeat="lodging in #{lodgingsArray} track by lodging.id")
         a.lodging-image.col-md-3(ng-href="/lodgings/{{lodging.id}}")             
         .lodging-content.col-md-7
             a(ng-href="/lodgings/{{lodging.id}}").lodging-title {{lodging.name}}
-            p.lodging-address {{lodging.city}} | {{lodging.company_name}}
+            p.lodging-address
+                span {{lodging.city}} 
+                span | 
+                span {{lodging.company_name}} 
+                span(ng-if-start="lodging.owner = #{user.id}") | 
+                a(ng-if-end ng-href="/lodgings/{{lodging.id}}/reservations") Varaukset
             p {{lodging.description}}
         .lodging-pricing.col-md-2
             p.lodging-price {{lodging.price_per_night | currency}} / yö
