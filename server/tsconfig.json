@@ -33,6 +33,7 @@
         "config/ConfigLoader.ts",
         "controllers/Amenities.ts",
         "controllers/api/Amenities.ts",
+        "controllers/api/Lodging.ts",
         "controllers/api/LodgingSearch.ts",
         "controllers/api/Login.ts",
         "controllers/api/MyLodgings.ts",
