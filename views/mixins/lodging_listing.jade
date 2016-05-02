@@ -6,9 +6,10 @@ mixin lodging-listing(lodgingsArray)
             p.lodging-address
                 span {{lodging.city}} 
                 span | 
-                span {{lodging.company_name}} 
-                span(ng-if-start="lodging.owner = #{user.id}") | 
-                a(ng-if-end ng-href="/lodgings/{{lodging.id}}/reservations") Varaukset
+                span {{lodging.company_name}}
+                span(ng-if="lodging.owner == #{user ? user.id : -1}")
+                    span | 
+                    a(ng-if-end ng-href="/lodgings/{{lodging.id}}/reservations") Varaukset
             p {{lodging.description}}
         .lodging-pricing.col-md-2
             p.lodging-price {{lodging.price_per_night | currency}} / yö

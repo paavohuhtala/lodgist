@@ -11,7 +11,7 @@ mixin stars(n, outOf)
 
 block content
     .container
-        - var isOwner = user.id === lodging.seller.user_id    
+        - var isOwner = user && user.id === lodging.seller.user_id
         .lodging
             h2 #{lodging.name}
             .text-info #{lodging.address.city}
