@@ -62,7 +62,7 @@ namespace lodgist.controllers {
             }
 
             $scope.onSend = () => {
-                $http.post("/api/v1/reservations/external/new", $scope.reservation).then(res => {
+                $http.post("/api/v1/reservations/external", $scope.reservation).then(res => {
                     location.pathname = `/reservations/${res.data}`;
                 });
             };

@@ -6,13 +6,13 @@ block vars
 block content
     #login-panel
         .col-sm-6
-            h3 Already have an account?
+            h3 Onko sinulla jo tili?
             form(novalidate)#login-form
                 .form-group: input.form-control#email(type="email" placeholder="Email" required ng-model="loginDetails.email")
-                .form-group: input.form-control#password(type="password" placeholder="Password" required ng-model="loginDetails.password")
-                button.btn.btn-primary.bottom-sm(ng-click="controls.loginButton.onClick()") {{controls.loginButton.text}}
+                .form-group: input.form-control#password(type="password" placeholder="Salasana" required ng-model="loginDetails.password")
+                button.btn.btn-primary.bottom-sm(ng-click="controls.loginButton.onClick()" ng-class="controls.loginButton.class") {{controls.loginButton.text}}
 
         .col-sm-6
-            h3 Not registered yet?
-            p It only takes a minute.
-            a.btn.btn-primary.bottom-sm(href="/register" ng-text) Register
+            h3 Ei vielä tiliä?
+            p Rekisteröityminen vie alle minuutin.
+            a.btn.btn-primary.bottom-sm(href="/register" ng-text) Rekisteröidy

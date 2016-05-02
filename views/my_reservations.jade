@@ -10,7 +10,8 @@ mixin reservation-item(reservation)
         h4.list-group-item-heading #{reservation.lodging.name}
         p.list-group-item-text
             span #{moment(reservation.during.lower).format("DD.MM.YYYY HH:mm")} - #{moment(reservation.during.upper).format("DD.MM.YYYY HH:mm")}
-            p {{::#{reservation.user_reservation.price} | currency}}
+            if reservation.user_reservation
+                p {{::#{reservation.user_reservation.price} | currency}}
             p: +reservation-state(reservation)
 
 block content

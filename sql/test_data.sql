@@ -1,4 +1,6 @@
 
+BEGIN TRANSACTION;
+
 INSERT INTO "Addresses" (street1, postal_code, city) VALUES
 	('Demonipolku 6', '00666', 'Kerava'),
 	('Low Earth Orbit', '01337', 'Space'),
@@ -15,7 +17,7 @@ INSERT INTO "Users" (role, name, email, password, phone, address) VALUES
 	('seller', 'Myyjä', 'myyja@example.com',
 	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq', -- 'salasana'
 	'123-457', 4),
-	('seller', 'Järjestelmänvalvoja', 'admin@example.com',
+	('admin', 'Järjestelmänvalvoja', 'admin@example.com',
 	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq', -- 'salasana'
 	'123-458', 4);
 
@@ -52,3 +54,5 @@ INSERT INTO "UserReservations" (reservation, customer, price, is_paid, paid) VAL
 
 INSERT INTO "Reviews" (lodging, author, content, rating) VALUES
 	(1, 3, '5/5 proper great', 5);
+
+COMMIT TRANSACTION;

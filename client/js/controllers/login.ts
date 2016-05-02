@@ -10,6 +10,7 @@ namespace lodgist.controllers {
         controls: {
             loginButton: {
                 text: string,
+                class: string,
                 onClick: () => void
             }
         }
@@ -22,7 +23,8 @@ namespace lodgist.controllers {
             
             $scope.controls = {
                 loginButton: {
-                    text: "Login",
+                    text: "Kirjaudu",
+                    class: "btn-primary",
                     onClick: () => {
                         $http({
                             method: "POST",
@@ -30,7 +32,8 @@ namespace lodgist.controllers {
                             params: $scope.loginDetails
                         }).
                         then(success => {
-                            $scope.controls.loginButton.text = "Success";
+                            $scope.controls.loginButton.text = "Onnistui";
+                            $scope.controls.loginButton.class = "btn-success";
                             setTimeout(() => window.location.pathname = "/", 500);
                         });
                     }

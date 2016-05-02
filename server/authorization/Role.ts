@@ -1,5 +1,7 @@
 
+import {RequestEx} from "../RequestEx"
 import {IUserRow, Role} from "../models/User"
+import {userCompose} from "./Utils"
 
 const rolePriority = {
     unverifiedUser: 0,
@@ -15,13 +17,31 @@ function getRolePriority(role: Role) {
 
 export function isAtLeast(role: Role) {
     let priority = getRolePriority(role);
-    return (user: IUserRow) => getRolePriority(user.role) >= priority;
+    return (user: IUserRow) => {
+        return getRolePriority(user.role) >= priority;
+    };
 }
 
-export function isSeller(user: IUserRow, allowUnverified: boolean = true) {
-    return (allowUnverified && user.role == "unverifiedSeller") || user.role == "seller";
+export function isSeller(allowUnverified: boolean = true) {
+    return (user: IUserRow) => {
+        if (user == null) {
+            return false;
+        }
+        
+        console.log(user.role);
+        
+        return (allowUnverified && user.role == "unverifiedSeller") || user.role == "seller";
+    }
 }
 
 export function isAdmin(user: IUserRow) {
+    if (user == null) {
+        return false;
+    }
+    
     return user.role == "admin";
 }
+
+export const isVerifiedSellerP = userCompose(isSeller(false)); 
+export const isAnySellerP = userCompose(isSeller(true)); 
+export const isAdminP = userCompose(isAdmin);

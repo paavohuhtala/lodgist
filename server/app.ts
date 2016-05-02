@@ -18,7 +18,17 @@ const port = 8080
 
 let app = express()
 app.use(compression());
-app.locals = {moment: require("moment"), _: require("lodash")};
+
+import * as Role from "./authorization/Role"
+import * as Capabilities from "./authorization/Capabilities"
+
+app.locals = {
+    moment: require("moment"),
+    _: require("lodash"),
+    Role,
+    Capabilities
+};
+
 app.set("view engine", "jade");
 app.use(cookieParser());
 app.use(bodyParser.json());

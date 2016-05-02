@@ -1,4 +1,5 @@
-﻿
+﻿BEGIN TRANSACTION;
+
 CREATE EXTENSION btree_gist;
 
 CREATE TYPE "user_role" AS ENUM (
@@ -124,3 +125,5 @@ CREATE VIEW "LodgingAmenityArrays" AS (
 CREATE INDEX "city_index" ON "Addresses"(lower(city));
 CREATE INDEX "session_token_index" ON "Sessions"(token);
 CREATE INDEX "user_emails" ON "Users"(lower(email));
+
+COMMIT TRANSACTION;

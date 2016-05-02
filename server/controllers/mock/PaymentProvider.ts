@@ -8,8 +8,8 @@ import {UserReservationDao} from "../../database/daos/UserReservationDao"
 
 export const PaymentProvider : IController = {
     get: async (req: RequestEx, res: Response) => {
-        const reservation = await new ReservationDao().getById(parseInt(req.params.reservation_id));
-        const userReservation = await new UserReservationDao().getById(parseInt(req.params.reservation_id));
+        const reservation = await new ReservationDao().getById(parseInt(req.params.id));
+        const userReservation = await new UserReservationDao().getById(parseInt(req.params.id));
         
         if (reservation == null || userReservation == null || userReservation.customer != req.user.id) {
             res.sendStatus(404);

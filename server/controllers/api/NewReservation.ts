@@ -5,7 +5,6 @@ import {RequestEx} from "../../RequestEx"
 import {IController} from "../../IController"
 
 import * as Promise from "bluebird"
-
 import * as pgp from "pg-promise"
 
 import {Range} from "pg-range"
@@ -24,19 +23,12 @@ import {ReservationDao} from "../../database/daos/ReservationDao"
 import {UserReservationDao} from "../../database/daos/UserReservationDao"
 import {ExternalReservationDao} from "../../database/daos/ExternalReservationDao"
 
+import {INewReservationRequest, INewExternalReservationRequest, INewUserReservationRequest} from "../../models/requests/NewReservation"
+
+import * as Role from "../../authorization/Role"
+import * as Capabilities from "../../authorization/Capabilities"
 
 // CONSIDER moving these request interfaces somewhere else
-
-interface INewReservationRequest {
-    during: IMinimalRange<string>
-    lodging?: number
-}
-
-interface INewUserReservationRequest extends INewReservationRequest { }
-
-interface INewExternalReservationRequest extends INewReservationRequest {
-    reason: string
-}
 
 async function createReservation(t: pgp.IDatabase<any>, request: INewReservationRequest, lodging: ILodgingRow, type: ReservationType) : Promise<number> {
     const during = toPgRange(parseDateRange(request.during));
@@ -112,8 +104,14 @@ export const NewUserReservationApi : IController = {
             res.sendStatus(400);
             return;
         }
-        
+                
         const reservation = <INewUserReservationRequest> req.body;
+        
+        if (!(await Capabilities.Lodging.canUserReserve(reservation.lodging, req.user))) {
+            res.sendStatus(403);
+            return;
+        }
+        
         const newReservationId = await createUserReservation(reservation, req.user);
         
         if (newReservationId == null) {
@@ -132,8 +130,14 @@ export const NewExternalReservationApi : IController = {
             res.sendStatus(400);
             return;
         }
-        
+
         const reservation = <INewExternalReservationRequest> req.body;
+        
+        if (!(await Capabilities.Lodging.canExternalReserve(reservation.lodging, req.user))) {
+            res.sendStatus(403);
+            return;
+        }
+        
         const newReservationId = await createExternalReservation(reservation);
         
         if (newReservationId == null) {

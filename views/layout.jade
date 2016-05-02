@@ -24,14 +24,16 @@ html(ng-app="lodgist" ng-controller="RootController")
                 ul.nav.navbar-nav
                     +nav-item("/", "Etusivu")
                     +nav-item("/lodgings", "Kohteet")
-                    +nav-item("/my_reservations", "Varaukseni")
-                    if user && user.role == "seller"
+                    if user
+                        +nav-item("/my_reservations", "Varaukseni")
+                    if Role.isSeller(true)(user)
                         +nav-item("/my_lodgings", "Kohteeni")
                         +nav-item("/lodgings/new", "Uusi kohde")
-                    +nav-item("/amenities", "Varusteet")
+                    if Role.isAdmin(user)
+                        +nav-item("/amenities", "Varusteet")
                 ul.nav.navbar-nav.navbar-right
                     if !user
-                        +nav-item("/login", "Log in")
+                        +nav-item("/login", "Kirjaudu sisään")
                     else
                         li: a #{user.name} (#{user.email})
                         li: a(ng-click="global.controls.logout.onClick()") Kirjaudu ulos

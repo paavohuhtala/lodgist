@@ -16,7 +16,7 @@ interface IReservation {
 
 export const MyReservations : IController = {
     get: async (req: RequestEx, res: Response) => {
-        const results = await getClient().oneOrNone(query, {customer: req.user.id});
+        const results = await getClient().oneOrNone(query, {user_id: req.user.id});
         
         const viewData = {
             reservations: {
