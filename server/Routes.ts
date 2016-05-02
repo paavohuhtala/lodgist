@@ -70,6 +70,7 @@ export function registerRoutes(app: Express) {
     app.get("/api/v1/amenities", AmenitiesApi.get);
     app.post("/api/v1/amenities", AmenitiesApi.post);
     app.delete("/api/v1/amenities/:id", AmenitiesApi.delete);
+    app.put("/api/v1/amenities/:id", AmenitiesApi.put);
     
     app.get("/api/v1/users/:email/available", EmailAvailableApi.get);
     app.post("/api/v1/users", NewUserApi.post);

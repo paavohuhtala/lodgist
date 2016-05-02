@@ -7,14 +7,18 @@ block content
     .container.margin-top-default
         h1 Varusteet
         .row
-            .col-md-6: .list-group.amenities
+            .col-md-8: .list-group.row.amenities
                 .progress(ng-if="!amenities"): .progress-bar.progress-bar-striped.active(style="width: 100%")
-                .list-group-item.clearfix.amenity(ng-repeat="amenity in amenities track by amenity.id")
-                    span {{::amenity.name}}
-                        .pull-right
-                            span.text-muted(ng-if="amenity.used") Ei käytössä
-                            a.glyphicon.glyphicon-remove.remove-amenity(ng-class="{'active': !amenity.used}" ng-click="deleteAmenity(amenity.id)")
-            .col-md-offset-2.col-md-4: form.form(name="newAmenityForm" novalidate)
+                .list-group-item.col-md-12.clearfix.amenity(ng-repeat="amenity in amenities track by amenity.id")
+                    .row
+                        .col-md-5
+                            span(inline-edit="amenity.name" inline-edit-placeholder="Nimi" inline-edit-on-blur="cancel" inline-edit-btn-edit="Muokkaa" inline-edit-callback="updateAmenity(amenity.id, 'name', newValue)")
+                        .col-md-5
+                            span(inline-edit="amenity.icon" inline-edit-placeholder="Kuvake" inline-edit-on-blur="cancel" inline-edit-btn-edit="Muokkaa" inline-edit-callback="updateAmenity(amenity.id, 'icon', newValue)")
+                        .col-md-2: .text-right
+                            span.text-muted(ng-if="amenity.used") Käytössä
+                            a.glyphicon.glyphicon-remove.remove-amenity(ng-class="{'active': !amenity.used}" ng-click="amenity.used || deleteAmenity($index)")
+            .col-md-4: form.form(name="newAmenityForm" novalidate)
                 .panel.panel-default
                     .panel-heading Lisää uusi varuste
                     .panel-body

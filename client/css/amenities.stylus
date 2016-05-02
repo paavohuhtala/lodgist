@@ -11,3 +11,7 @@
             &.active
                 cursor: pointer
                 color: red
+
+    // HACK ish
+    & .ng-inline-edit__button
+        margin-left: 1em

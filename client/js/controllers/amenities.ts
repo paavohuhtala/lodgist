@@ -1,11 +1,16 @@
 
 namespace lodgist.controllers {
     
+    interface IAmenity {
+        id: number
+    }
+    
     interface AmenitiesScope extends ng.IScope {
-        amenities?: any[]
-        deleteAmenity: (id: number) => void;
+        amenities?: IAmenity[]
+        deleteAmenity: (index: number) => void;
         updateAmenities: () => void;
         createAmenity: () => void;
+        updateAmenity: (id: number, property: "name" | "icon", newValue: string) => void;
         
         newAmenity: {
             name?: string
@@ -18,12 +23,12 @@ namespace lodgist.controllers {
             $scope.updateAmenities = () => {
                 $scope.amenities = []
                 $http.get("/api/v1/amenities").then(results => {
-                    $scope.amenities = <any[]> results.data;
+                    $scope.amenities = <IAmenity[]> results.data;
                 });
             };
             
-            $scope.deleteAmenity = (id) => {
-                $http.delete(`/api/v1/amenities/${id}`).then(succ => {
+            $scope.deleteAmenity = (index) => {
+                $http.delete(`/api/v1/amenities/${$scope.amenities[index].id}`).then(succ => {
                     $scope.updateAmenities();              
                 });
             };
@@ -33,6 +38,18 @@ namespace lodgist.controllers {
             $scope.createAmenity = () => {
                 $http.post("/api/v1/amenities", $scope.newAmenity).then(succ => {
                     $scope.newAmenity = {}
+                    $scope.updateAmenities();
+                });
+            };
+            
+            $scope.updateAmenity = (id, property, newValue) => {
+                const amenity = {
+                    id: id
+                }
+                
+                amenity[property] = newValue;
+                
+                $http.put(`/api/v1/amenities/${amenity.id}`, amenity).then(succ => {
                     $scope.updateAmenities();
                 });
             };
