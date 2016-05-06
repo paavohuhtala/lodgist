@@ -64,3 +64,13 @@ block content
                         +stars(4, 5)
                     span.author Tero
                     p.review-body Ihan kiva.
+            .lodging-address.col-md-8
+                h3 Sijainti
+                p
+                    span #{lodging.address.street1}
+                    br
+                    if lodging.address.street2
+                        span #{lodging.address.street2}
+                        br
+                    span #{lodging.address.postal_code} #{lodging.address.city}
+                    br
