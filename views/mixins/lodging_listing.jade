@@ -3,13 +3,10 @@ mixin lodging-listing(lodgingsArray)
         a.lodging-image.col-md-3(ng-href="/lodgings/{{lodging.id}}")             
         .lodging-content.col-md-7
             a(ng-href="/lodgings/{{lodging.id}}").lodging-title {{lodging.name}}
-            p.lodging-address
+            p.lodging-info
                 span {{lodging.city}} 
-                span | 
                 span {{lodging.company_name}}
-                span(ng-if="lodging.owner == #{user ? user.id : -1}")
-                    span | 
-                    a(ng-if-end ng-href="/lodgings/{{lodging.id}}/reservations") Varaukset
             p {{lodging.description}}
+            .text-fade
         .lodging-pricing.col-md-2
             p.lodging-price {{lodging.price_per_night | currency}} / yö

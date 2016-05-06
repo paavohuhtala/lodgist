@@ -35,6 +35,8 @@
         "controllers/register.ts",
         "controllers/reservation.ts",
         "controllers/root.ts",
+        "controllers/seller_application.ts",
+        "controllers/user.ts",
         "directives/email_availability.ts",
         "directives/inputs_match.ts",
         "module.ts",

@@ -7,7 +7,7 @@ mixin lodging-form()
         .row: .col-sm-5: .form-group
             label Nimi
             input.form-control(type="text" required ng-model="lodging.name")
-        +address-input("lodging.address")
+        +address-input("lodging.address", "false")
         .row: .col-sm-8: .form-group
             label Vapaamuotoinen kuvaus
             textarea.form-control(type="text" required ng-model="lodging.description")
@@ -35,4 +35,4 @@ mixin lodging-form()
         p.text-muted TODO
         
         .row: .col-sm-5
-            button.btn.btn-primary.btn-lg(ng-click="controls.sendButton.onClick()") Julkaise
+            button.btn.btn-primary(ng-click="controls.sendButton.onClick()") Julkaise

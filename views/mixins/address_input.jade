@@ -1,14 +1,14 @@
 
-mixin address-input(model)
+mixin address-input(model, disable)
     .row: .col-sm-3: .form-group
         label Lähiosoite
-        input.form-control(type="text" required ng-model="#{model}.street1" placeholder="Kadun nimi 1")
+        input.form-control(type="text" required ng-model="#{model}.street1" ng-disabled="#{disable} || false" placeholder="Kadun nimi 100")
     .row: .col-sm-3: .form-group
-        input.form-control(type="text" ng-model="#{model}.street2" placeholder="Vapaaehtoinen")
+        input.form-control(type="text" ng-model="#{model}.street2" ng-disabled="#{disable} || false")
     .row
         .col-sm-2: .form-group
             label Postinumero
-            input.form-control(type="text" ng-model="#{model}.postal_code")
+            input.form-control(type="text" ng-disabled="#{disable} || false" ng-model="#{model}.postal_code")
         .col-sm-3: .form-group
             label Postitoimipaikka
-            input.form-control(type="text" ng-model="#{model}.city")
+            input.form-control(type="text" ng-disabled="#{disable} || false" ng-model="#{model}.city")

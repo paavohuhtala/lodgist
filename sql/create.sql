@@ -40,7 +40,7 @@ CREATE TABLE "Sellers" (
 	user_id INTEGER REFERENCES "Users"(id) NOT NULL,
 	company_name TEXT NOT NULL,
 	billing_address INTEGER REFERENCES "Addresses"(id),
-	vatId TEXT NOT NULL,
+	vat_id TEXT NOT NULL,
 	PRIMARY KEY (user_id)
 );
 
