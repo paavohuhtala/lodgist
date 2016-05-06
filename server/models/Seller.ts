@@ -2,9 +2,9 @@
 import {IUser} from "./User"
 
 interface IBaseSeller {
-    userId: number
+    user_id: number
     company_name: string
-    vatId: string
+    vat_id: string
 }
 
 export interface ISellerRow extends IBaseSeller {
@@ -17,4 +17,8 @@ export interface ISeller extends IBaseSeller {
 
 export interface ISellerUser extends IUser {
     seller: ISeller
+}
+
+export module Seller {
+    export const columns = ["user_id", "company_name", "billing_address", "vat_id"];
 }

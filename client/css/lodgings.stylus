@@ -12,12 +12,24 @@
             background-size: cover
         
         & > .lodging-content
-            padding: 1em          
+            padding: 1em
+            overflow: hidden
               
             & > .lodging-title
                 font-size: 1.5em
                 color: #2c3e50
-            
+                
+            & > .lodging-info
+                & > span
+                    display: block
+                    
+            & > .text-fade
+                position: absolute
+                bottom: 0px
+                width: 100%
+                height: 2em
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white 100%)
+
         & > .lodging-pricing
             & > .lodging-price
                 font-size: 1.5em

@@ -1,0 +1,29 @@
+extends layout.jade
+
+include mixins/address_input
+
+block vars
+    - controller = "SellerApplicationController"
+
+block content
+    .container.margin-top-default.seller-application
+        .col-md-12
+            h1 Hae myyjäksi
+            p Hakemukset käsitellään yleensä 24 tunnin kuluessa.
+        .col-md-12: form(novalidate name="registerForm")
+            .row: .col-sm-4: .form-group
+                    label Myyjänimi (julkinen)
+                    input.form-control(type="text")
+            .row: .col-sm-2: .form-group
+                    label Y-tunnus
+                    input.form-control(type="text")
+            .row: .col-sm-5: .form-group
+                .radio: label
+                    input(type="radio" ng-model="billingAddressEnabled" ng-value="false")
+                    | Sama osoite kuin käyttäjällä
+                .radio: label
+                    input(type="radio" ng-model="billingAddressEnabled" ng-value="true")
+                    | Erillinen laskutusosoite
+            +address-input("seller.billing_address", "!billingAddressEnabled")
+            .row: .col-sm-5
+                button.btn.btn-primary(ng-click="onSend()") Lähetä

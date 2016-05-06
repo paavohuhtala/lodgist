@@ -9,6 +9,7 @@ import {Index} from "./controllers/Index"
 import {LoginApi, LogoutApi} from "./controllers/api/Login"
 import {Login} from "./controllers/Login"
 import {Register} from "./controllers/Register"
+import {SellerApplication} from "./controllers/SellerApplication"
 
 import {Lodging, NewLodging} from "./controllers/Lodging"
 import {Lodgings} from "./controllers/Lodgings"
@@ -68,6 +69,8 @@ export function registerRoutes(app: Express) {
 
     app.get("/login", Login.get);
     app.get("/register", Register.get);
+
+    app.get("/seller_application", SellerApplication.get);
 
     app.get("/lodgings", Lodgings.get);
     app.get("/lodgings/new", canPostLodgings, NewLodging.get);

@@ -5,15 +5,9 @@ include mixins/reservation_listing
 block vars
     - controller = "MyReservationsController"
 
-mixin reservation-item(reservation)
-    a.list-group-item(href="/reservations/#{reservation.id}")
-        h4.list-group-item-heading #{reservation.lodging.name}
-        p.list-group-item-text
-            span #{moment(reservation.during.lower).format("DD.MM.YYYY HH:mm")} - #{moment(reservation.during.upper).format("DD.MM.YYYY HH:mm")}
-            if reservation.user_reservation
-                p {{::#{reservation.user_reservation.price} | currency}}
-            p: +reservation-state(reservation)
-
 block content
     .container.margin-top-default.reservations
-        +reservation-listing(reservations)
+        .col-md-12
+            h1 Varaukseni
+        .col-md-12
+            +reservation-listing(reservations)
