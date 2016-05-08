@@ -11,3 +11,5 @@ block content
             h1 Uusi kohde
         .col-md-12
             +lodging-form()
+            .row: .col-sm-5
+                button.btn.btn-primary.margin-top-default(ng-click="controls.sendButton.onClick()" ng-disabled="!lodgingForm.$valid") Julkaise

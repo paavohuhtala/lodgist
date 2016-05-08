@@ -1,0 +1,20 @@
+
+// Derived from https://github.com/mgcrea/bootstrap-additions/blob/master/src/timepicker/timepicker.less
+
+.timepicker.dropdown-menu
+    padding: 0 4px
+    
+    & button
+        background-color: white
+        color: black
+        outline: none
+        border: none
+        
+        &:hover
+            background-color: #BBB
+        
+        &.btn-primary
+            background-color: black
+            background-color: #222
+            color: white
+        

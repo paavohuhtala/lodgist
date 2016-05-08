@@ -19,4 +19,4 @@ block content
                     div(ng-show="getPrice()")
                         p {{getNights()}} {{getNights() == 1 ? "yö" : "yötä"}} ✕ {{lodging.price_per_night | currency}} = {{getPrice() | currency}}
             .row: .col-sm-5
-                button.btn.btn-primary(ng-click="onSend()") Varaa ja maksa
+                button.btn.btn-primary(ng-click="onSend()" ng-disabled="!reservation.during.lower || !reservation.during.upper") Varaa ja maksa

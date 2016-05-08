@@ -4,18 +4,18 @@ namespace lodgist.controllers {
     interface NewLodgingScope extends angular.IScope {
         lodging: {
             address: {
-                street1: string,
+                street1?: string,
                 street2?: string,
-                postal_code: string,
-                city: string
+                postal_code?: string,
+                city?: string
             },
             owner?: number,
             name?: string,
             description?: string,
             is_public?: boolean,
-            reservation_start: string,
-            reservation_end: string,
-            price_per_night: number,
+            reservation_start?: string,
+            reservation_end?: string,
+            price_per_night?: number,
             amenities: any[]
         },
         controls: {
@@ -41,7 +41,7 @@ namespace lodgist.controllers {
         constructor($scope: NewLodgingScope, $http: angular.IHttpService) {
             this.$scope = $scope
 
-            $scope.lodging = {
+            /*$scope.lodging = {
                 address: {
                     street1: "Testikatu 1",
                     postal_code: "666000",
@@ -53,6 +53,11 @@ namespace lodgist.controllers {
                 description: "Esimerkkikuvaus",
                 price_per_night: 45,
                 amenities: []
+            }*/
+            
+            $scope.lodging = {
+                amenities: [],
+                address: {}
             }
             
             $scope.controls = {

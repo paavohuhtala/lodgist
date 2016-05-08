@@ -31,7 +31,7 @@ block content
                 input.form-control(name="password-confirm" type="password" ng-model="passwordConfirm" required)
             .row
                 h2 Osoite
-            +address-input("user.address")
+            +address-input("user.address", "registerForm", "false", "true")
             
             .row: .col-sm-4
                 button.btn.btn-primary(ng-click="onSend()") Rekisteröidy

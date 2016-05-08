@@ -13,10 +13,10 @@ block content
         .col-md-12: form(novalidate name="registerForm")
             .row: .col-sm-4: .form-group
                     label Myyjänimi (julkinen)
-                    input.form-control(type="text" ng-model="seller.company_name")
+                    input.form-control(type="text" ng-model="seller.company_name" required)
             .row: .col-sm-2: .form-group
                     label Y-tunnus
-                    input.form-control(type="text" ng-model="seller.vat_id")
+                    input.form-control(type="text" ng-model="seller.vat_id" required)
             .row: .col-sm-5: .form-group
                 .radio: label
                     input(type="radio" ng-model="billingAddressEnabled" ng-value="false")
@@ -24,6 +24,6 @@ block content
                 .radio: label
                     input(type="radio" ng-model="billingAddressEnabled" ng-value="true")
                     | Erillinen laskutusosoite
-            +address-input("seller.billing_address", "!billingAddressEnabled")
+            +address-input("seller.billing_address", "registerForm", "!billingAddressEnabled", "billingAddressEnabled")
             .row: .col-sm-5
-                button.btn.btn-primary(ng-click="onSend()") Lähetä
+                button.btn.btn-primary(ng-click="onSend()" ng-disabled="!registerForm.$valid") Lähetä

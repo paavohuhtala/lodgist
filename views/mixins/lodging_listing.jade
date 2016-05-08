@@ -1,4 +1,5 @@
 mixin lodging-listing(lodgingsArray)
+    p.text-muted(ng-if="#{lodgingsArray}.length < 1") Ei kohteita.
     .lodging-item.row(ng-repeat="lodging in #{lodgingsArray} track by lodging.id")
         a.lodging-image.col-md-3(ng-href="/lodgings/{{lodging.id}}")             
         .lodging-content.col-md-7

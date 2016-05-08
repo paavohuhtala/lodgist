@@ -2,37 +2,38 @@
 include address_input
 
 mixin lodging-form()
-    form
+    form(novalidate name="lodgingForm")
         h3 Perustiedot
         .row: .col-sm-5: .form-group
             label Nimi
-            input.form-control(type="text" required ng-model="lodging.name")
-        +address-input("lodging.address", "false")
+            input.form-control(type="text" name="name" required ng-model="lodging.name")
+            p(ng-show="lodgingForm.name.$touched && lodgingForm.name.$error.required") Nimi vaaditaan.
+        +address-input("lodging.address", "lodgingForm", "false", "true")
         .row: .col-sm-8: .form-group
             label Vapaamuotoinen kuvaus
-            textarea.form-control(type="text" required ng-model="lodging.description")
+            textarea.form-control(type="text" name="description" required ng-model="lodging.description")
+            p(ng-show="lodgingForm.description.$touched && lodgingForm.description.$error.required") Kuvaus vaaditaan.
         h3 Varaus
         .row
             .col-sm-2: .form-group
                 label Varaukset alkavat
-                input.form-control(type="text" bs-timepicker ng-model="lodging.reservation_start" data-time-format="HH:mm" data-time-type="string")
+                input.form-control(type="text" name="reservationStart" required bs-timepicker ng-model="lodging.reservation_start" data-time-format="HH:mm" data-time-type="string" data-min-time="lodging.reservation_end")
             .col-sm-2: form-group
                 label Varaukset päättyvät
-                input.form-control(type="text" bs-timepicker ng-model="lodging.reservation_end" data-time-format="HH:mm" data-time-type="string")
+                input.form-control(type="text" name="reservatationEnd" required bs-timepicker ng-model="lodging.reservation_end" data-time-format="HH:mm" data-time-type="string")
+        .row: .col-sm-4
+            p(ng-show="lodgingForm.reservationStart.$touched && lodgingForm.reservationStart.$error.required") Varausten alkuaika vaaditaan.
+            p(ng-show="lodgingForm.reservationStart.$touched && lodgingForm.reservationStart.$error.date") Alkuajan täytyy olla validi kellonaika.
+            p(ng-show="lodgingForm.reservatationEnd.$touched && lodgingForm.reservatationEnd.$error.required") Varausten päättymisaika vaaditaan.
+            p(ng-show="lodgingForm.reservatationEnd.$touched && lodgingForm.reservatationEnd.$error.date") Päättymisajan täytyy olla validi kellonaika
         .row
             .col-sm-2: .form-group
                 label Hinta per yö
-                input.form-control(type="number" ng-model="lodging.price_per_night")
-        .row
-            p.text-muted Lodgistin osuus: {{lodging.price_per_night * 0.1 | currency}}
+                input.form-control(type="number" name="pricePerNight" min="1" required ng-model="lodging.price_per_night")
+                p(ng-show="lodgingForm.pricePerNight.$touched && lodgingForm.pricePerNight.$error.required") Hinta vaaditaan.
+                p(ng-show="lodgingForm.pricePerNight.$touched && lodgingForm.pricePerNight.$error.number") Hinnan pitää olla numero.
+                p(ng-show="lodgingForm.pricePerNight.$touched && lodgingForm.pricePerNight.$error.min") Hinnan pitää olla yli {{0 | currency}}.
 
         h3 Varusteet
-        .row
-            .col-sm-5
-                button.form-control(ng-model="lodging.amenities" placeholder="Valitse varusteet" max-length="4" max-length-html="valittu" bs-select data-multiple="1" bs-options="amenity.id as amenity.name for amenity in amenities")
-
-        h3 Lisätiedot
-        p.text-muted TODO
-        
         .row: .col-sm-5
-            button.btn.btn-primary(ng-click="controls.sendButton.onClick()") Julkaise
+                button.form-control(ng-model="lodging.amenities" placeholder="Valitse varusteet" max-length="4" max-length-html="valittu" bs-select data-multiple="1" bs-options="amenity.id as amenity.name for amenity in amenities")
