@@ -12,7 +12,7 @@ mixin stars(n, outOf)
 block content
     .container
         - var isOwner = user && user.id === lodging.seller.user_id
-        .lodging
+        .lodging(ng-init="lodgingId = #{lodging.id}; canPublish = #{user.role == 'seller'}")
             h2 #{lodging.name}
             .text-info #{lodging.address.city}
             .text-info #{lodging.seller.company_name}
@@ -37,9 +37,15 @@ block content
                 if isOwner
                     .panel.panel-default
                         .panel-heading Hallitse
-                        .panel-body: .row
-                            .col-md-12
+                        .panel-body
+                            .row: .col-md-12
                                 a.btn.btn-default(href="/lodgings/#{lodging.id}/reservations") Selaa varauksia
+                            .row: .col-md-12
+                                case lodging.is_public
+                                    when true
+                                        a.btn.btn-default(ng-click="onUnpublish()") Piilota
+                                    when false
+                                        a.btn.btn-default(ng-click="onPublish()" ng-disabled="!canPublish") Julkaise
             .lodging-description.col-md-8
                 p= lodging.description
             .col-md-4

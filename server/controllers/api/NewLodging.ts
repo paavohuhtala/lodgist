@@ -46,6 +46,7 @@ async function createLodging(lodging: INewLodgingRequest, owner: IUserRow) : Pro
         const modifiedLodging = <ILodgingRow> _.pick(lodging, Lodging.baseMembers)
         modifiedLodging.address = addressId;
         modifiedLodging.owner = owner.id;
+        modifiedLodging.is_public = false;
         
         const lodgingId = await new LodgingDao(t).insert(modifiedLodging);
         

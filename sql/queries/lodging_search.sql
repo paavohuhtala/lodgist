@@ -20,4 +20,6 @@ AND (${amenities}::integer[] IS NULL
         OR array_length(${amenities}::integer[], 1) < 1
         OR (SELECT amenities FROM "LodgingAmenityArrays" laa WHERE laa.lodging = l.id) @> ${amenities}::integer[])
 
+AND (l.is_public)
+
 ORDER BY l.name, l.id DESC

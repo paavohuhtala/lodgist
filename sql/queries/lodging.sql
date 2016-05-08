@@ -10,6 +10,7 @@ SELECT to_json(r) AS lodging FROM (
      l.name,
      l.description,
      l.price_per_night,
+     l.is_public,
      to_json(s) AS seller,
      to_json(a) AS address,
      to_json(laf.amenities) AS amenities

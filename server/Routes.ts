@@ -16,6 +16,7 @@ import {User, Me} from "./controllers/User"
 import {Users} from "./controllers/Users"
 
 import {Lodging, NewLodging} from "./controllers/Lodging"
+import {PublishLodgingApi, UnpublishLodgingApi} from "./controllers/api/Lodging"
 import {Lodgings} from "./controllers/Lodgings"
 import {LodgingSearchApi} from "./controllers/api/LodgingSearch"
 import {NewLodgingApi} from "./controllers/api/NewLodging"
@@ -110,6 +111,9 @@ export function registerRoutes(app: Express) {
     app.post("/api/v1/reservations/external", NewExternalReservationApi.post);
     
     app.get("/api/v1/lodgings/:id/reservations/bounds", ReservationBoundsApi.get);
+    
+    app.post("/api/v1/lodgings/:id/publish", isOwnerOf, PublishLodgingApi.post);
+    app.post("/api/v1/lodgings/:id/unpublish", isOwnerOf, UnpublishLodgingApi.post);
     
     app.get("/api/v1/amenities", AmenitiesApi.get);
     app.post("/api/v1/amenities", canManipulateAmenities, AmenitiesApi.post);

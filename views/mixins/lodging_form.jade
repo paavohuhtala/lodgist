@@ -17,15 +17,16 @@ mixin lodging-form()
         .row
             .col-sm-2: .form-group
                 label Varaukset alkavat
-                input.form-control(type="text" name="reservationStart" required bs-timepicker ng-model="lodging.reservation_start" data-time-format="HH:mm" data-time-type="string" data-min-time="lodging.reservation_end")
+                input.form-control(type="text" name="reservationStart" required bs-timepicker ng-model="lodging.reservation_start" data-time-format="HH:mm" data-time-type="string" data-min-time="{{lodging.reservation_end}}")
             .col-sm-2: form-group
                 label Varaukset päättyvät
                 input.form-control(type="text" name="reservatationEnd" required bs-timepicker ng-model="lodging.reservation_end" data-time-format="HH:mm" data-time-type="string")
         .row: .col-sm-4
             p(ng-show="lodgingForm.reservationStart.$touched && lodgingForm.reservationStart.$error.required") Varausten alkuaika vaaditaan.
-            p(ng-show="lodgingForm.reservationStart.$touched && lodgingForm.reservationStart.$error.date") Alkuajan täytyy olla validi kellonaika.
+            p(ng-show="lodgingForm.reservationStart.$touched && lodgingForm.reservationStart.$error.parse") Alkuajan täytyy olla validi kellonaika.
+            p(ng-show="lodgingForm.reservationStart.$touched && lodgingForm.reservationStart.$error.min") Varaus saa alkaa vasta päättymisen jälkeen.
             p(ng-show="lodgingForm.reservatationEnd.$touched && lodgingForm.reservatationEnd.$error.required") Varausten päättymisaika vaaditaan.
-            p(ng-show="lodgingForm.reservatationEnd.$touched && lodgingForm.reservatationEnd.$error.date") Päättymisajan täytyy olla validi kellonaika
+            p(ng-show="lodgingForm.reservatationEnd.$touched && lodgingForm.reservatationEnd.$error.parse") Päättymisajan täytyy olla validi kellonaika
         .row
             .col-sm-2: .form-group
                 label Hinta per yö

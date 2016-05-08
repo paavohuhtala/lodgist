@@ -35,7 +35,7 @@ INSERT INTO "Amenities" (name) VALUES
 
 INSERT INTO "Lodgings" (owner, address, name, description, is_public, reservation_start, reservation_end, price_per_night) VALUES
 	(2, 2, 'Kansainvälinen avaruusasema',
-	'1990-luvun lopulla rakennettu ja useaan otteeseen laajennettu jännittävä kohde matallalla maan kiertoradalla!',
+	'1990-luvun lopulla rakennettu ja useaan otteeseen laajennettu jännittävä kohde matalalla maan kiertoradalla!',
 	TRUE, '12:00:00', '10:00:00', 10000);
 
 INSERT INTO "LodgingAmenities" (lodging, amenity) VALUES

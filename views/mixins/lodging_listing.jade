@@ -1,12 +1,13 @@
 mixin lodging-listing(lodgingsArray)
     p.text-muted(ng-if="#{lodgingsArray}.length < 1") Ei kohteita.
-    .lodging-item.row(ng-repeat="lodging in #{lodgingsArray} track by lodging.id")
+    .lodging-item.row(ng-repeat="lodging in #{lodgingsArray} track by lodging.id" ng-class="lodging.is_public ? 'public' : 'not-public'")
         a.lodging-image.col-md-3(ng-href="/lodgings/{{lodging.id}}")             
         .lodging-content.col-md-7
             a(ng-href="/lodgings/{{lodging.id}}").lodging-title {{lodging.name}}
             p.lodging-info
                 span {{lodging.city}} 
                 span {{lodging.company_name}}
+                span(ng-if="!lodging.is_public") Ei julkinen
             p {{lodging.description}}
             .text-fade
         .lodging-pricing.col-md-2

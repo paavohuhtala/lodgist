@@ -6,10 +6,12 @@ block vars
     - controller = "NewLodgingController"
 
 block content
-    .container.margin-top-default.new-lodging
+    .container.margin-top-default.new-lodging(ng-init="canPublish = #{user.role == 'seller'}")
         .col-md-12
             h1 Uusi kohde
         .col-md-12
             +lodging-form()
-            .row: .col-sm-5
-                button.btn.btn-primary.margin-top-default(ng-click="controls.sendButton.onClick()" ng-disabled="!lodgingForm.$valid") Julkaise
+            .row: .col-sm-5.new-lodging-actions
+                button.btn.btn-primary(ng-click="onSave()" ng-disabled="!lodgingForm.$valid") Tallenna
+                button.btn.btn-primary(ng-click="onPublish()" ng-disabled="!canPublish || !lodgingForm.$valid") Julkaise
+                p(ng-if="!canPublish") Vain vahvistetut myyjät voivat julkaista.
