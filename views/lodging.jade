@@ -12,7 +12,7 @@ mixin stars(n, outOf)
 block content
     .container
         - var isOwner = user && user.id === lodging.seller.user_id
-        .lodging(ng-init="lodgingId = #{lodging.id}; canPublish = #{user.role == 'seller'}")
+        .lodging(ng-init="lodgingId = #{lodging.id}; canPublish = #{user ? (user.role == 'seller') : false}")
             h2 #{lodging.name}
             .text-info #{lodging.address.city}
             .text-info #{lodging.seller.company_name}
