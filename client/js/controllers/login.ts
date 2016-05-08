@@ -35,6 +35,9 @@ namespace lodgist.controllers {
                             $scope.controls.loginButton.text = "Onnistui";
                             $scope.controls.loginButton.class = "btn-success";
                             setTimeout(() => window.location.pathname = "/", 500);
+                        }, failure => {
+                            $scope.controls.loginButton.text = "Epäonnistui, yritä uudestaan";
+                            $scope.controls.loginButton.class = "btn-danger";
                         });
                     }
                 }
