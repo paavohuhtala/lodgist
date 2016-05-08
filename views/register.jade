@@ -12,26 +12,26 @@ block content
                 h2 Perustiedot
             .row: .col-sm-4: .form-group
                 label.control-label(for="email") Nimi
-                input.form-control(type="text" required ng-model="user.name")
+                input.form-control(type="text" name="name" required ng-model="user.name")
+                p(ng-show="registerForm.name.$touched && registerForm.name.$error.required") Nimi vaaditaan.
             .row: .col-sm-4: .form-group(ng-class="{'has-error has-feedback': registerForm.email.$invalid && registerForm.email.$dirty, 'has-success has-feedback': registerForm.email.$valid && registerForm.email.$dirty}")
                 label.control-label(for="email") Sähköposti
                 input.form-control(type="email" name="email" required email-availability-validator ng-model="user.email" ng-model-options="{debounce: 250}")
                 span.glyphicon.glyphicon-ok.form-control-feedback(ng-if="registerForm.email.$valid && registerForm.email.$dirty")
-                p(ng-show="registerForm.email.$error.emailAvailability") Sähköposti on jo käytössä.
-                p(ng-show="registerForm.email.$error.email") Sähköposti on väärää muotoa.
+                p(ng-show="registerForm.email.$touched && registerForm.email.$error.emailAvailability") Sähköposti on jo käytössä.
+                p(ng-show="registerForm.email.$touched && registerForm.email.$error.email") Sähköposti on väärää muotoa.
+                p(ng-show="registerForm.email.$touched && registerForm.email.$error.required") Sähköposti vaaditaan.
             .row: .col-sm-4: .form-group
                 label.control-label(for="phone") Puhelin
                 input.form-control(type="text" name="phone" required ng-model="user.phone")
+                p(ng-show="registerForm.phone.$touched && registerForm.phone.$error.required") Puhelinnumero vaaditaan.
             .row: .col-sm-4: .form-group
                 label.control-label(for="password") Salasana
-                input.form-control(type="password" ng-model="user.password" required)
-            .row: .col-sm-4: .form-group
-                label.control-label(for="password-confirm") Salasana uudestaan
-                //input.form-control(name="password-confirm" type="password" ng-model="passwordConfirm" required inputs-match="user.password")
-                input.form-control(name="password-confirm" type="password" ng-model="passwordConfirm" required)
+                input.form-control(type="password" name="password" ng-model="user.password" required)
+                p(ng-show="registerForm.password.$touched && registerForm.password.$error.required") Salasana vaaditaan.
             .row
                 h2 Osoite
             +address-input("user.address", "registerForm", "false", "true")
             
             .row: .col-sm-4
-                button.btn.btn-primary(ng-click="onSend()") Rekisteröidy
+                button.btn.btn-primary(ng-click="onSend()" ng-disabled="!registerForm.$valid") Rekisteröidy
