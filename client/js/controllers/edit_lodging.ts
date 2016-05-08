@@ -48,8 +48,10 @@ namespace lodgist.controllers {
                     lodging.reservation_start = lodging.reservation_start.split(":").slice(0, 2).join(":");
                     lodging.reservation_end = lodging.reservation_end.split(":").slice(0, 2).join(":");
                     
-                    // Pick IDs from the lodgings
-                    lodging.amenities = lodging.amenities.map(l => l.id);
+                    if (lodging.amenities) {
+                        // Pick IDs from the lodgings
+                        lodging.amenities = lodging.amenities.map(l => l.id);
+                    }
                     
                     $scope.lodging = lodging;
                 });
