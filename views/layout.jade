@@ -7,8 +7,9 @@ mixin nav-item(url, title)
 
 block vars
 
-html(ng-app="lodgist" ng-controller="RootController")
+html(ng-app="lodgist" ng-controller="RootController" ng-init="userId = #{user ? user.id : null}")
     head
+        meta(name="viewport" content="width=device-width, initial-scale=1")
         title Lodgist
         link(rel="stylesheet" href="/css/ext.css")
         link(rel="stylesheet" href="/css/client.css")
@@ -26,17 +27,18 @@ html(ng-app="lodgist" ng-controller="RootController")
                     +nav-item("/lodgings", "Kohteet")
                     if user
                         +nav-item("/my_reservations", "Varaukseni")
-                    if Role.isSeller(true)(user)
+                    if Role.isSeller()(user)
                         +nav-item("/my_lodgings", "Kohteeni")
                         +nav-item("/lodgings/new", "Uusi kohde")
                     if Role.isAdmin(user)
                         +nav-item("/amenities", "Varusteet")
+                        +nav-item("/users", "Käyttäjät")
                     +nav-item("/seller_application", "Hae myyjäksi [TEST]")
                 ul.nav.navbar-nav.navbar-right
                     if !user
                         +nav-item("/login", "Kirjaudu sisään")
                     else
-                        li: a #{user.name} (#{user.email})
+                        li: a(href="/me") #{user.name} (#{user.email})
                         li: a(ng-click="global.controls.logout.onClick()") Kirjaudu ulos
         block content
     

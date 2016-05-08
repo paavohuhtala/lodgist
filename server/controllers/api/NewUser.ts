@@ -55,7 +55,7 @@ async function createUser(userRequest: INewUserRequest) : Promise<number> {
             email: userRequest.email,
             phone: userRequest.phone,
             address: addressId,
-            role: "unverifiedUser"
+            role: "user"
         }
         
         return new UserDao(t).insert(user);

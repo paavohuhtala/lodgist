@@ -37,6 +37,7 @@
         "controllers/root.ts",
         "controllers/seller_application.ts",
         "controllers/user.ts",
+        "controllers/users.ts",
         "directives/email_availability.ts",
         "directives/inputs_match.ts",
         "module.ts",

@@ -10,6 +10,7 @@ namespace lodgist.controllers {
     interface IGlobalScope extends angular.IScope {
         global: {
             controls: GlobalControls
+            userId?: number
         }
     }
     

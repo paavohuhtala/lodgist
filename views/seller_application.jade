@@ -13,10 +13,10 @@ block content
         .col-md-12: form(novalidate name="registerForm")
             .row: .col-sm-4: .form-group
                     label Myyjänimi (julkinen)
-                    input.form-control(type="text")
+                    input.form-control(type="text" ng-model="seller.company_name")
             .row: .col-sm-2: .form-group
                     label Y-tunnus
-                    input.form-control(type="text")
+                    input.form-control(type="text" ng-model="seller.vat_id")
             .row: .col-sm-5: .form-group
                 .radio: label
                     input(type="radio" ng-model="billingAddressEnabled" ng-value="false")

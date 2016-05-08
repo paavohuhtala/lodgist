@@ -3,6 +3,7 @@ import {RequestEx} from "./RequestEx"
 
 import * as Role from "./authorization/Role"
 import * as Capabilities from "./authorization/Capabilities"
+import {promisify} from "./authorization/Utils"
 
 import {Index} from "./controllers/Index"
 
@@ -10,6 +11,9 @@ import {LoginApi, LogoutApi} from "./controllers/api/Login"
 import {Login} from "./controllers/Login"
 import {Register} from "./controllers/Register"
 import {SellerApplication} from "./controllers/SellerApplication"
+import {NewSellerApplicationApi, ApproveApplicationApi} from "./controllers/api/SellerApplication"
+import {User, Me} from "./controllers/User"
+import {Users} from "./controllers/Users"
 
 import {Lodging, NewLodging} from "./controllers/Lodging"
 import {Lodgings} from "./controllers/Lodgings"
@@ -64,11 +68,15 @@ export function registerRoutes(app: Express) {
     const canPostLodgings = middlewarify(Capabilities.Lodging.canPostAP);
     const canAccessReservation = middlewarify(Capabilities.Reservation.canAccessAP);
     const canManipulateAmenities = middlewarify(Capabilities.Amenities.canManipulateAP);
+    const canAccessUser = middlewarify(Capabilities.User.canAccessUserAP);
 
     app.get("/", Index.get);
 
     app.get("/login", Login.get);
     app.get("/register", Register.get);
+    app.get("/me", isLoggedIn, Me.get);
+    app.get("/user/:id", canAccessUser, User.get);
+    app.get("/users", middlewarify(promisify(Role.isAdminP)), Users.get);
 
     app.get("/seller_application", SellerApplication.get);
 
@@ -77,7 +85,7 @@ export function registerRoutes(app: Express) {
     app.get("/lodgings/:id/reservations/user/new", canUserReserve, NewUserReservation.get);
     app.get("/lodgings/:id/reservations/external/new", canExternalReserve, NewExternalReservation.get);
     app.get("/lodgings/:id/reservations", isOwnerOf, LodgingReservations.get);
-    app.get("/lodgings/:id", Lodging.get);    
+    app.get("/lodgings/:id", Lodging.get);
     
     app.get("/my_lodgings", canPostLodgings, MyLodgings.get);
     
@@ -110,4 +118,7 @@ export function registerRoutes(app: Express) {
     
     app.get("/api/v1/users/:email/available", EmailAvailableApi.get);
     app.post("/api/v1/users", NewUserApi.post);
+    
+    app.post("/api/v1/seller_application", isLoggedIn, NewSellerApplicationApi.post);
+    app.post("/api/v1/users/:id/approve_application", middlewarify(promisify(Role.isAdminP)), ApproveApplicationApi.post);
 }

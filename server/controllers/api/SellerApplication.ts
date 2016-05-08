@@ -30,7 +30,7 @@ export const NewSellerApplicationApi : IController = {
                 addressId = await new AddressDao(t).insert(application.billing_address);
             }
             
-            await new UserDao().update({role: "unapprovedSeller"}, "_primary", req.user.id);
+            await new UserDao(t).update({role: "unapprovedSeller"}, "_primary", req.user.id);
             
             const seller: ISellerRow = {
                 user_id: req.user.id,
@@ -39,9 +39,16 @@ export const NewSellerApplicationApi : IController = {
                 billing_address: addressId
             }
             
-            await new SellerDao().insert(seller);
+            await new SellerDao(t).insert(seller);
             
             res.sendStatus(200);
         });
+    }
+}
+
+export const ApproveApplicationApi : IController = {
+    post: async (req: RequestEx, res: Response) => {
+        await new UserDao().update({role: "seller"}, "_primary", req.params.id);
+        res.sendStatus(200);
     }
 }

@@ -86,3 +86,11 @@ export module Amenities {
     export const canManipulate = Role.isAdminP;
     export const canManipulateAP = promisify(canManipulate);
 }
+
+export module User {
+    export async function canAccessUser(userId: number, user: IUserRow) {
+        return userId == user.id || user.role === "admin";
+    }
+    
+    export const canAccessUserAP = paramUserComposeP("id", canAccessUser);
+}

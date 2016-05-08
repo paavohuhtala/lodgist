@@ -1,9 +1,52 @@
 
 extends layout.jade
 
+mixin address(address)
+    p
+        span= address.street1
+        br
+        if address.street2
+            span= address.street2
+            br
+        span #{address.postal_code} #{address.city}
+
 block vars
     - controller = "UserController"
-    
+
 block content
-    .container
-        h2= user.name
+    .container.margin-top-default
+        if alert == "application_sent"
+            .alert.alert-info(role="alert")
+                .glyphicon.glyphicon-ok
+                strong Hakemuksesi lähetettiin onnistuneesti.
+        .col-md-12
+            h1= viewUser.user.name
+        .row
+            .col-md-6: .well
+                dl
+                    dt Rooli
+                    dd
+                        case viewUser.user.role
+                            when "user": span Käyttäjä
+                            when "unapprovedSeller": span.text-info Myyjä (odottaa hyväksyntää)
+                            when "unapprovedSeller": span.text-success Myyjä (hyväksytty)
+                            when "admin": span.text-success Järjestelmänvalvoja
+                    dt Sähköposti
+                    dd: a(href="mailto:#{viewUser.user.email}")= viewUser.user.email
+                    dt Puhelin
+                    dd= viewUser.user.phone
+                    dt Osoite
+                    dd: +address(viewUser.user.user_address)
+            .col-md-6
+        if viewUser.user.seller
+            .row
+                .col-md-6: .well
+                    dl
+                        dt Myyjänimi
+                        dd= viewUser.user.seller.company_name
+                        dt Y-tunnus
+                        dd= viewUser.user.seller.vat_id
+                        if viewUser.user.seller_address
+                            dt Osoite
+                            dd: +address(viewUser.user.user_address)
+                .col-md-6

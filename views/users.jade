@@ -1,0 +1,45 @@
+
+extends layout.jade
+
+block vars
+    - controller = "UsersController"
+
+block content
+    .container
+        .col-md-12
+            h1 Käyttäjät
+        .col-md-12
+            h2 Hyväksyntää odottavat myyjät
+            if users.unapprovedSeller
+                .list-group.row
+                    for user in users.unapprovedSeller
+                        .list-group-item.col-md-4
+                            .list-group-heading.clearfix
+                                a(href="/user/#{user.id}")= user.name
+                                a.pull-right(ng-click="approveSeller(#{user.id})") Hyväksy
+            else
+                p.text-muted Ei hyväksyntää odottavia myyjiä.
+        .col-md-12
+            h2 Järjestelmänvalvojat
+            .list-group.row
+                for user in users.admin
+                    .list-group-item.col-md-4
+                        .list-group-heading: a(href="/user/#{user.id}")= user.name
+        .col-md-12
+            h2 Myyjät
+            if users.seller
+                .list-group.row
+                    for user in users.seller
+                        .list-group-item.col-md-4
+                            .list-group-heading: a(href="/user/#{user.id}")= user.name
+            else
+                p.text-muted Ei myyjiä.
+        .col-md-12
+            h2 Asiakkaat
+            if users.user
+                .list-group.row
+                    for user in users.user
+                        .list-group-item.col-md-4
+                            .list-group-heading: a(href="/user/#{user.id}")= user.name
+            else
+                p.text-muted Ei asiakkaita.
