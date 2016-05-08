@@ -10,8 +10,8 @@ block content
     .search-bar: .container
         form.form.row
             .form-group.col-sm-3: input.form-control(type="text" placeholder="Nimi, myyjä tai sijainti" ng-model="search.query" ng-model-options="searchOptions" ng-change="onSearch()")
-            .form-group.col-sm-2: input.form-control(type="text" placeholder="Saapuminen" ng-model="search.from" bs-datepicker ng-change="onSearch()")
-            .form-group.col-sm-2: input.form-control(type="text" placeholder="Lähtö" ng-model="search.to" bs-datepicker ng-change="onSearch()")
+            .form-group.col-sm-2: input.form-control(type="text" disabled placeholder="Saapuminen" ng-model="search.from" bs-datepicker ng-change="onSearch()")
+            .form-group.col-sm-2: input.form-control(type="text" disabled placeholder="Lähtö" ng-model="search.to" bs-datepicker ng-change="onSearch()")
             .form-group.col-sm-4: button.form-control.amenity-selector(ng-model="search.amenities" placeholder="Valitse varusteet" max-length="2" max-length-html="valittu" bs-select data-multiple="1" bs-options="amenity.id as amenity.name for amenity in amenities" ng-change="onSearch()" ng-model-options="searchOptions")
     .container.lodgings-wrapper
         .col-md-12.lodgings(ng-if="!dynamicLodgings")
