@@ -40,6 +40,7 @@ block content
                         .panel-body
                             .row: .col-md-12
                                 a.btn.btn-default(href="/lodgings/#{lodging.id}/reservations") Selaa varauksia
+                                a.btn.btn-default(href="/lodgings/#{lodging.id}/edit") Muokkaa
                             .row: .col-md-12
                                 case lodging.is_public
                                     when true

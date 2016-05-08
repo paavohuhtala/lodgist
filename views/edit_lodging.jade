@@ -1,0 +1,15 @@
+extends layout.jade
+
+include mixins/lodging_form
+
+block vars
+    - controller = "EditLodgingController"
+
+block content
+    .container.margin-top-default.new-lodging(ng-init="setLodgingId(#{lodging.id})")
+        .col-md-12
+            h1 Muokkaa kohdetta #{lodging.id}
+        .col-md-12
+            +lodging-form()
+            .row: .col-sm-5.new-lodging-actions
+                button.btn.btn-primary(ng-click="onSave()" ng-disabled="!lodgingForm.$valid") Tallenna

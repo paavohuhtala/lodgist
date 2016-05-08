@@ -24,3 +24,9 @@ export const NewLodging : IController = {
         res.render("new_lodging");
     }
 }
+
+export const EditLodging : IController = {
+    get: (req: RequestEx, res: Response) => {
+        res.render("edit_lodging", {lodging: {id: req.params.id}});
+    }
+}

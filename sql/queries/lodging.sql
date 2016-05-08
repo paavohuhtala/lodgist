@@ -11,6 +11,8 @@ SELECT to_json(r) AS lodging FROM (
      l.description,
      l.price_per_night,
      l.is_public,
+     l.reservation_start,
+     l.reservation_end,
      to_json(s) AS seller,
      to_json(a) AS address,
      to_json(laf.amenities) AS amenities

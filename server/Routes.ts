@@ -15,8 +15,8 @@ import {NewSellerApplicationApi, ApproveApplicationApi} from "./controllers/api/
 import {User, Me} from "./controllers/User"
 import {Users} from "./controllers/Users"
 
-import {Lodging, NewLodging} from "./controllers/Lodging"
-import {PublishLodgingApi, UnpublishLodgingApi} from "./controllers/api/Lodging"
+import {Lodging, NewLodging, EditLodging} from "./controllers/Lodging"
+import {LodgingApi, PublishLodgingApi, UnpublishLodgingApi} from "./controllers/api/Lodging"
 import {Lodgings} from "./controllers/Lodgings"
 import {LodgingSearchApi} from "./controllers/api/LodgingSearch"
 import {NewLodgingApi} from "./controllers/api/NewLodging"
@@ -87,6 +87,7 @@ export function registerRoutes(app: Express) {
     app.get("/lodgings/:id/reservations/external/new", canExternalReserve, NewExternalReservation.get);
     app.get("/lodgings/:id/reservations", isOwnerOf, LodgingReservations.get);
     app.get("/lodgings/:id", Lodging.get);
+    app.get("/lodgings/:id/edit", isOwnerOf, EditLodging.get);
     
     app.get("/my_lodgings", canPostLodgings, MyLodgings.get);
     
@@ -114,6 +115,8 @@ export function registerRoutes(app: Express) {
     
     app.post("/api/v1/lodgings/:id/publish", isOwnerOf, PublishLodgingApi.post);
     app.post("/api/v1/lodgings/:id/unpublish", isOwnerOf, UnpublishLodgingApi.post);
+    app.put("/api/v1/lodgings/:id", isOwnerOf, LodgingApi.put);
+    app.get("/api/v1/lodgings/:id", isOwnerOf, LodgingApi.get);
     
     app.get("/api/v1/amenities", AmenitiesApi.get);
     app.post("/api/v1/amenities", canManipulateAmenities, AmenitiesApi.post);
