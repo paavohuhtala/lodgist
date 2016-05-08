@@ -1,8 +1,6 @@
 
 // TOOD: this file is 99% similar to new_user_reservation
 
-/// <reference path="../../../bower_components/moment/moment.d.ts" />
-
 namespace lodgist.controllers {
     
     interface DateRange {
@@ -43,6 +41,8 @@ namespace lodgist.controllers {
         getBounds(): void
         setLodgingId(id: number): void
         onSend(): void
+        upperMin: Date
+        lowerMax: Date
     }
    
     export class NewExternalReservation {
@@ -87,6 +87,18 @@ namespace lodgist.controllers {
                     areDisabled: true
                 }
             }
+            
+            $scope.$watch("reservation.during.lower", (newMin: Date) => {
+                $scope.upperMin = moment(newMin).add(1, "days").toDate()
+            });
+            
+            
+            $scope.$watch("reservation.during.upper", (newMax: Date) => {
+                if (newMax == null) return;
+                $scope.lowerMax = moment(newMax).subtract(1, "days").toDate()
+            });
+            
+            $scope.upperMin = new Date();
         }
     }
 }

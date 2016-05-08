@@ -6,7 +6,6 @@ import {IController} from "../../IController"
 import * as _ from "lodash"
 
 import {Range} from "pg-range"
-import {toPgRange} from "../../RangeUtils"
 import * as pgp from "pg-promise"
 import {getClient} from "../../database/Connection"
 
@@ -14,7 +13,15 @@ const query = new pgp.QueryFile("./sql/queries/lodging_search.sql", {debug: true
 
 export const LodgingSearchApi : IController = {
     get: async (req: RequestEx, res: Response) => {
-        const range = req.query.range;
+        let range = req.query.range;
+        
+        if (req.query.range != null) {
+            range = Range
+        }
+        
+        if (range === undefined) {
+            range = null;
+        }
         
         let amenities: number[]; 
         

@@ -1,6 +1,4 @@
 
-/// <reference path="../../../bower_components/moment/moment.d.ts" />
-
 namespace lodgist.controllers {
     
     interface DateRange {
@@ -45,6 +43,8 @@ namespace lodgist.controllers {
         getPrice(): number
         getNights(): number
         onSend(): void
+        upperMin: Date
+        lowerMax: Date
     }
    
     export class NewUserReservation {
@@ -90,7 +90,7 @@ namespace lodgist.controllers {
                     location.pathname = `/mock/payment_provider/${res.data}`;
                 });
             };
-
+            
             $scope.getBounds = () => {
                 $http.get(`/api/v1/lodgings/${$scope.reservation.lodging}/reservations/bounds`).then(res => {
                     const bounds : {starts: SerializedDateRange[], ends: SerializedDateRange[]} = <any> res.data
@@ -111,6 +111,18 @@ namespace lodgist.controllers {
                     areDisabled: true
                 }
             }
+            
+            $scope.$watch("reservation.during.lower", (newMin: Date) => {
+                $scope.upperMin = moment(newMin).add(1, "days").toDate()
+            });
+            
+            
+            $scope.$watch("reservation.during.upper", (newMax: Date) => {
+                if (newMax == null) return;
+                $scope.lowerMax = moment(newMax).subtract(1, "days").toDate()
+            });
+            
+            $scope.upperMin = new Date();
         }
     }
 }

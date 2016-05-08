@@ -41,7 +41,6 @@
         "directives/email_availability.ts",
         "directives/inputs_match.ts",
         "module.ts",
-        "services/authentication.ts",
-        "validation/Conductor.ts"
+        "services/authentication.ts"
     ]
 }

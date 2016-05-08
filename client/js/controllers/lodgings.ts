@@ -27,6 +27,14 @@ namespace lodgist.controllers {
             $scope.searchOptions = {
                 debounce: 200
             }
+
+            function getRangeParam() {
+                if ($scope.search.from == null || $scope.search.to == null) {
+                    return null;
+                } else {
+                    return `[${$scope.search.from.toISOString()}, ${$scope.search.to.toISOString()}]`;
+                }
+            }
             
             $scope.onSearch = () => {
                 $http({
@@ -34,7 +42,8 @@ namespace lodgist.controllers {
                     url: "/api/v1/lodgings",
                     params: {
                         q: $scope.search.query,
-                        amenities: $scope.search.amenities
+                        amenities: $scope.search.amenities,
+                        range: getRangeParam()
                     }
                 }).then(res => {
                      $scope.dynamicLodgings = <any[]> res.data;

@@ -7,11 +7,8 @@ block content
     .hero
         .call-to-action
             p.slogan Obey. Consume. Travel.
-            .searcher.form-inline
-                .form-group: input.form-control(type="text" placeholder="Where")
-                .form-group: input.form-control(type="text" placeholder="From" ng-model="dateFrom" bs-datepicker)
-                .form-group: input.form-control(type="text" placeholder="To" ng-model="dateTo" bs-datepicker)
-                .form-group: button.btn.btn-success: .glyphicon.glyphicon-search
+            .text-center
+                a.btn.btn-primary.btn-lg.btn-success(href="/lodgings") Selaa kohteita
     .placeholder-buzzwords: .container
         .col-md-4.text-center
             .icon-huge.glyphicon.glyphicon-plane

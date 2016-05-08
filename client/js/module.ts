@@ -27,7 +27,8 @@ namespace lodgist {
     .config(($datepickerProvider: mgcrea.ngStrap.datepicker.IDatepickerProvider) => {
         angular.extend($datepickerProvider.defaults, {
             monthTitleFormat: "LLLL yyyy",
-            monthFormat: "LLLL"
+            monthFormat: "LLLL",
+            startWeek: 1
         });
     });
 }

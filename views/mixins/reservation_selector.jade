@@ -3,9 +3,9 @@ mixin reservation-selector()
     .row
         .col-sm-3: .form-group
             label Alkaen
-            input.form-control(type="text" ng-model="reservation.during.lower" required ng-disabled="controls.datePickers.areDisabled" bs-datepicker data-min-date="today" data-max-date="reservation.during.upper" data-disabled-dates="bounds.starts")
+            input.form-control(type="text" ng-model="reservation.during.lower" required ng-disabled="controls.datePickers.areDisabled" bs-datepicker data-min-date="today" data-max-date="{{lowerMax}}" data-disabled-dates="bounds.starts")
         .col-sm-3: .form-group
             label Päättyy
-            input.form-control(type="text" ng-model="reservation.during.upper" required ng-disabled="controls.datePickers.areDisabled" bs-datepicker data-min-date="{{reservation.during.lower}}" data-disabled-dates="bounds.ends")
+            input.form-control(type="text" ng-model="reservation.during.upper" required ng-disabled="controls.datePickers.areDisabled" bs-datepicker data-min-date="{{upperMin}}" data-disabled-dates="bounds.ends")
     .row
         .col-sm-8: p Varaus alkaa klo #{lodging.reservation_start} ja päättyy klo #{lodging.reservation_end}.
