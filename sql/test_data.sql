@@ -21,7 +21,7 @@ INSERT INTO "Users" (role, name, email, password, phone, address) VALUES
 	'$2a$10$OZe9MT3tTZl/TU7fu8VNB.xQU66.C.Ltuv7MqaEAX/ZnVY5K7TSaq', -- 'salasana'
 	'123-458', 4);
 
-INSERT INTO "Sellers" (user_id, company_name, vatId) VALUES
+INSERT INTO "Sellers" (user_id, company_name, vat_id) VALUES
 	(2, 'Myyjän myymälä', 'FI12345678');
 
 INSERT INTO "Amenities" (name) VALUES
