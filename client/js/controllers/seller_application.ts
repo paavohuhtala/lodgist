@@ -14,7 +14,7 @@ namespace lodgist.controllers {
             
             $scope.onSend = () => {
                 $http.post("/api/v1/seller_application", $scope.seller).then(succ => {
-                    location.pathname = "/me?application_sent"
+                    window.location.href = "/me?application_sent"
                 });
             }
         }
