@@ -1,11 +1,11 @@
 
-import * as pgp from "pg-promise"
+import {QueryFile} as pgp from "pg-promise"
 import {getClient} from "../database/Connection"
 import {Request, Response} from "express"
 import {IController} from "../IController"
 import {UserDao} from "../database/daos/UserDao"
 
-const query = new pgp.QueryFile("./sql/queries/reservation.sql", {debug: true});
+const query = new QueryFile("./sql/queries/reservation.sql", {debug: true});
 
 async function getViewData(reservationId: number) {
     return await getClient().one(query, {reservation: reservationId});
